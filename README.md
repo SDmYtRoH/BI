@@ -1,122 +1,122 @@
-# RehaPiano EXACT_FORCE: ознаки тремору для кожного пальця
+# RehaPiano EXACT_FORCE: ukazovatele tremoru pre každý prst
 
-Pipeline: зчитування → заповнення пропусків → зниження частоти → обрізання → критерії валідності → ознаки кожного пальця → агрегація → CSV.
-Далі — статистичний аналіз (`scripts/run_analysis.py`) і візуалізація (`notebooks/analyza_prstov.ipynb`).
+Pipeline: načítanie → doplnenie chýbajúcich hodnôt → zníženie vzorkovacej frekvencie → orezanie → kritériá platnosti → ukazovatele pre každý prst → agregácia → CSV.
+Ďalej nasleduje štatistická analýza (`scripts/run_analysis.py`) a vizualizácia (`notebooks/analyza_prstov.ipynb`).
 
-## Встановлення
+## Inštalácia
 
 ```bash
-git clone <url-репозиторію> && cd <тека>
+git clone https://github.com/SDmYtRoH/BI.git && cd BI
 conda create -n rehapiano python=3.12 && conda activate rehapiano
 pip install -r requirements.txt
 ```
 
-Дані в репозиторій не входять: як їх розкласти, описано в [data/README.md](data/README.md).
-Готові результати вже лежать в `outputs/` (CSV) і в ноутбуках, тож переглядати їх можна без даних.
+Dáta nie sú súčasťou repozitára – ako ich uložiť, je opísané v [data/README.md](data/README.md).
+Hotové výsledky sú už v `outputs/` (CSV) a v notebookoch, takže ich možno prezerať aj bez dát.
 
-## Запуск
+## Spustenie
 
 ```bash
 conda activate rehapiano                 # numpy, pandas, scipy, matplotlib, jupyter
-python scripts/build_dataset.py          # усі параметри за замовчуванням з src/rehapiano/config.py
-python scripts/build_dataset.py --limit 5    # швидка перевірка на 5 файлах
-python scripts/run_analysis.py           # статистика → outputs/stats/
-jupyter lab notebooks/analyza_prstov.ipynb   # графіки (словацькою)
+python scripts/build_dataset.py          # všetky predvolené parametre zo src/rehapiano/config.py
+python scripts/build_dataset.py --limit 5    # rýchla kontrola na 5 súboroch
+python scripts/run_analysis.py           # štatistika → outputs/stats/
+jupyter lab notebooks/analyza_prstov.ipynb   # grafy
 python -m unittest discover tests
 ```
 
-## Структура
+## Štruktúra
 
 ```
-data/raw/RehaPiano/          сирі файли results_* (1912 шт., усі ігри)
-data/metadata/               dataset_full.csv, dataset_patients.csv (використовуються);
-                             dataset_tuke.csv, dataset_99.csv (підмножини dataset_full, не використовуються)
+data/raw/RehaPiano/          surové súbory results_* (1912 ks, všetky hry)
+data/metadata/               dataset_full.csv, dataset_patients.csv (používajú sa);
+                             dataset_tuke.csv, dataset_99.csv (podmnožiny dataset_full, nepoužívajú sa)
 src/rehapiano/
-  config.py                  УСІ шляхи, step_id, частоти, смуги, пороги
-  io/metadata.py             читання CSV, зіставлення файлів, inventory, вікові групи
-  io/reader.py               декодування JSON → base64 → zlib → pickle → пакети
-  preprocessing/polarity.py  виправлення знаку каналу 9 (right_sensor_2)
-  preprocessing/gaps.py      перевірка часу, усереднення дублікатів, інтерполяція на сітку 1 мс
-  preprocessing/resample.py  1000 → 100 Гц (resample_poly з anti-alias фільтром)
-  preprocessing/crop.py      обрізання 3–15 с
-  preprocessing/pipeline.py  load_measurement_data(): усі кроки разом
-  quality.py                 критерії валідності, прапорці неактивного пальця і викидів
-  features/spectral.py       спектрограма, частотні смуги
-  features/finger.py         ознаки пальця (+ список можливих додаткових ознак)
-  aggregation.py             спроба → вимірювання → людина, неактивна рука
-  stats/                     тести, демографія, активність рук, тремор пальців
-scripts/build_dataset.py     CLI всього pipeline
-scripts/run_analysis.py      CLI статистичного аналізу
-tests/                       unit-тести
-notebooks/analyza_prstov.ipynb  графіки й таблиці аналізу (словацькою)
-notebooks/task_1.ipynb       перше завдання (самостійний код)
-outputs/                     результати (генеруються скриптом)
+  config.py                  VŠETKY cesty, step_id, frekvencie, pásma, prahy
+  io/metadata.py             čítanie CSV, priradenie súborov, inventár, vekové skupiny
+  io/reader.py               dekódovanie JSON → base64 → zlib → pickle → pakety
+  preprocessing/polarity.py  oprava znamienka kanála 9 (right_sensor_2)
+  preprocessing/gaps.py      kontrola času, priemerovanie duplicít, interpolácia na mriežku 1 ms
+  preprocessing/resample.py  1000 → 100 Hz (resample_poly s anti-aliasingovým filtrom)
+  preprocessing/crop.py      orezanie 3–15 s
+  preprocessing/pipeline.py  load_measurement_data(): všetky kroky spolu
+  quality.py                 kritériá platnosti, príznaky neaktívneho prsta a odľahlých hodnôt
+  features/spectral.py       spektrogram, frekvenčné pásma
+  features/finger.py         ukazovatele prsta (+ zoznam možných ďalších ukazovateľov)
+  aggregation.py             pokus → meranie → osoba, neaktívna ruka
+  stats/                     testy, demografia, aktivita rúk, tremor prstov
+scripts/build_dataset.py     CLI celého pipeline
+scripts/run_analysis.py      CLI štatistickej analýzy
+tests/                       unit testy
+notebooks/analyza_prstov.ipynb  grafy a tabuľky analýzy
+notebooks/task_1.ipynb       prvá úloha (samostatný kód)
+outputs/                     výsledky (generuje ich skript)
 ```
 
-## Дані
+## Dáta
 
-- **Вправа EXACT_FORCE:** людина стискає всі пальці й утримує силу на цільовому рівні. 4 спроби по 16 с (крок `d475…` — 1 спроба).
-- **`step_id` збігається з групою:** здорові — `5867ebbc-…` і `d475bc4a-…`, пацієнти — лише `d2e6b7bd-…`. Різниця між групами може частково пояснюватися налаштуваннями гри.
-- **Зіставлення:** ключ `(measurement_id, step_id)`; UUID з імені файла = `payload.examination_id` = `measurement_id`. `is_patient = 1`, якщо ключ є в `dataset_patients.csv`.
-- **Сенсори:** канали `[0–4]` — ліва рука, `[8–12]` — права; 5–7 і 13–15 завжди 0. Канал 9 має протилежний знак (підтверджено калібруванням у `25_03_2025_calibration`) і виправляється. Без навантаження сенсори показують 0 ± 0.002, шум ~1e-4.
-- **Пальці:** `sensor_1…5` = мізинець…великий — **не перевірено**, змінюється в `config.FINGER_NAMES`.
+- **Cvičenie EXACT_FORCE:** osoba stláča všetky prsty a udržiava silu na cieľovej úrovni. 4 pokusy po 16 s (krok `d475…` – 1 pokus).
+- **`step_id` sa zhoduje so skupinou:** zdraví – `5867ebbc-…` a `d475bc4a-…`, pacienti – iba `d2e6b7bd-…`. Rozdiely medzi skupinami môžu čiastočne vyplývať z nastavenia hry.
+- **Priradenie:** kľúč `(measurement_id, step_id)`; UUID z názvu súboru = `payload.examination_id` = `measurement_id`. `is_patient = 1`, ak je kľúč v `dataset_patients.csv`.
+- **Snímače:** kanály `[0–4]` – ľavá ruka, `[8–12]` – pravá; 5–7 a 13–15 sú vždy 0. Kanál 9 má opačné znamienko (potvrdené kalibráciou v `25_03_2025_calibration`) a opravuje sa. Bez zaťaženia ukazujú snímače 0 ± 0,002, šum ~1e-4.
+- **Prsty:** `sensor_1…5` = malíček…palec – **neoverené**, mení sa v `config.FINGER_NAMES`.
 
-## Попередня обробка (перевірено на сирих даних)
+## Predspracovanie (overené na surových dátach)
 
-Частота пакетів 1000–1010/с. ~25 % міток часу дублюються → усереднюються. NaN у 0.1–0.2 % рядків (найдовша серія 12 мс) → лінійна інтерполяція. Канал, у якому > 1 % NaN або розрив > 50 мс, лишається NaN. Розриви > 50 мс ділять спробу на сегменти; аналізується лише сегмент 1. Після обрізання 3–15 с — 1200 семплів при 100 Гц.
+Frekvencia paketov 1000–1010/s. ~25 % časových značiek je duplicitných → priemerujú sa. NaN v 0,1–0,2 % riadkov (najdlhšia séria 12 ms) → lineárna interpolácia. Kanál s > 1 % NaN alebo s medzerou > 50 ms zostáva NaN. Medzery > 50 ms rozdelia pokus na segmenty; analyzuje sa iba segment 1. Po orezaní na 3–15 s zostáva 1200 vzoriek pri 100 Hz.
 
-## Ознаки пальця (`features/finger.py`)
+## Ukazovatele prsta (`features/finger.py`)
 
-Спектрограма: Hann 5 с (0.2 Гц), крок 0.01 с, `detrend="constant"`, magnitude, ≤ 15 Гц. Рух 0–4 Гц (без DC), тремор 4–15 Гц (з межею 3 Гц 63 % «піків» лежали на краю смуги).
+Spektrogram: Hann 5 s (0,2 Hz), krok 0,01 s, `detrend="constant"`, magnitúda, ≤ 15 Hz. Pohyb 0–4 Hz (bez DC), tremor 4–15 Hz (pri hranici 3 Hz ležalo 63 % „vrcholov“ na okraji pásma).
 
-| Ознака | Значення |
+| Ukazovateľ | Význam |
 |---|---|
-| `tremor_mean_amplitude` | середня амплітуда в 4–15 Гц |
-| `tremor_mean_frequency_hz` | центроїд спектра 4–15 Гц |
-| `tremor_peak_frequency_hz` | частота найвищого **локального максимуму** спектра (не край смуги); NaN, якщо максимуму немає |
-| `tremor_peak_amplitude` | амплітуда цієї складової |
-| `mean_force` | середня сила пальця (знак виправлено) |
-| `tremor_to_movement_ratio` | амплітуда 4–15 Гц / амплітуда 0–4 Гц (тремор відносно нормальної корекції сили) |
-| `tremor_peak_prominence` | пік / медіана спектра 4–15 Гц (≈1–2 шум, більше — ритмічний тремор) |
+| `tremor_mean_amplitude` | priemerná amplitúda v pásme 4–15 Hz |
+| `tremor_mean_frequency_hz` | ťažisko spektra 4–15 Hz |
+| `tremor_peak_frequency_hz` | frekvencia najvyššieho **lokálneho maxima** spektra (nie okraj pásma); NaN, ak maximum neexistuje |
+| `tremor_peak_amplitude` | amplitúda tejto zložky |
+| `mean_force` | priemerná sila prsta (znamienko opravené) |
+| `tremor_to_movement_ratio` | amplitúda 4–15 Hz / amplitúda 0–4 Hz (tremor voči bežnej korekcii sily) |
+| `tremor_peak_prominence` | vrchol / medián spektra 4–15 Hz (≈1–2 šum, viac – rytmický tremor) |
 
-## Валідність і викиди (`quality.py`)
+## Platnosť a odľahlé hodnoty (`quality.py`)
 
-| Рівень | Критерій | Наслідок |
+| Úroveň | Kritérium | Dôsledok |
 |---|---|---|
-| файл | не декодується, UUID не збігається, немає метаданих, дублікат | `recordings_inventory.csv`, `status = excluded` |
-| спроба | час назад, неможлива частота пакетів, немає сегмента ≥ 3 с | файл/спроба не обробляється |
-| спроба × палець | < 500 семплів, NaN, `std < 1e-5` (`flat_signal`) | `status = invalid` |
-| спроба × палець | `mean_force < 0.002` | `finger_inactive = True`, рядок залишається |
-| спроба × рука | середнє по пальцях `mean_force` або `tremor_mean_amplitude` > 3× або < 1/3 від медіани спроб цього вимірювання (≥ 3 спроби) | `attempt_outlier`, виключається з середніх |
-| вимірювання × рука | те саме відносно інших вимірювань людини (≥ 3 вимірювання) | `measurement_outlier`, виключається з середніх |
+| súbor | nedá sa dekódovať, UUID nesedí, chýbajú metadáta, duplicita | `recordings_inventory.csv`, `status = excluded` |
+| pokus | čas ide dozadu, nemožná frekvencia paketov, chýba segment ≥ 3 s | súbor/pokus sa nespracuje |
+| pokus × prst | < 500 vzoriek, NaN, `std < 1e-5` (`flat_signal`) | `status = invalid` |
+| pokus × prst | `mean_force < 0,002` | `finger_inactive = True`, riadok zostáva |
+| pokus × ruka | priemer cez prsty `mean_force` alebo `tremor_mean_amplitude` > 3× alebo < 1/3 mediánu pokusov tohto merania (≥ 3 pokusy) | `attempt_outlier`, vylúčené z priemerov |
+| meranie × ruka | to isté voči ostatným meraniam osoby (≥ 3 merania) | `measurement_outlier`, vylúčené z priemerov |
 
-**Неактивна рука:** `activity_ratio` = середня сила пальців слабшої руки / сильнішої; `< 0.10` → `inactive_hand = left/right`, інакше `none`; `unknown` — немає даних або жодна рука не тисне.
+**Neaktívna ruka:** `activity_ratio` = priemerná sila prstov slabšej ruky / silnejšej; `< 0,10` → `inactive_hand = left/right`, inak `none`; `unknown` – chýbajú dáta alebo netlačí ani jedna ruka.
 
-## Вихідні файли (`outputs/`)
+## Výstupné súbory (`outputs/`)
 
-| Файл | Рядок |
+| Súbor | Riadok |
 |---|---|
-| `recordings_inventory.csv` | кожен файл `results_*`: matched / excluded + причина |
-| `features_by_attempt_finger.csv` | спроба × рука × палець: контекст, статус, прапорці, 7 ознак |
-| `features_by_measurement_finger.csv` | вимірювання × рука × палець: середнє валідних спроб без викидів |
-| `features_by_person_finger.csv` | людина × step_id × рука × палець: середнє вимірювань без викидів |
-| `person_summary.csv` | людина × step_id: вік, вікова група (10 років), кількість даних, сила рук, `activity_ratio`, `inactive_hand` |
-| `processing_summary.csv` | скільки записів на кожному рівні, валідні / невалідні / викиди |
+| `recordings_inventory.csv` | každý súbor `results_*`: matched / excluded + dôvod |
+| `features_by_attempt_finger.csv` | pokus × ruka × prst: kontext, stav, príznaky, 7 ukazovateľov |
+| `features_by_measurement_finger.csv` | meranie × ruka × prst: priemer platných pokusov bez odľahlých hodnôt |
+| `features_by_person_finger.csv` | osoba × step_id × ruka × prst: priemer meraní bez odľahlých hodnôt |
+| `person_summary.csv` | osoba × step_id: vek, veková skupina (10 rokov), počty dát, sila rúk, `activity_ratio`, `inactive_hand` |
+| `processing_summary.csv` | počet záznamov na každej úrovni: platné / neplatné / odľahlé |
 
-Здорові мають обидва контрольні кроки, тому на рівні людини вони представлені двома рядками (по одному на `step_id`).
+Zdraví majú oba kontrolné kroky, preto sú na úrovni osoby zastúpení dvoma riadkami (jeden na `step_id`).
 
-## Статистичний аналіз (`scripts/run_analysis.py` → `outputs/stats/`)
+## Štatistická analýza (`scripts/run_analysis.py` → `outputs/stats/`)
 
-Порівняння груп: контрольні — крок `5867…` (4 спроби, як у пацієнтів), пацієнти — `d2e6…`. Тести непараметричні, поправка Холма.
-Тремор-ознаки неактивних пальців не використовуються. Додатково — підгрупа вік ≥ 50 (контрольні значно молодші).
+Porovnanie skupín: kontrolná skupina – krok `5867…` (4 pokusy ako u pacientov), pacienti – `d2e6…`. Neparametrické testy, Holmova korekcia.
+Tremorové ukazovatele neaktívnych prstov sa nepoužívajú. Navyše sa analyzuje podskupina s vekom ≥ 50 (kontrolná skupina je výrazne mladšia).
 
-| Файл | Що містить |
+| Súbor | Obsah |
 |---|---|
-| `demographics_by_group`, `age_histogram`, `age_test`, `gender_by_age_group` | вік (інтервали 10 років), стать, Манн-Вітні для віку |
-| `hand_activity`, `weak_hand_counts` | `force_ratio` (сила) і `fluctuation_ratio` (коливання) слабшої/сильнішої руки; кількість людей під порогами 0.10/0.25/0.50 |
-| `finger_descriptives` | медіана, квартилі для групи × руки × пальця × ознаки |
-| `finger_friedman`, `finger_posthoc` | чи відрізняються пальці однієї людини (Фрідман + Kendall W, попарний Вілкоксон) |
-| `most_tremulous_finger` | у скількох людей який палець має найбільший тремор |
-| `finger_spread_by_person`, `finger_spread_group_test` | CV і max/min між пальцями людини; порівняння груп |
-| `group_comparison_by_finger` | пацієнти vs здорові для кожного пальця (r > 0 — у пацієнтів більше) |
-| `left_right_by_finger` | ліва vs права рука для того самого пальця |
+| `demographics_by_group`, `age_histogram`, `age_test`, `gender_by_age_group` | vek (intervaly po 10 rokov), pohlavie, Mann-Whitneyho test veku |
+| `hand_activity`, `weak_hand_counts` | `force_ratio` (sila) a `fluctuation_ratio` (kolísanie) slabšej/silnejšej ruky; počet osôb pod prahmi 0,10/0,25/0,50 |
+| `finger_descriptives` | medián, kvartily pre skupinu × ruku × prst × ukazovateľ |
+| `finger_friedman`, `finger_posthoc` | či sa líšia prsty jednej osoby (Friedmanov test + Kendallovo W, párový Wilcoxonov test) |
+| `most_tremulous_finger` | u koľkých osôb má ktorý prst najväčší tremor |
+| `finger_spread_by_person`, `finger_spread_group_test` | CV a max/min medzi prstami osoby; porovnanie skupín |
+| `group_comparison_by_finger` | pacienti vs. zdraví pre každý prst (r > 0 – u pacientov vyššie) |
+| `left_right_by_finger` | ľavá vs. pravá ruka pre ten istý prst |

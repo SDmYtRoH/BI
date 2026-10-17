@@ -1,18 +1,18 @@
-# Дані (не входять у репозиторій)
+# Dáta (nie sú súčasťou repozitára)
 
-Сирі вимірювання й метадані містять дані пацієнтів і важать ~6.6 ГБ, тому вони виключені через `.gitignore`.
-Щоб запустити pipeline, поклади їх так:
+Surové merania a metadáta obsahujú údaje pacientov a majú ~6,6 GB, preto sú vylúčené cez `.gitignore`.
+Na spustenie pipeline ich ulož takto:
 
 ```
 data/
-├── raw/RehaPiano/          теки з файлами results_<uuid>_<YYYYMMDD-HHMMSS>
+├── raw/RehaPiano/          priečinky so súbormi results_<uuid>_<YYYYMMDD-HHMMSS>
 │   ├── 13_02_2025/ ...
 │   ├── 22_08_2025/ ...
-│   └── 25_03_2025_calibration/   (калібрування; підтверджує інверсію каналу 9)
+│   └── 25_03_2025_calibration/   (kalibrácia; potvrdzuje opačné znamienko kanála 9)
 └── metadata/
-    ├── dataset_full.csv       (обов'язковий)
-    └── dataset_patients.csv   (обов'язковий)
+    ├── dataset_full.csv       (povinný)
+    └── dataset_patients.csv   (povinný)
 ```
 
-Файли шукаються рекурсивно, тож структура підтек у `RehaPiano/` може бути будь-якою.
-Шляхи задано в `src/rehapiano/config.py`.
+Súbory sa hľadajú rekurzívne, takže štruktúra podpriečinkov v `RehaPiano/` môže byť ľubovoľná.
+Cesty sú nastavené v `src/rehapiano/config.py`.
