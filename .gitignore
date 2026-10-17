@@ -1,0 +1,20 @@
+# Raw measurements and metadata: 6.6 GB of patient data, never committed.
+# Only the instructions in data/README.md are tracked.
+data/*
+!data/README.md
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editors / OS
+.DS_Store
+.vscode/
+.idea/
+.claude/

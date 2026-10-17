@@ -1,0 +1,3 @@
+group,n_people,n_measurements,age_mean,age_sd,age_median,age_q1,age_q3,age_min,age_max,n_female,n_male,n_hand_right,n_hand_left,n_hand_unknown
+control,90,180,35.56666666666667,19.61543189785343,24.0,22.0,52.25,18,85,36,54,77,13,0
+patient,48,83,62.708333333333336,17.215725534340947,66.5,56.0,74.25,21,89,20,28,0,0,48
