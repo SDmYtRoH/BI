@@ -1,0 +1,124 @@
+{
+  "participants": 138,
+  "sessions": 173,
+  "cohort_people": {
+    "reference": 90,
+    "patient": 48
+  },
+  "label_status": {
+    "no_reported_condition": 76,
+    "patient_cohort": 48,
+    "reported_condition": 11,
+    "unknown_or_conflicting": 2,
+    "duplicate_questionnaire_id": 1
+  },
+  "quality_iterations": 692,
+  "processing_errors": 0,
+  "divergent_files": 0,
+  "primary_hand_status": {
+    "usable": 276
+  },
+  "primary_windows": 2768,
+  "primary_usable_windows": 2765,
+  "low_use_example": "XT2X-WLNW",
+  "method_checks": {
+    "status": "passed",
+    "checks": [
+      "known sine amplitudes and frequency",
+      "opposite-phase cancellation",
+      "unused hand exclusion",
+      "zero-power undefined frequency",
+      "filter separation",
+      "large-gap splitting",
+      "timestamp reset rejection",
+      "jitter and NaN resampling",
+      "invalid channel isolation"
+    ]
+  },
+  "baseline": [
+    {
+      "feature": "tremor_rms_max_hand",
+      "n": 124,
+      "patients": 48,
+      "references": 76,
+      "sensitivity": 0.8541666666666666,
+      "specificity": 0.75,
+      "balanced_accuracy": 0.8020833333333333,
+      "tp": 41,
+      "tn": 57,
+      "fp": 19,
+      "fn": 7,
+      "descriptive_raw_feature_auc": 0.8519736842105263
+    },
+    {
+      "feature": "age",
+      "n": 124,
+      "patients": 48,
+      "references": 76,
+      "sensitivity": 0.8541666666666666,
+      "specificity": 0.75,
+      "balanced_accuracy": 0.8020833333333333,
+      "tp": 41,
+      "tn": 57,
+      "fp": 19,
+      "fn": 7,
+      "descriptive_raw_feature_auc": 0.8548519736842105
+    }
+  ],
+  "packet_rate_summary": {
+    "count": 692.0,
+    "mean": 1000.8012833438327,
+    "std": 0.9698347533145742,
+    "min": 999.6882987344928,
+    "25%": 1000.1248439450687,
+    "50%": 1000.5612197180649,
+    "75%": 1001.0607431472649,
+    "max": 1009.6693699313786
+  },
+  "versions": {
+    "python": "3.9.6",
+    "numpy": "2.0.2",
+    "pandas": "2.3.3",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.4"
+  },
+  "config": {
+    "resampled_fs_hz": 100.0,
+    "crop_start_s": 3,
+    "crop_end_s": 15,
+    "primary_window_s": 5,
+    "bands": {
+      "slow": [
+        0.2,
+        3
+      ],
+      "boundary": [
+        3,
+        4
+      ],
+      "tremor": [
+        4,
+        15.00001
+      ],
+      "tremor_4_12": [
+        4,
+        12
+      ],
+      "upper": [
+        12,
+        15.00001
+      ],
+      "sensitivity_3": [
+        3,
+        15.00001
+      ],
+      "sensitivity_3p5": [
+        3.5,
+        15.00001
+      ]
+    },
+    "level_floor": 0.002,
+    "relative_hand_floor": 0.1,
+    "max_interpolated_gap_s": 0.05
+  }
+}

@@ -1,7 +1,7 @@
 # RehaPiano EXACT_FORCE: ukazovatele tremoru pre každý prst
 
 Pipeline: načítanie → doplnenie chýbajúcich hodnôt → zníženie vzorkovacej frekvencie → orezanie → kritériá platnosti → ukazovatele pre každý prst → agregácia → CSV.
-Ďalej nasleduje štatistická analýza (`scripts/run_analysis.py`) a vizualizácia (`notebooks/analyza_prstov.ipynb`).
+Ďalej nasleduje štatistická analýza (`scripts/run_analysis.py`) a vizualizácia (`notebooks/week3/analyza_prstov.ipynb`).
 
 ## Inštalácia
 
@@ -21,7 +21,7 @@ conda activate rehapiano                 # numpy, pandas, scipy, matplotlib, jup
 python scripts/build_dataset.py          # všetky predvolené parametre zo src/rehapiano/config.py
 python scripts/build_dataset.py --limit 5    # rýchla kontrola na 5 súboroch
 python scripts/run_analysis.py           # štatistika → outputs/stats/
-jupyter lab notebooks/analyza_prstov.ipynb   # grafy
+jupyter lab notebooks/week3/analyza_prstov.ipynb   # grafy
 python -m unittest discover tests
 ```
 
@@ -48,8 +48,8 @@ src/rehapiano/
 scripts/build_dataset.py     CLI celého pipeline
 scripts/run_analysis.py      CLI štatistickej analýzy
 tests/                       unit testy
-notebooks/analyza_prstov.ipynb  grafy a tabuľky analýzy
-notebooks/task_1.ipynb       prvá úloha (samostatný kód)
+notebooks/README.md          prehľad úloh podľa týždňov (week1–week3)
+notebooks/week1/ … week3/    notebooky 1.–3. úlohy (week3/analyza_prstov.ipynb = grafy tejto analýzy)
 outputs/                     výsledky (generuje ich skript)
 ```
 

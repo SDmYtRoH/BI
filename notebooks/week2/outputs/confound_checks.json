@@ -1,0 +1,22 @@
+{
+  "age_tremor_spearman_rho": 0.39510338728888145,
+  "age50plus_patients": 40,
+  "age50plus_references": 17,
+  "age50plus_descriptive_tremor_auc": 0.8411764705882353,
+  "age_summary": [
+    {
+      "cohort": "patient",
+      "count": 48,
+      "median": 66.5,
+      "min": 21,
+      "max": 89
+    },
+    {
+      "cohort": "reference",
+      "count": 90,
+      "median": 24.0,
+      "min": 18,
+      "max": 85
+    }
+  ]
+}

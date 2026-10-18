@@ -16,3 +16,16 @@ data/
 
 Súbory sa hľadajú rekurzívne, takže štruktúra podpriečinkov v `RehaPiano/` môže byť ľubovoľná.
 Cesty sú nastavené v `src/rehapiano/config.py`.
+
+## Local layout on the `mykyta` branch (English note)
+
+The archive extracts to `data/RehaPiano/` with the metadata indices in `data/RehaPiano/datasets/`.
+The week-3 pipeline (`src/rehapiano/config.py`) expects `data/raw/RehaPiano/` and `data/metadata/`, so two local symlinks bridge the layouts:
+
+```sh
+mkdir -p data/raw
+ln -s ../RehaPiano data/raw/RehaPiano
+ln -s RehaPiano/datasets data/metadata
+```
+
+`data/sources/` holds read-only snapshots used by week 2: `questionnaire.csv` (control-group questionnaire with self-reported health answers – never commit it), `protocol.txt`, `document.txt`.
