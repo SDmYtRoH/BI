@@ -16,9 +16,11 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from rehapiano.aggregation import classify_hand_activity, flag_attempt_outliers  # noqa: E402
+from rehapiano.aggregation import build_wide_table, classify_hand_activity, flag_attempt_outliers  # noqa: E402
 from rehapiano.config import (  # noqa: E402
     ANALYSIS_SAMPLE_RATE_HZ as FS,
+    CONTROL_STEP_IDS,
+    PATIENT_STEP_IDS,
     MOVEMENT_BAND,
     SENSOR_COLUMNS,
     SPECTROGRAM_NPERSEG,
@@ -184,6 +186,29 @@ class QualityTests(unittest.TestCase):
                                  finger=finger, status="valid", mean_force=force, tremor_mean_amplitude=0.001))
         flagged = flag_attempt_outliers(pd.DataFrame(rows))
         self.assertEqual(flagged.groupby("attempt")["attempt_outlier"].all().tolist(), [False, False, False, True])
+
+
+class WideTableTests(unittest.TestCase):
+    def test_one_row_per_person_primary_step_only(self) -> None:
+        people = [("C1", CONTROL_STEP_IDS[0], 0), ("C1", CONTROL_STEP_IDS[1], 0), ("P1", PATIENT_STEP_IDS[0], 1)]
+        fingers, summary = [], []
+        for patient_id, step_id, is_patient in people:
+            summary.append(dict(patient_id=patient_id, step_id=step_id, is_patient=is_patient,
+                                group="patient" if is_patient else "control", age=30, age_group="30-39",
+                                gender="f", metadata_hand="right", n_measurements=1, n_attempts=4,
+                                left_mean_force=0.01, right_mean_force=0.01, activity_ratio=1.0,
+                                inactive_hand="none"))
+            for hand in ("left", "right"):
+                for finger, name in enumerate(("little", "ring", "middle", "index", "thumb"), start=1):
+                    row = dict(patient_id=patient_id, step_id=step_id, hand=hand, finger=finger,
+                               finger_name=name, finger_inactive=False)
+                    row.update({column: float(finger) for column in compute_finger_features(tone(1200))})
+                    fingers.append(row)
+        wide = build_wide_table(pd.DataFrame(fingers), pd.DataFrame(summary))
+        self.assertEqual(wide["patient_id"].tolist(), ["C1", "P1"])
+        self.assertTrue((wide["step_id"] != CONTROL_STEP_IDS[1]).all())
+        self.assertEqual(wide.loc[0, "right_thumb_mean_force"], 5.0)
+        self.assertIn("left_little_inactive", wide.columns)
 
 
 class ActivityTests(unittest.TestCase):

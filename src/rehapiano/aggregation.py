@@ -149,3 +149,31 @@ def summarize_persons(
     summary["activity_ratio"] = [item[0] for item in activity]
     summary["inactive_hand"] = [item[1] for item in activity]
     return summary.reset_index().sort_values(["is_patient", "patient_id", "step_id"]).reset_index(drop=True)
+
+
+def build_wide_table(features_by_person: pd.DataFrame, person_summary: pd.DataFrame) -> pd.DataFrame:
+    """One row per person with every finger feature as a column.
+
+    Controls enter with the primary control step only (four attempts, like the
+    patient step), so every person appears exactly once. Columns are named
+    ``<hand>_<finger_name>_<feature>`` plus ``<hand>_<finger_name>_inactive``.
+    """
+
+    from rehapiano.stats.selection import primary_step  # local import: stats builds on this module
+
+    fingers = primary_step(features_by_person).sort_values(["hand", "finger"])
+    fingers["column_prefix"] = fingers["hand"] + "_" + fingers["finger_name"]
+    fingers = fingers.rename(columns={"finger_inactive": "inactive"})
+    wide = fingers.pivot(index="patient_id", columns="column_prefix",
+                         values=[*FINGER_FEATURE_COLUMNS, "inactive"])
+    prefixes = fingers["column_prefix"].drop_duplicates()  # hand, then finger order
+    ordered = [(value, prefix) for prefix in prefixes for value in [*FINGER_FEATURE_COLUMNS, "inactive"]]
+    wide = wide[ordered]
+    wide.columns = [f"{prefix}_{value}" for value, prefix in ordered]
+
+    summary_columns = ["patient_id", "group", "is_patient", "age", "age_group", "gender", "metadata_hand",
+                       "step_id", "n_measurements", "n_attempts", "left_mean_force", "right_mean_force",
+                       "activity_ratio", "inactive_hand"]
+    summary = primary_step(person_summary)[summary_columns]
+    return (summary.merge(wide.reset_index(), on="patient_id", how="left")
+            .sort_values(["is_patient", "patient_id"]).reset_index(drop=True))

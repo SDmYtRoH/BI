@@ -20,6 +20,7 @@ from rehapiano import config  # noqa: E402
 from rehapiano.aggregation import (  # noqa: E402
     aggregate_by_measurement,
     aggregate_by_person,
+    build_wide_table,
     flag_attempt_outliers,
     summarize_persons,
 )
@@ -158,6 +159,7 @@ def main() -> None:
     features_by_measurement.to_csv(output_dir / "features_by_measurement_finger.csv", index=False)
     features_by_person.to_csv(output_dir / "features_by_person_finger.csv", index=False)
     person_summary.to_csv(output_dir / "person_summary.csv", index=False)
+    build_wide_table(features_by_person, person_summary).to_csv(output_dir / "dataset_wide.csv", index=False)
     summary.to_csv(output_dir / "processing_summary.csv", index=False)
 
     print("\n===== Summary =====")

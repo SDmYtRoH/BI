@@ -100,6 +100,7 @@ Spektrogram: Hann 5 s (0,2 Hz), krok 0,01 s, `detrend="constant"`, magnitúda, �
 | `features_by_attempt_finger.csv` | pokus × ruka × prst: kontext, stav, príznaky, 7 ukazovateľov |
 | `features_by_measurement_finger.csv` | meranie × ruka × prst: priemer platných pokusov bez odľahlých hodnôt |
 | `features_by_person_finger.csv` | osoba × step_id × ruka × prst: priemer meraní bez odľahlých hodnôt |
+| `dataset_wide.csv` | **osoba (138 riadkov): skupina, vek, aktivita rúk a všetkých 7 ukazovateľov pre každý z 10 prstov v stĺpcoch `<ruka>_<prst>_<ukazovateľ>`**; zdraví iba s krokom `5867…` |
 | `person_summary.csv` | osoba × step_id: vek, veková skupina (10 rokov), počty dát, sila rúk, `activity_ratio`, `inactive_hand` |
 | `processing_summary.csv` | počet záznamov na každej úrovni: platné / neplatné / odľahlé |
 
