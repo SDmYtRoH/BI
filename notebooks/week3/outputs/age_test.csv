@@ -1,0 +1,2 @@
+comparison,n_a,n_b,median_a,median_b,u,p,effect_r
+"age, healthy (a) vs sick (b)",76,48,23.0,66.5,3118.5,3.0372353631605824e-11,0.709703947368421

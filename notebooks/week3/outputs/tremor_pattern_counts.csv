@@ -1,0 +1,4 @@
+Pattern,Healthy,Sick
+none,16,19
+localized (2–4 fingers),0,16
+generalized (5+ fingers),1,5

@@ -1,0 +1,58 @@
+patient_id,label,age,fingers_scored,fingers_elevated,median_z,elevated_fingers,pattern
+992606,Healthy,85,9,8,2.9866460954767597,"L ring, L middle, L index, L thumb, R ring, R middle, R index, R thumb",generalized (5+ fingers)
+2102202516,Healthy,56,10,1,0.9835061671653367,R index,none
+1402202503,Healthy,61,10,0,-1.0436306251192882,,none
+1702202502,Healthy,64,10,0,0.5427651796594222,,none
+1702202503,Healthy,62,10,0,-0.8440274476941902,,none
+20250228006,Healthy,53,10,0,-1.9998318514428401,,none
+2102202501,Healthy,55,10,0,-0.9346832378594685,,none
+2102202504,Healthy,64,10,0,-0.5110142071418977,,none
+2102202514,Healthy,50,9,0,-0.5218870318057256,,none
+2102202515,Healthy,79,8,0,0.5934514722845883,,none
+992601,Healthy,66,10,0,-0.22766256501063392,,none
+992602,Healthy,67,9,0,-0.009236487784074276,,none
+992604,Healthy,75,7,0,1.3631992869311567,,none
+992607,Healthy,56,10,0,1.1708869012077776,,none
+992610,Healthy,63,9,0,0.04954715717921483,,none
+992611,Healthy,65,10,0,-0.0006645761043793212,,none
+992612,Healthy,74,10,0,0.1233719905929242,,none
+QQYP-XMRG,Sick,74,10,7,3.0890228243815274,"L little, L ring, L middle, L thumb, R ring, R middle, R thumb",generalized (5+ fingers)
+UIMG-NOVN,Sick,73,8,7,2.387735454140354,"L ring, L middle, L index, R ring, R middle, R index, R thumb",generalized (5+ fingers)
+0IKB-27Y1,Sick,75,9,5,3.0612247100685477,"R little, R ring, R middle, R index, R thumb",generalized (5+ fingers)
+ILHC-BZCP,Sick,73,8,5,2.863070310780464,"L middle, R ring, R middle, R index, R thumb",generalized (5+ fingers)
+LLCF-IB2I,Sick,63,9,5,2.502470120081237,"L thumb, R little, R ring, R middle, R thumb",generalized (5+ fingers)
+3BOP-Z8PU,Sick,85,10,4,1.80452244799193,"L little, L middle, L index, L thumb",localized (2–4 fingers)
+3OUS-NI9J,Sick,82,9,4,0.8805466067244183,"R ring, R middle, R index, R thumb",localized (2–4 fingers)
+B5LW-5W1Q,Sick,60,9,4,1.9416314361206066,"L thumb, R ring, R middle, R thumb",localized (2–4 fingers)
+4FGL-NBCC,Sick,79,9,3,1.8230901161580642,"L middle, L thumb, R thumb",localized (2–4 fingers)
+MAYR-BEU4,Sick,62,9,3,1.6204226188591109,"L thumb, R little, R thumb",localized (2–4 fingers)
+2REJ-DLCV,Sick,56,10,2,0.7753113672324168,"R middle, R thumb",localized (2–4 fingers)
+6JRZ-KPE6,Sick,51,8,2,1.3071225858016435,"R middle, R thumb",localized (2–4 fingers)
+A8MY-DD2W,Sick,64,10,2,1.3425363362347105,"L little, L thumb",localized (2–4 fingers)
+FC3B-FR3M,Sick,71,10,2,0.9627298319177318,"L little, R little",localized (2–4 fingers)
+JJAV-NYZD,Sick,56,10,2,0.6113475504130891,"L little, L thumb",localized (2–4 fingers)
+JMPV-JTBP,Sick,56,10,2,1.4578256602482893,"L thumb, R little",localized (2–4 fingers)
+OJBL-BUN8,Sick,76,10,2,1.3942773057420106,"L middle, L thumb",localized (2–4 fingers)
+OQHZ-N4AV,Sick,60,9,2,1.2049106150364375,"L little, L thumb",localized (2–4 fingers)
+UHE7-LPCN,Sick,74,9,2,1.418049146140269,"R little, R thumb",localized (2–4 fingers)
+W6JM-R0SG,Sick,58,10,2,1.13916498070066,"L little, L thumb",localized (2–4 fingers)
+XT2X-WLNW,Sick,67,9,2,1.3669438056866101,"L ring, L thumb",localized (2–4 fingers)
+ALFZ-9NGL,Sick,66,10,1,1.059960049019168,L little,none
+EJIT-XSEZ,Sick,76,9,1,1.5176915418452859,L thumb,none
+G1VW-NO6C,Sick,77,10,1,1.1205083266988196,R thumb,none
+RPKE-H4MT,Sick,61,10,1,0.5900268322214289,L little,none
+S5PQ-K0C7,Sick,69,10,1,0.8903123792210501,R ring,none
+UFEQ-X1ZK,Sick,76,10,1,0.302798190325015,L thumb,none
+0HXU-5CYJ,Sick,67,10,0,0.1547459491390256,,none
+8VAU-MPTB,Sick,67,9,0,-0.9121770258816959,,none
+9VMD-WMRM,Sick,84,10,0,0.2946354908178101,,none
+AIP1-ZJEP,Sick,62,10,0,0.27620191999345606,,none
+NUYV-81KG,Sick,88,9,0,1.0817248654387555,,none
+OKZD-QXFU,Sick,70,10,0,1.112407358166168,,none
+REWW-2HZE,Sick,56,10,0,-1.5111509644398353,,none
+SVEL-EDUK,Sick,79,10,0,-0.8461710501241875,,none
+T1IE-6TRR,Sick,89,10,0,0.9842827652793407,,none
+UQIS-DXIH,Sick,55,10,0,1.1462835564766003,,none
+VFKD-HGNK,Sick,67,10,0,-0.03225182680673956,,none
+ZPVE-HPNW,Sick,58,10,0,1.1539875451444765,,none
+ZWTN-LDUR,Sick,74,10,0,-0.06001726807201313,,none

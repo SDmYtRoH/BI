@@ -1,0 +1,4 @@
+Group,People,Median age,Q1,Q3,Youngest,Oldest,Aged 50+,Female,Male,Handedness recorded,Recording period
+Healthy,76,23.0,21.0,43.5,18,85,17,25,51,76,"Feb 2025, Sep 2026"
+Sick,48,66.5,56.0,74.25,21,89,40,20,28,0,Mar-Aug 2025
+Other control,14,46.0,22.75,65.75,21,83,7,11,3,14,"Feb 2025, Sep 2026"

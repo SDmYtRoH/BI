@@ -1,0 +1,51 @@
+{
+  "gender_p": 0.4249979704498563,
+  "weak_hand_checks": {
+    "threshold": 0.6226473588465125,
+    "sick_below": 7,
+    "n_sick": 48,
+    "healthy_below": 2,
+    "n_healthy": 76,
+    "sick_below_bootstrap_95": [
+      6,
+      10
+    ],
+    "age_rho_healthy": -0.06644895139261169,
+    "age_p_healthy": 0.5684615194726731,
+    "group_test": {
+      "n_a": 76,
+      "n_b": 48,
+      "median_a": 0.9391973646719898,
+      "median_b": 0.8936574472074256,
+      "u": 1342.0,
+      "p": 0.013509685624515357,
+      "effect_r": -0.26425438596491224
+    },
+    "sick_below_010": 0
+  },
+  "weak_hand_example_ids": {
+    "Healthy": "1402202503",
+    "Sick": "0IKB-27Y1",
+    "healthy_ratio": 0.9241358925470603,
+    "sick_ratio": 0.21303490357314156,
+    "healthy_age": 61,
+    "sick_age": 75
+  },
+  "noise_level": {
+    "median": 2.9206738472595863e-06,
+    "p95": 3.857031218883651e-06
+  },
+  "finger_force_checks": {
+    "force_slope": 0.333723509612865,
+    "rho_force_amplitude_median": 0.6,
+    "rho_force_ratio_median": -0.65,
+    "ratio_winner_is_weakest_finger": 0.5241935483870968
+  },
+  "peak_example": {
+    "patient_id": "992601",
+    "attempt": 1,
+    "finger": "right index",
+    "peak_hz": 4.6000000000000005,
+    "prominence": 2.976175246038402
+  }
+}

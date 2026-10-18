@@ -1,0 +1,5 @@
+Rule,Healthy: people below,Healthy: % below,Sick: people below,Sick: % below
+ratio < 0.10,0,0.0,0,0.0
+ratio < 0.25,0,0.0,1,2.083333333333333
+ratio < 0.50,1,1.3157894736842104,6,12.5
+ratio < 0.623 (healthy 2.5th percentile),2,2.631578947368421,7,14.583333333333334
