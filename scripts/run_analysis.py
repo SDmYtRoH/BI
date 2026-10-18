@@ -39,6 +39,9 @@ def main() -> None:
     friedman_table, posthoc_table = finger_tremor.finger_differences(fingers)
     spread = finger_tremor.finger_spread(fingers)
 
+    z_table = finger_tremor.z_scores(fingers)
+    sensor_noise_path = arguments.input_dir / "sensor_noise.csv"
+
     tables = {
         "demographics_by_group": demographics.describe_groups(people),
         "age_histogram": demographics.age_histogram(people),
@@ -46,6 +49,10 @@ def main() -> None:
         "gender_by_age_group": demographics.gender_by_age_group(people),
         "hand_activity": activity,
         "weak_hand_counts": hand_activity.weak_hand_counts(activity),
+        "weak_hand_patients": hand_activity.weak_hand_patients(activity),
+        "finger_ratio_to_reference": finger_tremor.ratio_to_reference(fingers),
+        "finger_z_scores": z_table,
+        "tremor_pattern": finger_tremor.tremor_pattern(z_table),
         "finger_descriptives": finger_tremor.finger_descriptives(fingers),
         "finger_friedman": friedman_table,
         "finger_posthoc": posthoc_table,
@@ -55,6 +62,8 @@ def main() -> None:
         "group_comparison_by_finger": finger_tremor.group_comparison(fingers),
         "left_right_by_finger": finger_tremor.left_right_comparison(fingers),
     }
+    if sensor_noise_path.exists():
+        tables["finger_signal_to_noise"] = finger_tremor.noise_comparison(fingers, pd.read_csv(sensor_noise_path))
     for name, table in tables.items():
         table.to_csv(output_dir / f"{name}.csv", index=False)
         print(f"{name + '.csv':<36} {len(table):>5} rows")

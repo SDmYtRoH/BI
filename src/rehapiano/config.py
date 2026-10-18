@@ -106,3 +106,22 @@ FINGER_COMPARISON_FEATURES = (
     "tremor_peak_frequency_hz",
     "tremor_peak_prominence",
 )
+
+# --------------------------------------------------------------------------- reference values
+CALIBRATION_DIR = MEASUREMENTS_DIR / "25_03_2025_calibration"
+# A calibration channel counts as unloaded (pure sensor noise) below these limits.
+UNLOADED_MAX_ABS_MEAN = 0.003
+UNLOADED_MAX_STD = 0.0005
+# Weak hand: hand symmetry below this quantile of the healthy controls.
+WEAK_HAND_METRIC = "force_ratio"
+WEAK_HAND_REFERENCE_QUANTILE = 0.025
+# Finger tremor is judged against healthy controls of comparable age; the
+# younger controls would make every older person look abnormal.
+REFERENCE_MIN_AGE = AGE_MATCHED_MIN_AGE
+ELEVATED_TREMOR_Z = 1.96  # above ~97.5 % of the reference controls
+# With 10 fingers and a 2.5 % chance per finger, a healthy person has ~22 % chance
+# of one elevated finger but only ~2.5 % of two, so one finger is not a pattern.
+LOCALIZED_MIN_FINGERS = 2
+GENERALIZED_MIN_FINGERS = 5  # elevated on at least half of the 10 fingers
+BOOTSTRAP_SAMPLES = 2000
+RANDOM_SEED = 0

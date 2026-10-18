@@ -25,6 +25,7 @@ from rehapiano.aggregation import (  # noqa: E402
     summarize_persons,
 )
 from rehapiano.features.finger import extract_measurement_finger_features  # noqa: E402
+from rehapiano.features.noise import estimate_sensor_noise  # noqa: E402
 from rehapiano.io.metadata import (  # noqa: E402
     add_demographics,
     build_inventory,
@@ -161,6 +162,10 @@ def main() -> None:
     person_summary.to_csv(output_dir / "person_summary.csv", index=False)
     build_wide_table(features_by_person, person_summary).to_csv(output_dir / "dataset_wide.csv", index=False)
     summary.to_csv(output_dir / "processing_summary.csv", index=False)
+    if config.CALIBRATION_DIR.exists():
+        estimate_sensor_noise().to_csv(output_dir / "sensor_noise.csv", index=False)
+    else:
+        logger.warning("Calibration recordings not found; sensor_noise.csv not written")
 
     print("\n===== Summary =====")
     for level, frame in summary.groupby("level", sort=False):

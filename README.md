@@ -102,6 +102,7 @@ Spektrogram: Hann 5 s (0,2 Hz), krok 0,01 s, `detrend="constant"`, magnitúda, �
 | `features_by_person_finger.csv` | osoba × step_id × ruka × prst: priemer meraní bez odľahlých hodnôt |
 | `dataset_wide.csv` | **osoba (138 riadkov): skupina, vek, aktivita rúk a všetkých 7 ukazovateľov pre každý z 10 prstov v stĺpcoch `<ruka>_<prst>_<ukazovateľ>`**; zdraví iba s krokom `5867…` |
 | `person_summary.csv` | osoba × step_id: vek, veková skupina (10 rokov), počty dát, sila rúk, `activity_ratio`, `inactive_hand` |
+| `sensor_noise.csv` | ukazovatele tremoru nezaťažených snímačov z kalibračných meraní (úroveň šumu) |
 | `processing_summary.csv` | počet záznamov na každej úrovni: platné / neplatné / odľahlé |
 
 Zdraví majú oba kontrolné kroky, preto sú na úrovni osoby zastúpení dvoma riadkami (jeden na `step_id`).
@@ -109,12 +110,16 @@ Zdraví majú oba kontrolné kroky, preto sú na úrovni osoby zastúpení dvoma
 ## Štatistická analýza (`scripts/run_analysis.py` → `outputs/stats/`)
 
 Porovnanie skupín: kontrolná skupina – krok `5867…` (4 pokusy ako u pacientov), pacienti – `d2e6…`. Neparametrické testy, Holmova korekcia.
-Tremorové ukazovatele neaktívnych prstov sa nepoužívajú. Navyše sa analyzuje podskupina s vekom ≥ 50 (kontrolná skupina je výrazne mladšia).
+Prsty sa neporovnávajú priamo (líšia sa už u zdravých silou aj kolísaním), ale každý prst s normou toho istého prsta u zdravých ≥ 50 rokov. Tremorové ukazovatele neaktívnych prstov sa nepoužívajú. Navyše sa analyzuje podskupina s vekom ≥ 50 (kontrolná skupina je výrazne mladšia).
 
 | Súbor | Obsah |
 |---|---|
 | `demographics_by_group`, `age_histogram`, `age_test`, `gender_by_age_group` | vek (intervaly po 10 rokov), pohlavie, Mann-Whitneyho test veku |
 | `hand_activity`, `weak_hand_counts` | `force_ratio` (sila) a `fluctuation_ratio` (kolísanie) slabšej/silnejšej ruky; počet osôb pod prahmi 0,10/0,25/0,50 |
+| `weak_hand_patients` | **odpoveď na otázku 2:** osoby s pomerom sily nižším ako 97,5 % zdravých (prah z kontrolnej skupiny) |
+| `finger_signal_to_noise` | tremor prstov v pomere k šumu nezaťaženého snímača (`outputs/sensor_noise.csv` z kalibrácie) |
+| `finger_ratio_to_reference` | koľkokrát je tremor pacientov vyšší ako norma zdravých ≥ 50 rokov pre ten istý prst (95 % IS, bootstrap) |
+| `finger_z_scores`, `tremor_pattern` | z-skóre každého prsta voči norme; typ tremoru osoby: bez zvýšenia / lokálny (2–4 prsty) / generalizovaný (≥ 5 prstov) |
 | `finger_descriptives` | medián, kvartily pre skupinu × ruku × prst × ukazovateľ |
 | `finger_friedman`, `finger_posthoc` | či sa líšia prsty jednej osoby (Friedmanov test + Kendallovo W, párový Wilcoxonov test) |
 | `most_tremulous_finger` | u koľkých osôb má ktorý prst najväčší tremor |

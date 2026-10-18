@@ -37,6 +37,9 @@ from rehapiano.preprocessing.crop import crop_mask  # noqa: E402
 from rehapiano.preprocessing.gaps import fill_missing  # noqa: E402
 from rehapiano.preprocessing.polarity import correct_polarity  # noqa: E402
 from rehapiano.quality import FLAT_SIGNAL, NO_SEGMENT, NON_FINITE, TOO_SHORT, flag_outliers  # noqa: E402
+from rehapiano.stats.finger_tremor import tremor_pattern, z_scores  # noqa: E402
+from rehapiano.stats.hand_activity import weak_hand_patients  # noqa: E402
+from rehapiano.stats.tests import holm_adjust  # noqa: E402
 
 UUID = "7d55e12b-66df-4ca6-9ef3-27a880edec7a"
 STEP = "5867ebbc-a463-4d20-8b20-50df7c64ace7"
@@ -219,6 +222,40 @@ class ActivityTests(unittest.TestCase):
         self.assertEqual(classify_hand_activity(np.nan, 0.05)[1], "unknown")
         self.assertEqual(classify_hand_activity(0.001, 0.0005)[1], "unknown")
         self.assertAlmostEqual(classify_hand_activity(0.01, 0.04)[0], 0.25)
+
+
+class ReferenceAnalysisTests(unittest.TestCase):
+    def test_weak_hand_uses_control_quantile(self) -> None:
+        ratios = list(np.linspace(0.6, 1.0, 40))
+        activity = pd.DataFrame({
+            "patient_id": [f"C{i}" for i in range(40)] + ["P1", "P2"],
+            "group": ["control"] * 40 + ["patient"] * 2, "age": 60, "gender": "f",
+            "force_ratio": ratios + [0.3, 0.9], "force_weaker_hand": "left", "fluctuation_ratio": 1.0,
+            "fluctuation_weaker_hand": "left", "left_mean_force": 0.01, "right_mean_force": 0.02})
+        weak = weak_hand_patients(activity)
+        self.assertEqual(weak.loc[weak["group"] == "patient", "patient_id"].tolist(), ["P1"])
+
+    def test_z_scores_and_pattern(self) -> None:
+        rng = np.random.default_rng(0)
+        rows = []
+        for person in range(30):  # reference controls aged >= 50
+            for finger, name in enumerate(("little", "ring", "middle", "index", "thumb"), start=1):
+                for hand in ("left", "right"):
+                    rows.append(dict(patient_id=f"C{person}", group="control", age=60, hand=hand, finger=finger,
+                                     finger_name=name, tremor_mean_amplitude=float(np.exp(rng.normal(0, 0.3)))))
+        for hand in ("left", "right"):  # a patient with strongly elevated tremor on every finger
+            for finger, name in enumerate(("little", "ring", "middle", "index", "thumb"), start=1):
+                rows.append(dict(patient_id="P", group="patient", age=70, hand=hand, finger=finger, finger_name=name,
+                                 tremor_mean_amplitude=float(np.exp(3.0))))
+        z = z_scores(pd.DataFrame(rows))
+        self.assertTrue((z.loc[z["group"] == "patient", "z"] > 5).all())
+        self.assertAlmostEqual(z.loc[z["group"] == "control", "z"].median(), 0, delta=0.3)
+        pattern = tremor_pattern(z).set_index("patient_id")
+        self.assertEqual(pattern.loc["P", "pattern"], "generalized")
+        self.assertEqual(pattern.loc["P", "n_elevated"], 10)
+
+    def test_holm_adjust(self) -> None:
+        np.testing.assert_allclose(holm_adjust([0.01, 0.04, 0.03]), [0.03, 0.06, 0.06])
 
 
 class ManifestTests(unittest.TestCase):
