@@ -1,0 +1,22 @@
+{
+  "limits": {
+    "exact_force_ratio": 0.6226473588465125,
+    "rhythm_ratio": 0.6953693535005945
+  },
+  "checks": {
+    "rhythm_sessions": 173,
+    "rhythm_attempts": 692,
+    "valid_attempts": 692,
+    "files_with_copies": 27,
+    "conflicting_copies": 0,
+    "people_with_rhythm": 138,
+    "rho_range_vs_press": 0.9047692978590787,
+    "same_weaker_hand": 0.7291666666666666,
+    "rho_tests_sick": 0.45701259227095087,
+    "press_rate_median": {
+      "Healthy": 2.902822436584495,
+      "Other control": 2.554483744194355,
+      "Sick": 1.5005359056806
+    }
+  }
+}

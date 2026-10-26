@@ -1,0 +1,9 @@
+quantity,Maksym (press amplitude),this version (force range)
+"rhythm median, healthy",0.87,0.8801776755380766
+"rhythm median, sick",0.7,0.7450116126970898
+"EXACT_FORCE median, healthy",0.94,0.9391973646719898
+"EXACT_FORCE median, sick",0.89,0.8936574472074256
+"weak hand in rhythm, sick",18.0,16.0
+"weak hand in rhythm, healthy",3.0,3.0
+"weak hand in EXACT_FORCE, sick",6.0,6.0
+"weak hand in EXACT_FORCE, healthy",3.0,3.0
