@@ -26,7 +26,7 @@ python -m venv .venv && .venv/bin/pip install -r requirements.txt
 | features | `pipeline/extract.py`, `features/exact_force_game.py`, `features/rhythm_game.py` | `ef_attempt_finger.csv`, `ef_attempt_hand.csv`, `rhythm_attempt.csv`, `extraction_errors.csv` |
 | aggregate | `pipeline/aggregate.py` | `person_features.csv` (one row per person), `person_finger.csv` |
 | analysis | `pipeline/analysis.py` | `analysis/*.csv`: hypotheses, age trends, decade norms, classifier, ablation |
-| report | `pipeline/report.py` | `analysis/figures/01–04*.png` |
+| report | `pipeline/report.py`, `pipeline/writeup.py` | **`REPORT.md` / `REPORT.html`** (short final report, numbers filled in from this run; the HTML has the figures embedded), `analysis/figures/01–05*.png`, `run_summary.json` |
 
 All choices (game steps, crop windows, bands, thresholds, CV settings) are in `src/rehapiano/pipeline/settings.py`; the feature list and its factors are in `pipeline/catalog.py`.
 

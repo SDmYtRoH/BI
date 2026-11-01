@@ -3,5 +3,6 @@ pandas
 scipy
 matplotlib
 scikit-learn
+markdown
 # notebooks only
 jupyter

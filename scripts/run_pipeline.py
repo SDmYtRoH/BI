@@ -25,7 +25,7 @@ import pandas as pd  # noqa: E402
 import scipy  # noqa: E402
 import sklearn  # noqa: E402
 
-from rehapiano.pipeline import aggregate, analysis, extract, index, participants, report, settings  # noqa: E402
+from rehapiano.pipeline import aggregate, analysis, extract, index, participants, report, settings, writeup  # noqa: E402
 
 STAGES = ["index", "participants", "features", "aggregate", "analysis", "report"]
 
@@ -57,6 +57,14 @@ def summary(output_dir: Path) -> dict:
     }
 
 
+def write_summary(output_dir: Path) -> dict:
+    if not (output_dir / "person_features.csv").exists():
+        return {}
+    info = summary(output_dir)
+    (output_dir / "run_summary.json").write_text(json.dumps(info, indent=2, default=str))
+    return info
+
+
 def main() -> None:
     args = parse_arguments()
     logging.basicConfig(level=args.log_level.upper(), format="%(asctime)s %(levelname)s %(name)s: %(message)s",
@@ -69,7 +77,7 @@ def main() -> None:
         "features": lambda: extract.run(out, args.recompute),
         "aggregate": lambda: aggregate.run(out),
         "analysis": lambda: analysis.run(out, analysis_dir),
-        "report": lambda: report.run(out, analysis_dir),
+        "report": lambda: (write_summary(out), report.run(out, analysis_dir), writeup.run(out, analysis_dir)),
     }
     for stage in STAGES:
         if stage in args.stages:
@@ -77,10 +85,11 @@ def main() -> None:
             logging.info("stage %s", stage)
             steps[stage]()
             logging.info("stage %s done in %.0f s", stage, time.time() - start)
-    if (out / "person_features.csv").exists():
-        info = summary(out)
-        (out / "run_summary.json").write_text(json.dumps(info, indent=2, default=str))
+    info = write_summary(out)
+    if info:
         print(json.dumps(info, indent=2, default=str))
+    if "report" in args.stages:
+        print(f"\nReport: {out / 'REPORT.md'}  and  {out / 'REPORT.html'}")
 
 
 if __name__ == "__main__":

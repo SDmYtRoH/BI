@@ -17,7 +17,8 @@ from rehapiano.pipeline.participants import HEALTHY, SICK  # noqa: E402
 
 COLORS = {HEALTHY: "#2377a4", SICK: "#cf5c36"}
 INK, MUTED = "#222222", "#777777"
-KEY_FEATURES = ["ef_tremor_amp", "ef_slow_amp", "rh_press_rate_hz", "rh_balance_press"]
+FALLBACK_KEY_FEATURES = ["ef_tremor_amp", "ef_slow_amp", "rh_press_rate_hz", "rh_balance_press"]
+MAX_KEY_FEATURES = 6
 
 plt.rcParams.update({"figure.dpi": 110, "savefig.dpi": 160, "font.size": 9.5, "axes.spines.top": False,
                      "axes.spines.right": False, "axes.grid": True, "grid.alpha": .18, "figure.facecolor": "white",
@@ -50,10 +51,54 @@ def group_differences(h: pd.DataFrame, path: Path) -> None:
     plt.close(fig)
 
 
-def norms(people: pd.DataFrame, norm_table: pd.DataFrame, path: Path) -> None:
-    fig, axs = plt.subplots(1, len(KEY_FEATURES), figsize=(15, 3.9))
+def key_features(h: pd.DataFrame) -> list:
+    """Features that differ between healthy and sick people of the same decade, at most one per factor,
+    ordered by effect size; the fixed fallback list if fewer than four qualify."""
+
+    chosen = (h.loc[h["p_same_decade_holm"] < .05]
+              .assign(strength=lambda t: (t["auc"] - .5).abs())
+              .sort_values("strength", ascending=False)
+              .drop_duplicates("factor"))["feature"].tolist()[:MAX_KEY_FEATURES]
+    return chosen if len(chosen) >= 4 else FALLBACK_KEY_FEATURES
+
+
+def distributions(people: pd.DataFrame, features: list, path: Path) -> None:
+    """One dot per person, healthy vs sick, all ages and age 50+ side by side."""
+
+    fig, axs = plt.subplots(1, len(features), figsize=(2.6 * len(features), 3.9))
+    rng = np.random.default_rng(1)
+    for ax, feature in zip(np.atleast_1d(axs), features):
+        for x0, older in [(0, False), (2.6, True)]:
+            for k, label in enumerate([HEALTHY, SICK]):
+                part = people.loc[people["label"] == label]
+                if older:
+                    part = part.loc[part["age"] >= settings.OLDER_AGE]
+                values = part[feature].dropna()
+                x = x0 + k
+                ax.scatter(x + rng.uniform(-.22, .22, len(values)), values, s=9, color=COLORS[label], alpha=.65,
+                           edgecolor="none")
+                ax.hlines(values.median(), x - .3, x + .3, color=INK, lw=2)
+        ax.set_xticks([.5, 3.1], ["all ages", f"{settings.OLDER_AGE}+"])
+        ax.set_title(feature, fontsize=9)
+        if catalog.FEATURES[feature].log:
+            ax.set_yscale("log")
+        ax.grid(axis="x", visible=False)
+    handles = [plt.Line2D([], [], marker="o", ls="", color=COLORS[g], label=f"{g} group") for g in [HEALTHY, SICK]]
+    fig.legend(handles=handles, frameon=False, loc="upper center", ncol=2, bbox_to_anchor=(.5, 1.06))
+    fig.suptitle("One dot per person; bar = median (left pair: all ages, right pair: aged 50+)", y=-.02, fontsize=9)
+    fig.tight_layout()
+    fig.savefig(path, bbox_inches="tight")
+    plt.close(fig)
+
+
+def norms(people: pd.DataFrame, norm_table: pd.DataFrame, features: list, path: Path) -> None:
+    columns = min(3, len(features))
+    rows = int(np.ceil(len(features) / columns))
+    fig, axs = plt.subplots(rows, columns, figsize=(4.6 * columns, 3.7 * rows), squeeze=False)
+    for ax in axs.flat[len(features):]:
+        ax.set_visible(False)
     rng = np.random.default_rng(0)
-    for ax, feature in zip(axs, KEY_FEATURES):
+    for ax, feature in zip(axs.flat, features):
         n = norm_table.loc[norm_table["feature"] == feature].copy()
         n["start"] = n["decade"].str.split("–").str[0].astype(int)
         for _, row in n.iterrows():
@@ -68,7 +113,7 @@ def norms(people: pd.DataFrame, norm_table: pd.DataFrame, path: Path) -> None:
         ax.set_xlabel("Age (years)")
         if catalog.FEATURES[feature].log:
             ax.set_yscale("log")
-    axs[0].legend(frameon=False, fontsize=8)
+    axs.flat[0].legend(frameon=False, fontsize=8)
     fig.suptitle("Normal range of healthy people per decade (band = 2.5–97.5 %, line = median)", fontweight="bold")
     fig.tight_layout()
     fig.savefig(path, bbox_inches="tight")
@@ -126,7 +171,10 @@ def run(output_dir: Path = settings.OUTPUT_DIR, analysis_dir: Path = settings.AN
     figures.mkdir(parents=True, exist_ok=True)
     read = lambda name: pd.read_csv(analysis_dir / f"{name}.csv")  # noqa: E731
     people = pd.read_csv(output_dir / "person_features.csv", dtype={"patient_id": str})
-    group_differences(read("hypotheses"), figures / "01_group_differences.png")
-    norms(people, read("decade_norms"), figures / "02_norms_by_decade.png")
+    hypotheses = read("hypotheses")
+    chosen = key_features(hypotheses)
+    group_differences(hypotheses, figures / "01_group_differences.png")
+    norms(people, read("decade_norms"), chosen, figures / "02_norms_by_decade.png")
+    distributions(people, chosen, figures / "05_key_feature_distributions.png")
     roc(analysis_dir, read("classifier"), figures / "03_roc.png")
     ablation(read("ablation"), figures / "04_ablation.png")

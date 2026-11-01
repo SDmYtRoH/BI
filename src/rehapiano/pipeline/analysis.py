@@ -113,11 +113,16 @@ def age_trends(people: pd.DataFrame) -> pd.DataFrame:
     for feature in FEATURES:
         frame = healthy.dropna(subset=[feature])
         rho, p = stats.spearmanr(frame["age"], frame[feature])
-        fit = stats.linregress(frame["age"] / 10, frame[feature])
+        logged = catalog.FEATURES[feature].log
+        values = design_matrix(frame, [feature])[feature] if logged else frame[feature]
+        fit = stats.linregress(frame["age"] / 10, values)
         t = stats.t.ppf(0.975, len(frame) - 2)
+        change = np.array([fit.slope, fit.slope - t * fit.stderr, fit.slope + t * fit.stderr])
+        if logged:  # skewed amplitude: linear fit on the log scale, reported as % change
+            change = 100 * (np.exp(change) - 1)
         rows.append({"feature": feature, "n": len(frame), "spearman_rho": rho, "p": p,
-                     "change_per_10_years": fit.slope, "ci_low": fit.slope - t * fit.stderr,
-                     "ci_high": fit.slope + t * fit.stderr})
+                     "change_per_10_years": change[0], "ci_low": change[1], "ci_high": change[2],
+                     "change_unit": "% per 10 years" if logged else "units per 10 years"})
     table = pd.DataFrame(rows)
     table["p_holm"] = holm_adjust(table["p"])
     table["age_dependent"] = table["p_holm"] < 0.05
