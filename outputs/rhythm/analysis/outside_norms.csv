@@ -1,0 +1,11 @@
+parameter,below,above,n_patients
+press_rate_hz,14,0,48
+interval_cv,4,4,48
+amplitude_strong,0,10,48
+amplitude_weak,10,4,48
+balance,19,0,48
+amplitude_cv,8,2,48
+sync_lag_ms,0,12,48
+release_ratio,11,0,48
+fatigue_amplitude,1,1,48
+fatigue_rate,5,1,48

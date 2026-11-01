@@ -16,30 +16,33 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from rehapiano.aggregation import build_wide_table, classify_hand_activity, flag_attempt_outliers  # noqa: E402
-from rehapiano.config import (  # noqa: E402
-    ANALYSIS_SAMPLE_RATE_HZ as FS,
+from rehapiano.exact_force.aggregation import build_wide_table, classify_hand_activity, flag_attempt_outliers  # noqa: E402
+from rehapiano.common.config import ANALYSIS_SAMPLE_RATE_HZ as FS, SENSOR_COLUMNS  # noqa: E402
+from rehapiano.exact_force.config import (  # noqa: E402
+    ANALYSED_STEP_IDS,
     CONTROL_STEP_IDS,
+    CROP_END_S,
+    CROP_START_S,
     PATIENT_STEP_IDS,
+    STEP_TYPE,
     MOVEMENT_BAND,
-    SENSOR_COLUMNS,
     SPECTROGRAM_NPERSEG,
     TREMOR_BAND,
 )
-from rehapiano.features.finger import (  # noqa: E402
+from rehapiano.exact_force.features.finger import (  # noqa: E402
     analyze_finger,
     compute_finger_features,
     extract_measurement_finger_features,
 )
-from rehapiano.features.spectral import band_mask, compute_spectrogram  # noqa: E402
-from rehapiano.io.metadata import age_group_label, build_manifest, extract_file_uuid, label_patients  # noqa: E402
-from rehapiano.preprocessing.crop import crop_mask  # noqa: E402
-from rehapiano.preprocessing.gaps import fill_missing  # noqa: E402
-from rehapiano.preprocessing.polarity import correct_polarity  # noqa: E402
-from rehapiano.quality import FLAT_SIGNAL, NO_SEGMENT, NON_FINITE, TOO_SHORT, flag_outliers  # noqa: E402
-from rehapiano.stats.finger_tremor import tremor_pattern, z_scores  # noqa: E402
-from rehapiano.stats.hand_activity import weak_hand_patients  # noqa: E402
-from rehapiano.stats.tests import holm_adjust  # noqa: E402
+from rehapiano.exact_force.features.spectral import band_mask, compute_spectrogram  # noqa: E402
+from rehapiano.common.io.metadata import age_group_label, build_manifest, extract_file_uuid, label_patients  # noqa: E402
+from rehapiano.common.preprocessing.crop import crop_mask  # noqa: E402
+from rehapiano.common.preprocessing.gaps import fill_missing  # noqa: E402
+from rehapiano.common.preprocessing.polarity import correct_polarity  # noqa: E402
+from rehapiano.exact_force.quality import FLAT_SIGNAL, NO_SEGMENT, NON_FINITE, TOO_SHORT, flag_outliers  # noqa: E402
+from rehapiano.exact_force.stats.finger_tremor import tremor_pattern, z_scores  # noqa: E402
+from rehapiano.exact_force.stats.hand_activity import weak_hand_patients  # noqa: E402
+from rehapiano.common.stats.tests import holm_adjust  # noqa: E402
 
 UUID = "7d55e12b-66df-4ca6-9ef3-27a880edec7a"
 STEP = "5867ebbc-a463-4d20-8b20-50df7c64ace7"
@@ -110,7 +113,7 @@ class PreprocessingTests(unittest.TestCase):
 
     def test_crop_interval(self) -> None:
         time_s = np.arange(1600) / FS
-        self.assertEqual(crop_mask(time_s).sum(), 1200)
+        self.assertEqual(crop_mask(time_s, CROP_START_S, CROP_END_S).sum(), 1200)
 
 
 class SpectralTests(unittest.TestCase):
@@ -280,7 +283,7 @@ class ManifestTests(unittest.TestCase):
             write(f"results_{other_uuid}_20250101-000001", UUID)  # payload disagrees with name
             write("results_bad_name", UUID)
             write(f"results_{UUID}_20250101-000002", UUID, step_id="other-step")
-            manifest, unmatched = build_manifest(metadata, root)
+            manifest, unmatched = build_manifest(metadata, root, ANALYSED_STEP_IDS, STEP_TYPE)
 
         self.assertEqual(len(manifest), 1)
         self.assertEqual(manifest.loc[0, "patient_id"], "P1")

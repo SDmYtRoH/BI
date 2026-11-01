@@ -1,0 +1,4 @@
+group,features,auc_all,auc_without,auc_drop,auc_alone,auc_alone_low,auc_alone_high
+vek,age,0.9048656798245615,0.8832510964912282,0.021614583333333215,0.841077302631579,0.8321580317982457,0.8509354440789474
+RHYTHM,"rh_press_rate_hz, rh_interval_cv, rh_amplitude_strong, rh_amplitude_weak, rh_balance, rh_amplitude_cv, rh_sync_lag_ms, rh_release_ratio, rh_fatigue_amplitude, rh_fatigue_rate",0.9048656798245615,0.8915570175438597,0.01330866228070171,0.851452850877193,0.8308799342105263,0.8711759868421053
+EXACT_FORCE,"ef_log_tremor_amplitude, ef_log_tremor_amplitude_worse_hand, ef_log_movement_amplitude, ef_tremor_to_movement, ef_tremor_frequency_hz, ef_tremor_prominence, ef_log_mean_force, ef_force_balance, ef_tremor_balance, ef_finger_spread",0.9048656798245615,0.9012061403508772,0.003659539473684248,0.8487801535087719,0.8329084429824561,0.8609169407894737

@@ -2,6 +2,8 @@
 # Only the instructions in data/README.md are tracked.
 data/*
 !data/README.md
+# Questionnaire screening of healthy people (no personal data beyond id/age/gender).
+!data/participant_labels.csv
 
 # Python
 __pycache__/

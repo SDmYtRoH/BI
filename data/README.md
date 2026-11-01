@@ -15,4 +15,5 @@ data/
 ```
 
 Súbory sa hľadajú rekurzívne, takže štruktúra podpriečinkov v `RehaPiano/` môže byť ľubovoľná.
-Cesty sú nastavené v `src/rehapiano/config.py`.
+Cesty sú nastavené v `src/rehapiano/common/config.py`. Súbor `data/participant_labels.csv` (zdraví bez ťažkostí podľa
+dotazníka) je v gite; pri nových zdravých osobách ho treba doplniť.
