@@ -2,5 +2,6 @@ numpy
 pandas
 scipy
 matplotlib
+scikit-learn
 # notebooks only
 jupyter
