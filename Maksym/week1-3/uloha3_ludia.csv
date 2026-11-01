@@ -1,0 +1,139 @@
+﻿patient_id;skupina;podskupina;vek;pohlavie;pocet_vysetreni;vekova_skupina;vysetreni;slabych_vysetreni;slabsia_ruka;pomer_min;pomer_z_priemeru;aspon_raz;vo_vacsine;z_priemeru;prstov_nad_normou;aktivnych_prstov;typ_trasu;ruka_s_trasom
+0HXU-5CYJ;pacient;pacienti;67;male;2;60–69;2;0;;0.808824;0.83385;False;False;False;0;10;bez zvýšeného trasu;
+0IKB-27Y1;pacient;pacienti;75;female;1;70–79;1;1;ľavá;0.185326;0.185326;True;True;True;3;9;lokálny (niekoľko prstov);pravá
+1302202501;zdravý;zdraví TUKE 2025-02;23;female;1;20–29;1;0;;0.974485;0.974485;False;False;False;0;10;bez zvýšeného trasu;
+1302202502;zdravý;zdraví TUKE 2025-02;21;male;1;20–29;1;0;;0.874434;0.874434;False;False;False;0;10;bez zvýšeného trasu;
+1302202503;zdravý;zdraví TUKE 2025-02;22;female;1;20–29;1;0;;0.90161;0.90161;False;False;False;0;9;bez zvýšeného trasu;
+1302202504;zdravý;zdraví TUKE 2025-02;23;male;1;20–29;1;0;;0.955881;0.955881;False;False;False;0;10;bez zvýšeného trasu;
+1302202505;zdravý;zdraví TUKE 2025-02;26;male;1;20–29;1;0;;0.93814;0.93814;False;False;False;0;8;bez zvýšeného trasu;
+1302202506;zdravý;zdraví TUKE 2025-02;23;male;1;20–29;1;0;;0.977085;0.977085;False;False;False;0;9;bez zvýšeného trasu;
+1302202507;zdravý;zdraví TUKE 2025-02;20;male;1;20–29;1;0;;0.897211;0.897211;False;False;False;0;9;bez zvýšeného trasu;
+1302202508;zdravý;zdraví TUKE 2025-02;22;female;1;20–29;1;0;;0.99083;0.99083;False;False;False;0;10;bez zvýšeného trasu;
+1302202509;zdravý;zdraví TUKE 2025-02;22;male;1;20–29;1;0;;0.934136;0.934136;False;False;False;0;7;bez zvýšeného trasu;
+1302202510;zdravý;zdraví TUKE 2025-02;22;male;1;20–29;1;0;;0.948499;0.948499;False;False;False;0;9;bez zvýšeného trasu;
+1302202511;zdravý;zdraví TUKE 2025-02;21;male;1;20–29;1;0;;0.741212;0.741212;False;False;False;0;9;bez zvýšeného trasu;
+1302202512;zdravý;zdraví TUKE 2025-02;20;male;1;20–29;1;0;;0.991305;0.991305;False;False;False;0;10;bez zvýšeného trasu;
+1302202513;zdravý;zdraví TUKE 2025-02;22;male;1;20–29;1;0;;0.978491;0.978491;False;False;False;0;10;bez zvýšeného trasu;
+1302202514;zdravý;zdraví TUKE 2025-02;20;male;1;20–29;1;0;;0.962338;0.962338;False;False;False;0;9;bez zvýšeného trasu;
+1302202515;zdravý;zdraví TUKE 2025-02;20;male;1;20–29;1;0;;0.904735;0.904735;False;False;False;0;8;bez zvýšeného trasu;
+1302202516;zdravý;zdraví TUKE 2025-02;20;male;1;20–29;1;0;;0.991177;0.991177;False;False;False;0;10;bez zvýšeného trasu;
+1302202517;zdravý;zdraví TUKE 2025-02;23;female;1;20–29;1;0;;0.689253;0.689253;False;False;False;0;7;bez zvýšeného trasu;
+1302202518;zdravý;zdraví TUKE 2025-02;23;male;1;20–29;1;0;;0.9949;0.9949;False;False;False;0;8;bez zvýšeného trasu;
+1302202519;zdravý;zdraví TUKE 2025-02;23;male;1;20–29;1;0;;0.813205;0.813205;False;False;False;0;8;bez zvýšeného trasu;
+1302202520;zdravý;zdraví TUKE 2025-02;21;male;1;20–29;1;0;;0.982909;0.982909;False;False;False;1;9;bez zvýšeného trasu;pravá
+1302202521;zdravý;zdraví TUKE 2025-02;23;male;1;20–29;1;1;pravá;0.482279;0.482279;True;True;True;0;5;bez zvýšeného trasu;
+1302202522;zdravý;zdraví TUKE 2025-02;23;male;1;20–29;1;1;pravá;0.544195;0.544195;True;True;True;0;8;bez zvýšeného trasu;
+1402202501;zdravý;zdraví TUKE 2025-02;29;female;1;20–29;1;0;;0.873928;0.873928;False;False;False;0;9;bez zvýšeného trasu;
+1402202502;zdravý;zdraví TUKE 2025-02;35;male;1;30–39;1;0;;0.955991;0.955991;False;False;False;0;9;bez zvýšeného trasu;
+1402202503;zdravý;zdraví TUKE 2025-02;61;female;1;60–69;1;0;;0.925642;0.925642;False;False;False;0;10;bez zvýšeného trasu;
+1702202501;zdravý;zdraví TUKE 2025-02;36;female;1;30–39;1;0;;0.975491;0.975491;False;False;False;0;10;bez zvýšeného trasu;
+1702202502;zdravý;zdraví TUKE 2025-02;64;male;1;60–69;1;0;;0.976049;0.976049;False;False;False;0;10;bez zvýšeného trasu;
+1702202503;zdravý;zdraví TUKE 2025-02;62;female;1;60–69;1;0;;0.943678;0.943678;False;False;False;0;10;bez zvýšeného trasu;
+1702202504;zdravý;zdraví TUKE 2025-02;38;male;1;30–39;1;0;;0.97887;0.97887;False;False;False;0;9;bez zvýšeného trasu;
+1802202501;zdravý;zdraví TUKE 2025-02;24;male;1;20–29;1;0;;0.931941;0.931941;False;False;False;0;10;bez zvýšeného trasu;
+1802202502;zdravý;zdraví TUKE 2025-02;23;male;1;20–29;1;0;;0.880079;0.880079;False;False;False;0;10;bez zvýšeného trasu;
+1802202503;zdravý;zdraví TUKE 2025-02;22;female;1;20–29;1;0;;0.96393;0.96393;False;False;False;0;10;bez zvýšeného trasu;
+1802202504;zdravý;zdraví TUKE 2025-02;22;male;1;20–29;1;0;;0.950934;0.950934;False;False;False;0;9;bez zvýšeného trasu;
+1802202505;zdravý;zdraví TUKE 2025-02;22;male;1;20–29;1;0;;0.989942;0.989942;False;False;False;0;10;bez zvýšeného trasu;
+1802202506;zdravý;zdraví TUKE 2025-02;19;male;1;10–19;1;0;;0.984989;0.984989;False;False;False;0;10;bez zvýšeného trasu;
+1802202507;zdravý;zdraví TUKE 2025-02;23;male;1;20–29;1;0;;0.993928;0.993928;False;False;False;0;10;bez zvýšeného trasu;
+1802202508;zdravý;zdraví TUKE 2025-02;22;male;1;20–29;1;0;;0.989605;0.989605;False;False;False;0;10;bez zvýšeného trasu;
+1802202509;zdravý;zdraví TUKE 2025-02;24;female;1;20–29;1;0;;0.990699;0.990699;False;False;False;0;10;bez zvýšeného trasu;
+1802202510;zdravý;zdraví TUKE 2025-02;23;male;1;20–29;1;0;;0.956746;0.956746;False;False;False;0;9;bez zvýšeného trasu;
+1802202511;zdravý;zdraví TUKE 2025-02;24;male;1;20–29;1;0;;0.984553;0.984553;False;False;False;0;9;bez zvýšeného trasu;
+1902202501;zdravý;zdraví TUKE 2025-02;21;male;1;20–29;1;0;;0.992;0.992;False;False;False;0;9;bez zvýšeného trasu;
+1902202502;zdravý;zdraví TUKE 2025-02;20;male;1;20–29;1;0;;0.903189;0.903189;False;False;False;0;10;bez zvýšeného trasu;
+1902202503;zdravý;zdraví TUKE 2025-02;24;male;1;20–29;1;0;;0.946925;0.946925;False;False;False;1;9;bez zvýšeného trasu;pravá
+1902202504;zdravý;zdraví TUKE 2025-02;21;male;1;20–29;1;0;;0.951059;0.951059;False;False;False;0;10;bez zvýšeného trasu;
+1902202505;zdravý;zdraví TUKE 2025-02;20;male;1;20–29;1;0;;0.841098;0.841098;False;False;False;4;8;rozsiahly (väčšina prstov);ľavá
+1902202506;zdravý;zdraví TUKE 2025-02;22;male;1;20–29;1;0;;0.966134;0.966134;False;False;False;0;9;bez zvýšeného trasu;
+1902202507;zdravý;zdraví TUKE 2025-02;20;male;1;20–29;1;0;;0.626062;0.626062;False;False;False;0;9;bez zvýšeného trasu;
+1902202508;zdravý;zdraví TUKE 2025-02;18;male;1;10–19;1;0;;0.879753;0.879753;False;False;False;1;9;bez zvýšeného trasu;pravá
+1902202509;zdravý;zdraví TUKE 2025-02;18;female;1;10–19;1;0;;0.93166;0.93166;False;False;False;0;10;bez zvýšeného trasu;
+1902202510;zdravý;zdraví TUKE 2025-02;19;male;1;10–19;1;0;;0.98174;0.98174;False;False;False;0;10;bez zvýšeného trasu;
+1902202511;zdravý;zdraví TUKE 2025-02;18;male;1;10–19;1;0;;0.979332;0.979332;False;False;False;1;10;bez zvýšeného trasu;ľavá
+1902202512;zdravý;zdraví TUKE 2025-02;19;male;1;10–19;1;0;;0.872062;0.872062;False;False;False;0;10;bez zvýšeného trasu;
+1902202513;zdravý;zdraví TUKE 2025-02;19;male;1;10–19;1;0;;0.797343;0.797343;False;False;False;0;9;bez zvýšeného trasu;
+1902202514;zdravý;zdraví TUKE 2025-02;18;male;1;10–19;1;0;;0.906768;0.906768;False;False;False;0;8;bez zvýšeného trasu;
+20250228001;zdravý;zdraví TUKE 2025-02;45;female;1;40–49;1;0;;0.797842;0.797842;False;False;False;0;9;bez zvýšeného trasu;
+20250228002;zdravý;zdraví TUKE 2025-02;24;female;1;20–29;1;0;;0.718991;0.718991;False;False;False;0;9;bez zvýšeného trasu;
+20250228003;zdravý;zdraví TUKE 2025-02;21;female;1;20–29;1;0;;0.953803;0.953803;False;False;False;0;10;bez zvýšeného trasu;
+20250228004;zdravý;zdraví TUKE 2025-02;25;female;1;20–29;1;1;ľavá;0.221525;0.221525;True;True;True;0;9;bez zvýšeného trasu;
+20250228005;zdravý;zdraví TUKE 2025-02;30;female;1;30–39;1;0;;0.894912;0.894912;False;False;False;0;10;bez zvýšeného trasu;
+20250228006;zdravý;zdraví TUKE 2025-02;53;female;1;50–59;1;0;;0.771194;0.771194;False;False;False;0;10;bez zvýšeného trasu;
+20250228007;zdravý;zdraví TUKE 2025-02;43;female;1;40–49;1;0;;0.988176;0.988176;False;False;False;0;10;bez zvýšeného trasu;
+2102202501;zdravý;zdraví TUKE 2025-02;55;female;1;50–59;1;0;;0.91688;0.91688;False;False;False;0;10;bez zvýšeného trasu;
+2102202502;zdravý;zdraví TUKE 2025-02;43;male;1;40–49;1;0;;0.915229;0.915229;False;False;False;0;10;bez zvýšeného trasu;
+2102202503;zdravý;zdraví TUKE 2025-02;48;male;1;40–49;1;0;;0.966049;0.966049;False;False;False;0;8;bez zvýšeného trasu;
+2102202504;zdravý;zdraví TUKE 2025-02;64;female;1;60–69;1;0;;0.951513;0.951513;False;False;False;0;10;bez zvýšeného trasu;
+2102202505;zdravý;zdraví TUKE 2025-02;56;male;1;50–59;1;0;;0.973424;0.973424;False;False;False;0;10;bez zvýšeného trasu;
+2102202506;zdravý;zdraví TUKE 2025-02;27;female;1;20–29;1;0;;0.819445;0.819445;False;False;False;0;10;bez zvýšeného trasu;
+2102202507;zdravý;zdraví TUKE 2025-02;25;male;1;20–29;1;0;;0.992537;0.992537;False;False;False;0;10;bez zvýšeného trasu;
+2102202508;zdravý;zdraví TUKE 2025-02;28;male;1;20–29;1;0;;0.982789;0.982789;False;False;False;0;10;bez zvýšeného trasu;
+2102202509;zdravý;zdraví TUKE 2025-02;31;male;1;30–39;1;0;;0.99976;0.99976;False;False;False;0;10;bez zvýšeného trasu;
+2102202510;zdravý;zdraví TUKE 2025-02;29;male;1;20–29;1;0;;0.956848;0.956848;False;False;False;0;9;bez zvýšeného trasu;
+2102202511;zdravý;zdraví TUKE 2025-02;66;female;1;60–69;1;0;;0.925758;0.925758;False;False;False;2;10;lokálny (niekoľko prstov);ľavá
+2102202512;zdravý;zdraví TUKE 2025-02;28;male;1;20–29;1;0;;0.871046;0.871046;False;False;False;0;10;bez zvýšeného trasu;
+2102202513;zdravý;zdraví TUKE 2025-02;37;male;1;30–39;1;0;;0.938583;0.938583;False;False;False;0;10;bez zvýšeného trasu;
+2102202514;zdravý;zdraví TUKE 2025-02;50;male;1;50–59;1;0;;0.951841;0.951841;False;False;False;0;10;bez zvýšeného trasu;
+2102202515;zdravý;zdraví TUKE 2025-02;79;male;1;70–79;1;0;;0.677406;0.677406;False;False;False;0;9;bez zvýšeného trasu;
+2102202516;zdravý;zdraví TUKE 2025-02;56;female;1;50–59;1;0;;0.849827;0.849827;False;False;False;2;10;lokálny (niekoľko prstov);obe rovnako
+2102202517;zdravý;zdraví TUKE 2025-02;60;female;1;60–69;1;0;;0.96321;0.96321;False;False;False;0;9;bez zvýšeného trasu;
+2REJ-DLCV;pacient;pacienti;56;female;2;50–59;2;0;;0.602282;0.655219;False;False;False;2;10;lokálny (niekoľko prstov);pravá
+3BOP-Z8PU;pacient;pacienti;85;female;2;80–89;2;0;;0.575135;0.624798;False;False;False;1;10;bez zvýšeného trasu;ľavá
+3OUS-NI9J;pacient;pacienti;82;female;2;80–89;2;2;ľavá;0.27068;0.281434;True;True;True;2;10;lokálny (niekoľko prstov);obe rovnako
+4FGL-NBCC;pacient;pacienti;79;female;2;70–79;2;0;;0.852576;0.96939;False;False;False;3;9;lokálny (niekoľko prstov);ľavá
+6JRZ-KPE6;pacient;pacienti;51;male;2;50–59;2;1;ľavá;0.420316;0.742947;True;False;False;1;10;bez zvýšeného trasu;ľavá
+8VAU-MPTB;pacient;pacienti;67;male;1;60–69;1;0;;0.968657;0.968657;False;False;False;0;9;bez zvýšeného trasu;
+992601;zdravý;zdraví 9_9_2026 (starší);66;female;1;60–69;1;0;;0.973451;0.973451;False;False;False;0;10;bez zvýšeného trasu;
+992602;zdravý;zdraví 9_9_2026 (starší);67;female;1;60–69;1;0;;0.994384;0.994384;False;False;False;0;9;bez zvýšeného trasu;
+992603;zdravý;zdraví 9_9_2026 (starší);75;female;1;70–79;1;0;;0.906117;0.906117;False;False;False;0;10;bez zvýšeného trasu;
+992604;zdravý;zdraví 9_9_2026 (starší);75;female;1;70–79;1;0;;0.784728;0.784728;False;False;False;0;10;bez zvýšeného trasu;
+992605;zdravý;zdraví 9_9_2026 (starší);65;female;1;60–69;1;0;;0.949659;0.949659;False;False;False;1;9;bez zvýšeného trasu;pravá
+992606;zdravý;zdraví 9_9_2026 (starší);85;female;1;80–89;1;0;;0.855218;0.855218;False;False;False;8;9;rozsiahly (väčšina prstov);obe rovnako
+992607;zdravý;zdraví 9_9_2026 (starší);56;female;1;50–59;1;0;;0.949384;0.949384;False;False;False;0;10;bez zvýšeného trasu;
+992608;zdravý;zdraví 9_9_2026 (starší);83;female;1;80–89;1;0;;0.960687;0.960687;False;False;False;0;9;bez zvýšeného trasu;
+992609;zdravý;zdraví 9_9_2026 (starší);71;female;1;70–79;1;0;;0.925645;0.925645;False;False;False;0;10;bez zvýšeného trasu;
+992610;zdravý;zdraví 9_9_2026 (starší);63;female;1;60–69;1;0;;0.755397;0.755397;False;False;False;0;9;bez zvýšeného trasu;
+992611;zdravý;zdraví 9_9_2026 (starší);65;female;1;60–69;1;0;;0.985094;0.985094;False;False;False;0;10;bez zvýšeného trasu;
+992612;zdravý;zdraví 9_9_2026 (starší);74;female;1;70–79;1;0;;0.879404;0.879404;False;False;False;0;10;bez zvýšeného trasu;
+9VMD-WMRM;pacient;pacienti;84;male;1;80–89;1;0;;0.980211;0.980211;False;False;False;0;10;bez zvýšeného trasu;
+A8MY-DD2W;pacient;pacienti;64;male;2;60–69;2;0;;0.85673;0.873514;False;False;False;3;10;lokálny (niekoľko prstov);ľavá
+AIP1-ZJEP;pacient;pacienti;62;male;2;60–69;2;0;;0.919694;0.947937;False;False;False;0;10;bez zvýšeného trasu;
+ALFZ-9NGL;pacient;pacienti;66;male;2;60–69;2;0;;0.990607;0.993309;False;False;False;0;10;bez zvýšeného trasu;
+ALVB-UZKR;pacient;pacienti;35;male;2;30–39;2;0;;0.866578;0.885251;False;False;False;0;9;bez zvýšeného trasu;
+B5LW-5W1Q;pacient;pacienti;60;male;1;60–69;1;0;;0.712381;0.712381;False;False;False;0;10;bez zvýšeného trasu;
+BVRZ-IF8J;pacient;pacienti;49;male;2;40–49;2;0;;0.922899;0.974608;False;False;False;1;10;bez zvýšeného trasu;pravá
+EJIT-XSEZ;pacient;pacienti;76;male;2;70–79;2;2;pravá;0.164255;0.341914;True;True;True;2;10;lokálny (niekoľko prstov);obe rovnako
+EPLH-ZTE8;pacient;pacienti;47;male;2;40–49;2;0;;0.76271;0.825237;False;False;False;0;10;bez zvýšeného trasu;
+FC3B-FR3M;pacient;pacienti;71;male;2;70–79;2;0;;0.912434;0.940528;False;False;False;0;10;bez zvýšeného trasu;
+FHIK-X0HJ;pacient;pacienti;22;male;1;20–29;1;0;;0.966196;0.966196;False;False;False;2;10;lokálny (niekoľko prstov);ľavá
+G1VW-NO6C;pacient;pacienti;77;female;2;70–79;2;0;;0.820556;0.855483;False;False;False;1;10;bez zvýšeného trasu;pravá
+ILHC-BZCP;pacient;pacienti;73;female;2;70–79;2;2;pravá;0.418762;0.426282;True;True;True;5;8;rozsiahly (väčšina prstov);pravá
+JJAV-NYZD;pacient;pacienti;56;male;2;50–59;2;0;;0.772626;0.793019;False;False;False;3;10;lokálny (niekoľko prstov);ľavá
+JMPV-JTBP;pacient;pacienti;56;male;2;50–59;2;0;;0.752076;0.972798;False;False;False;1;10;bez zvýšeného trasu;ľavá
+LLCF-IB2I;pacient;pacienti;63;male;2;60–69;2;0;;0.758982;0.880409;False;False;False;6;10;rozsiahly (väčšina prstov);obe rovnako
+MAYR-BEU4;pacient;pacienti;62;male;2;60–69;2;0;;0.871215;0.979624;False;False;False;2;10;lokálny (niekoľko prstov);obe rovnako
+N78F-WUBU;pacient;pacienti;22;female;1;20–29;1;0;;0.87146;0.87146;False;False;False;0;9;bez zvýšeného trasu;
+NUYV-81KG;pacient;pacienti;88;female;2;80–89;2;1;ľavá;0.502155;0.571586;True;False;False;1;10;bez zvýšeného trasu;ľavá
+OJBL-BUN8;pacient;pacienti;76;female;1;70–79;1;0;;0.975327;0.975327;False;False;False;2;10;lokálny (niekoľko prstov);ľavá
+OKZD-QXFU;pacient;pacienti;70;female;2;70–79;2;0;;0.927882;0.928822;False;False;False;0;10;bez zvýšeného trasu;
+OQHZ-N4AV;pacient;pacienti;60;male;2;60–69;2;1;pravá;0.425416;0.648899;True;False;False;3;10;lokálny (niekoľko prstov);ľavá
+QQYP-XMRG;pacient;pacienti;74;female;2;70–79;2;0;;0.718777;0.764826;False;False;False;5;10;rozsiahly (väčšina prstov);ľavá
+REWW-2HZE;pacient;pacienti;56;male;1;50–59;1;0;;0.772297;0.772297;False;False;False;0;10;bez zvýšeného trasu;
+RPKE-H4MT;pacient;pacienti;61;male;2;60–69;2;0;;0.944923;0.969164;False;False;False;0;10;bez zvýšeného trasu;
+S5PQ-K0C7;pacient;pacienti;69;male;2;60–69;2;0;;0.874439;0.914181;False;False;False;1;10;bez zvýšeného trasu;pravá
+SVEL-EDUK;pacient;pacienti;79;female;1;70–79;1;0;;0.964942;0.964942;False;False;False;0;10;bez zvýšeného trasu;
+T1IE-6TRR;pacient;pacienti;89;female;2;80–89;2;0;;0.681483;0.81767;False;False;False;1;10;bez zvýšeného trasu;pravá
+T3VN-RDQV;pacient;pacienti;34;male;2;30–39;2;0;;0.871093;0.925725;False;False;False;0;10;bez zvýšeného trasu;
+T9VB-KBHX;pacient;pacienti;21;female;1;20–29;1;0;;0.91819;0.91819;False;False;False;0;10;bez zvýšeného trasu;
+UFEQ-X1ZK;pacient;pacienti;76;female;1;70–79;1;0;;0.931301;0.931301;False;False;False;1;10;bez zvýšeného trasu;ľavá
+UHE7-LPCN;pacient;pacienti;74;male;2;70–79;2;0;;0.963706;0.978908;False;False;False;1;10;bez zvýšeného trasu;pravá
+UIMG-NOVN;pacient;pacienti;73;male;1;70–79;1;0;;0.741214;0.741214;False;False;False;7;8;rozsiahly (väčšina prstov);ľavá
+UQIS-DXIH;pacient;pacienti;55;female;2;50–59;2;0;;0.907441;0.92213;False;False;False;0;10;bez zvýšeného trasu;
+V6TD-3R18;pacient;pacienti;24;male;2;20–29;2;0;;0.795022;0.919526;False;False;False;1;10;bez zvýšeného trasu;ľavá
+VFKD-HGNK;pacient;pacienti;67;female;2;60–69;2;0;;0.858451;0.896482;False;False;False;0;10;bez zvýšeného trasu;
+W6JM-R0SG;pacient;pacienti;58;female;1;50–59;1;1;pravá;0.466915;0.466915;True;True;True;1;10;bez zvýšeného trasu;pravá
+XT2X-WLNW;pacient;pacienti;67;male;2;60–69;2;1;pravá;0.403971;0.554591;True;False;True;1;9;bez zvýšeného trasu;pravá
+ZPVE-HPNW;pacient;pacienti;58;male;2;50–59;2;0;;0.863865;0.983089;False;False;False;0;10;bez zvýšeného trasu;
+ZWTN-LDUR;pacient;pacienti;74;female;2;70–79;2;0;;0.939959;0.97666;False;False;False;0;10;bez zvýšeného trasu;

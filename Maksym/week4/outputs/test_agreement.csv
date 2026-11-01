@@ -1,0 +1,2 @@
+n_people,spearman_rho,spearman_p,weak_both,weak_only_exact_force,weak_only_rhythm,weak_none,cohen_kappa,same_weaker_hand_if_flagged
+138,0.11963085830922693,0.16223745608170917,5,4,16,113,0.26634768740031867,0.88

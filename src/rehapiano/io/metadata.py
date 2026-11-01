@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 from pathlib import Path
 from typing import Iterable, Optional, Tuple, Union
@@ -59,10 +60,11 @@ def read_metadata(path: PathLike) -> pd.DataFrame:
 def filter_target_steps(
     metadata: pd.DataFrame,
     step_ids: Iterable[str] = TARGET_STEP_IDS,
+    step_type: str = STEP_TYPE,
 ) -> pd.DataFrame:
-    """Keep only EXACT_FORCE rows of the selected game steps."""
+    """Keep only rows of ``step_type`` (EXACT_FORCE by default) and the selected game steps."""
 
-    selected = metadata["step_type"].eq(STEP_TYPE) & metadata["step_id"].isin(set(step_ids))
+    selected = metadata["step_type"].eq(step_type) & metadata["step_id"].isin(set(step_ids))
     return metadata.loc[selected].copy()
 
 
@@ -102,7 +104,7 @@ def read_file_identity(path: PathLike) -> Tuple[Optional[str], Optional[str]]:
 def to_project_relative(path: PathLike) -> str:
     """Path relative to the project root when possible (portable CSV outputs)."""
 
-    path = Path(path).resolve()
+    path = Path(os.path.abspath(path))  # not resolve(): keep paths inside linked data folders relative
     try:
         return path.relative_to(PROJECT_ROOT).as_posix()
     except ValueError:
@@ -130,8 +132,9 @@ def build_manifest(
     metadata: pd.DataFrame,
     measurements_dir: PathLike,
     step_ids: Iterable[str] = TARGET_STEP_IDS,
+    step_type: str = STEP_TYPE,
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    """Match measurement files to metadata rows.
+    """Match measurement files to metadata rows of ``step_type`` (EXACT_FORCE by default).
 
     Parameters
     ----------
@@ -152,7 +155,7 @@ def build_manifest(
     """
 
     step_ids = set(step_ids)
-    target = filter_target_steps(metadata, step_ids)
+    target = filter_target_steps(metadata, step_ids, step_type)
     target_by_key = {key: rows for key, rows in target.groupby(MATCH_KEY)}
 
     unmatched: list[dict] = []
@@ -185,7 +188,7 @@ def build_manifest(
 
         rows = target_by_key.get((file_uuid, step_id))
         if rows is None:
-            reject(path, file_uuid, step_id, "no_match", "no EXACT_FORCE metadata row for (measurement_id, step_id)")
+            reject(path, file_uuid, step_id, "no_match", f"no {step_type} metadata row for (measurement_id, step_id)")
             continue
         if len(rows) > 1:
             reject(path, file_uuid, step_id, "multiple_matches", f"{len(rows)} different metadata rows")
