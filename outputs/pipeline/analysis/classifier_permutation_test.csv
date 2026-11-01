@@ -1,0 +1,2 @@
+features,model,auc,null_mean,null_p97_5,p
+All game features,logistic regression,0.8908991228070174,0.506485745614035,0.6538719846491229,0.004975124378109453

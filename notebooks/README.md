@@ -1,6 +1,8 @@
 # Notebooks by week
 
-Each folder answers one column of the course task sheet ("Zadania", RehaPiano row).
+Each folder answers one column of the course task sheet ("Zadania", RehaPiano row). Folder numbers follow the team's numbering (week5 = 4th task, week6 = 5th task).
+
+**Reproducible results for all games now come from the unified pipeline** (`scripts/run_pipeline.py`, see `../PIPELINE.md`); the notebooks document how each weekly answer was developed.
 Run every notebook from its own folder; data paths are relative to the repository's `data/` folder (see `data/README.md`).
 
 | Week | Task (sheet column) | Contents |
@@ -8,7 +10,8 @@ Run every notebook from its own folder; data paths are relative to the repositor
 | 1 | **D** – take the updated Balanced Force (`EXACT_FORCE`) data; demonstrate Fourier analysis on one sick and one healthy person with 3, 5 and 10 s windows; make spectrograms for both. | `week1/task_1.ipynb` – Fourier and spectrogram comparison of healthy `992601` vs sick `UQIS-DXIH`. `week1/dataset_full_analysis.ipynb` – what the metadata index `dataset_full.csv` contains. |
 | 2 | **E** – separate force variation from controlling the game from involuntary tremor (up to 15 Hz); compute per-person values (component amplitudes, mean frequency, SD, …); try to decide sick vs healthy from them; watch for people who use one hand little or not at all. | `week2/week2_tremor_analysis.ipynb` (+ `REPORT.html` export), code in `analysis.py` / `extensions.py`, presentation notes in `SUMMARY.md` and `GUIDE.md`, figures in `figures/`, per-person exports in `outputs/` (`DATA_DICTIONARY.md`). |
 | 3 | **F** – basic statistics by age (10-year histogram), healthy vs patients; count patients who barely use one hand; design a per-finger tremor analysis. | `week3/week3_age_hands_fingers.ipynb` – English version (code in `week3_analysis.py`, figures, outputs, `README.md`). `week3/analyza_prstov.ipynb` – original Slovak version by D. Sholtys. Both use the pipeline in `src/rehapiano` / `scripts/` and the tables in `outputs/`. |
-| 4 | – | next task |
+| 4 | **G** – hand-force balance also in the rhythm test, compare with EXACT_FORCE, by age categories, separate age from illness. | `week5/rovnovaha_ruk.ipynb` (M. Kuznietsov, Slovak); `week5/mykyta/` – short version with 10-year age groups. |
+| 5 | **H** – hypotheses and significance tests, age changes and decade norms of healthy people, classifier and ablation. | `week6/statisticka_analyza_rytmus.ipynb` (M. Kuznietsov, rhythm only). Unified results for both games: `PIPELINE.md`, `outputs/pipeline/analysis/`. |
 
 ## Known inconsistencies between weeks
 

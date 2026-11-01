@@ -1,0 +1,18 @@
+feature,factor,standardised_coefficient
+ef_tremor_amp,EF fast oscillation,0.43711593580383395
+ef_tremor_amp_max,EF fast oscillation,0.39618937833173207
+ef_slow_amp,EF slow force control,0.7330808082329191
+ef_tremor_share,EF fast-to-slow share,-0.18489595003047193
+ef_balance,EF hand balance,0.3920915015612825
+ef_tremor_balance,EF hand balance,0.05442107620927561
+rh_press_rate_hz,Rhythm tempo,-0.8157604581101752
+rh_interval_cv,Rhythm regularity,0.19047803273235342
+rh_amplitude_strong,Rhythm press force,0.696224713949233
+rh_amplitude_weak,Rhythm press force,0.1185996873887162
+rh_balance_range,Rhythm hand balance,-0.033259775157533804
+rh_balance_press,Rhythm hand balance,-1.2106098025502217
+rh_amplitude_cv,Rhythm force stability,-0.8334193421156917
+rh_sync_lag_ms,Rhythm hand synchrony,0.16878109664047858
+rh_release_ratio,Rhythm release,0.3430475738298805
+rh_fatigue_amplitude,Rhythm fatigue,-0.4349273075522924
+rh_fatigue_rate,Rhythm fatigue,0.012000347749277197

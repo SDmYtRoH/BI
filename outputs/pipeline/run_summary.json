@@ -1,0 +1,25 @@
+{
+  "recordings": {
+    "copy/identical_copy": 54,
+    "excluded/no_metadata": 312,
+    "excluded/step_not_analysed": 1942,
+    "used": 346
+  },
+  "used_recordings_per_game": {
+    "exact_force": 173,
+    "rhythm": 173
+  },
+  "people_per_label": {
+    "Healthy": 76,
+    "Sick": 48,
+    "Other control": 14
+  },
+  "extraction_errors": 0,
+  "versions": {
+    "python": "3.9.6",
+    "numpy": "2.0.2",
+    "pandas": "2.3.3",
+    "scipy": "1.13.1",
+    "scikit-learn": "1.6.1"
+  }
+}

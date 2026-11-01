@@ -1,0 +1,139 @@
+patient_id,label,cohort,label_status,questionnaire_matches,age,decade,gender,metadata_hand,recording_period,first_recording,source_files,sessions_exact_force,sessions_rhythm
+1302202501,Healthy,control,no_reported_condition,1,23,20–29,female,right,2025-02,2025-02-13 08:12:06,dataset_full.csv;dataset_tuke.csv,1,1
+1302202502,Healthy,control,no_reported_condition,1,21,20–29,male,right,2025-02,2025-02-13 08:15:37,dataset_full.csv;dataset_tuke.csv,1,1
+1302202503,Healthy,control,no_reported_condition,1,22,20–29,female,right,2025-02,2025-02-13 08:32:27,dataset_full.csv;dataset_tuke.csv,1,1
+1302202504,Healthy,control,no_reported_condition,1,23,20–29,male,left,2025-02,2025-02-13 08:45:22,dataset_full.csv;dataset_tuke.csv,1,1
+1302202505,Healthy,control,no_reported_condition,1,26,20–29,male,right,2025-02,2025-02-13 08:56:24,dataset_full.csv;dataset_tuke.csv,1,1
+1302202506,Healthy,control,no_reported_condition,1,23,20–29,male,right,2025-02,2025-02-13 08:58:42,dataset_full.csv;dataset_tuke.csv,1,1
+1302202507,Healthy,control,no_reported_condition,1,20,20–29,male,right,2025-02,2025-02-13 09:07:47,dataset_full.csv;dataset_tuke.csv,1,1
+1302202508,Healthy,control,no_reported_condition,1,22,20–29,female,right,2025-02,2025-02-13 09:31:03,dataset_full.csv;dataset_tuke.csv,1,1
+1302202509,Healthy,control,no_reported_condition,1,22,20–29,male,right,2025-02,2025-02-13 09:32:47,dataset_full.csv;dataset_tuke.csv,1,1
+1302202510,Healthy,control,no_reported_condition,1,22,20–29,male,right,2025-02,2025-02-13 09:36:10,dataset_full.csv;dataset_tuke.csv,1,1
+1302202511,Healthy,control,no_reported_condition,1,21,20–29,male,left,2025-02,2025-02-13 10:06:03,dataset_full.csv;dataset_tuke.csv,1,1
+1302202512,Healthy,control,no_reported_condition,1,20,20–29,male,right,2025-02,2025-02-13 10:07:57,dataset_full.csv;dataset_tuke.csv,1,1
+1302202513,Healthy,control,no_reported_condition,1,22,20–29,male,left,2025-02,2025-02-13 10:10:03,dataset_full.csv;dataset_tuke.csv,1,1
+1302202514,Healthy,control,no_reported_condition,1,20,20–29,male,right,2025-02,2025-02-13 10:28:35,dataset_full.csv;dataset_tuke.csv,1,1
+1302202515,Healthy,control,no_reported_condition,1,20,20–29,male,right,2025-02,2025-02-13 10:35:04,dataset_full.csv;dataset_tuke.csv,1,1
+1302202516,Healthy,control,no_reported_condition,1,20,20–29,male,right,2025-02,2025-02-13 10:37:06,dataset_full.csv;dataset_tuke.csv,1,1
+1302202517,Healthy,control,no_reported_condition,1,23,20–29,female,right,2025-02,2025-02-13 11:00:04,dataset_full.csv;dataset_tuke.csv,1,1
+1302202518,Healthy,control,no_reported_condition,1,23,20–29,male,right,2025-02,2025-02-13 11:01:42,dataset_full.csv;dataset_tuke.csv,1,1
+1302202519,Healthy,control,no_reported_condition,1,23,20–29,male,left,2025-02,2025-02-13 11:10:45,dataset_full.csv;dataset_tuke.csv,1,1
+1302202520,Healthy,control,no_reported_condition,1,21,20–29,male,right,2025-02,2025-02-13 11:27:37,dataset_full.csv;dataset_tuke.csv,1,1
+1302202521,Healthy,control,no_reported_condition,1,23,20–29,male,left,2025-02,2025-02-13 11:31:35,dataset_full.csv;dataset_tuke.csv,1,1
+1302202522,Healthy,control,no_reported_condition,1,23,20–29,male,right,2025-02,2025-02-13 11:37:43,dataset_full.csv;dataset_tuke.csv,1,1
+1402202501,Healthy,control,no_reported_condition,1,29,20–29,female,right,2025-02,2025-02-14 15:57:54,dataset_full.csv;dataset_tuke.csv,1,1
+1402202502,Healthy,control,no_reported_condition,1,35,30–39,male,right,2025-02,2025-02-14 16:00:27,dataset_full.csv;dataset_tuke.csv,1,1
+1402202503,Healthy,control,no_reported_condition,1,61,60–69,female,right,2025-02,2025-02-14 16:03:23,dataset_full.csv;dataset_tuke.csv,1,1
+1702202502,Healthy,control,no_reported_condition,1,64,60–69,male,right,2025-02,2025-02-17 14:32:49,dataset_full.csv;dataset_tuke.csv,1,1
+1702202503,Healthy,control,no_reported_condition,1,62,60–69,female,right,2025-02,2025-02-17 14:47:47,dataset_full.csv;dataset_tuke.csv,1,1
+1702202504,Healthy,control,no_reported_condition,1,38,30–39,male,right,2025-02,2025-02-17 15:29:49,dataset_full.csv;dataset_tuke.csv,1,1
+1802202501,Healthy,control,no_reported_condition,1,24,20–29,male,right,2025-02,2025-02-18 11:02:51,dataset_full.csv;dataset_tuke.csv,1,1
+1802202502,Healthy,control,no_reported_condition,1,23,20–29,male,right,2025-02,2025-02-18 11:04:33,dataset_full.csv;dataset_tuke.csv,1,1
+1802202504,Healthy,control,no_reported_condition,1,22,20–29,male,right,2025-02,2025-02-18 11:08:14,dataset_full.csv;dataset_tuke.csv,1,1
+1802202505,Healthy,control,no_reported_condition,1,22,20–29,male,right,2025-02,2025-02-18 11:10:13,dataset_full.csv;dataset_tuke.csv,1,1
+1802202506,Healthy,control,no_reported_condition,1,19,10–19,male,right,2025-02,2025-02-18 12:13:32,dataset_full.csv;dataset_tuke.csv,1,1
+1802202507,Healthy,control,no_reported_condition,1,23,20–29,male,left,2025-02,2025-02-18 12:22:48,dataset_full.csv;dataset_tuke.csv,1,1
+1802202508,Healthy,control,no_reported_condition,1,22,20–29,male,right,2025-02,2025-02-18 12:30:12,dataset_full.csv;dataset_tuke.csv,1,1
+1802202509,Healthy,control,no_reported_condition,1,24,20–29,female,right,2025-02,2025-02-18 13:37:01,dataset_full.csv;dataset_tuke.csv,1,1
+1802202510,Healthy,control,no_reported_condition,1,23,20–29,male,right,2025-02,2025-02-18 13:46:18,dataset_full.csv;dataset_tuke.csv,1,1
+1802202511,Healthy,control,no_reported_condition,1,24,20–29,male,right,2025-02,2025-02-18 13:56:06,dataset_full.csv;dataset_tuke.csv,1,1
+1902202501,Healthy,control,no_reported_condition,1,21,20–29,male,right,2025-02,2025-02-19 09:42:10,dataset_full.csv;dataset_tuke.csv,1,1
+1902202502,Healthy,control,no_reported_condition,1,20,20–29,male,right,2025-02,2025-02-19 10:05:01,dataset_full.csv;dataset_tuke.csv,1,1
+1902202503,Healthy,control,no_reported_condition,1,24,20–29,male,right,2025-02,2025-02-19 10:11:50,dataset_full.csv;dataset_tuke.csv,1,1
+1902202505,Healthy,control,no_reported_condition,1,20,20–29,male,right,2025-02,2025-02-19 10:39:39,dataset_full.csv;dataset_tuke.csv,1,1
+1902202507,Healthy,control,no_reported_condition,1,20,20–29,male,right,2025-02,2025-02-19 10:56:15,dataset_full.csv;dataset_tuke.csv,1,1
+1902202508,Healthy,control,no_reported_condition,1,18,10–19,male,right,2025-02,2025-02-19 12:44:34,dataset_full.csv;dataset_tuke.csv,1,1
+1902202509,Healthy,control,no_reported_condition,1,18,10–19,female,right,2025-02,2025-02-19 12:52:12,dataset_full.csv;dataset_tuke.csv,1,1
+1902202510,Healthy,control,no_reported_condition,1,19,10–19,male,right,2025-02,2025-02-19 13:08:54,dataset_full.csv;dataset_tuke.csv,1,1
+1902202511,Healthy,control,no_reported_condition,1,18,10–19,male,right,2025-02,2025-02-19 13:00:47,dataset_full.csv;dataset_tuke.csv,1,1
+1902202512,Healthy,control,no_reported_condition,1,19,10–19,male,right,2025-02,2025-02-19 13:16:13,dataset_full.csv;dataset_tuke.csv,1,1
+1902202513,Healthy,control,no_reported_condition,1,19,10–19,male,left,2025-02,2025-02-19 13:24:10,dataset_full.csv;dataset_tuke.csv,1,1
+1902202514,Healthy,control,no_reported_condition,1,18,10–19,male,right,2025-02,2025-02-19 13:32:46,dataset_full.csv;dataset_tuke.csv,1,1
+20250228001,Healthy,control,no_reported_condition,1,45,40–49,female,right,2025-02,2025-02-28 12:06:42,dataset_full.csv;dataset_tuke.csv,1,1
+20250228002,Healthy,control,no_reported_condition,1,24,20–29,female,right,2025-02,2025-02-28 12:34:51,dataset_full.csv;dataset_tuke.csv,1,1
+20250228006,Healthy,control,no_reported_condition,1,53,50–59,female,right,2025-02,2025-02-28 13:17:42,dataset_full.csv;dataset_tuke.csv,1,1
+20250228007,Healthy,control,no_reported_condition,1,43,40–49,female,right,2025-02,2025-02-28 13:37:35,dataset_full.csv;dataset_tuke.csv,1,1
+2102202501,Healthy,control,no_reported_condition,1,55,50–59,female,left,2025-02,2025-02-21 09:38:24,dataset_full.csv;dataset_tuke.csv,1,1
+2102202502,Healthy,control,no_reported_condition,1,43,40–49,male,right,2025-02,2025-02-21 09:44:09,dataset_full.csv;dataset_tuke.csv,1,1
+2102202503,Healthy,control,no_reported_condition,1,48,40–49,male,right,2025-02,2025-02-21 09:52:01,dataset_full.csv;dataset_tuke.csv,1,1
+2102202504,Healthy,control,no_reported_condition,1,64,60–69,female,right,2025-02,2025-02-21 09:59:34,dataset_full.csv;dataset_tuke.csv,1,1
+2102202506,Healthy,control,no_reported_condition,1,27,20–29,female,right,2025-02,2025-02-21 10:21:32,dataset_full.csv;dataset_tuke.csv,1,1
+2102202507,Healthy,control,no_reported_condition,1,25,20–29,male,left,2025-02,2025-02-21 10:25:34,dataset_full.csv;dataset_tuke.csv,1,1
+2102202508,Healthy,control,no_reported_condition,1,28,20–29,male,right,2025-02,2025-02-21 10:40:09,dataset_full.csv;dataset_tuke.csv,1,1
+2102202509,Healthy,control,no_reported_condition,1,31,30–39,male,right,2025-02,2025-02-21 10:41:26,dataset_full.csv;dataset_tuke.csv,1,1
+2102202510,Healthy,control,no_reported_condition,1,29,20–29,male,right,2025-02,2025-02-21 11:00:06,dataset_full.csv;dataset_tuke.csv,1,1
+2102202512,Healthy,control,no_reported_condition,1,28,20–29,male,right,2025-02,2025-02-21 11:12:39,dataset_full.csv;dataset_tuke.csv,1,1
+2102202513,Healthy,control,no_reported_condition,1,37,30–39,male,left,2025-02,2025-02-21 11:21:07,dataset_full.csv;dataset_tuke.csv,1,1
+2102202514,Healthy,control,no_reported_condition,1,50,50–59,male,right,2025-02,2025-02-21 11:46:44,dataset_full.csv;dataset_tuke.csv,1,1
+2102202515,Healthy,control,no_reported_condition,1,79,70–79,male,left,2025-02,2025-02-21 11:54:34,dataset_full.csv;dataset_tuke.csv,1,1
+2102202516,Healthy,control,no_reported_condition,1,56,50–59,female,right,2025-02,2025-02-21 12:04:14,dataset_full.csv;dataset_tuke.csv,1,1
+992601,Healthy,control,no_reported_condition,1,66,60–69,female,right,2026-09,2026-09-09 13:12:19,dataset_99.csv;dataset_full.csv,1,1
+992602,Healthy,control,no_reported_condition,1,67,60–69,female,right,2026-09,2026-09-09 13:24:03,dataset_99.csv;dataset_full.csv,1,1
+992604,Healthy,control,no_reported_condition,1,75,70–79,female,right,2026-09,2026-09-09 13:59:49,dataset_99.csv;dataset_full.csv,1,1
+992606,Healthy,control,no_reported_condition,1,85,80–89,female,right,2026-09,2026-09-09 14:25:49,dataset_99.csv;dataset_full.csv,1,1
+992607,Healthy,control,no_reported_condition,1,56,50–59,female,right,2026-09,2026-09-09 14:37:44,dataset_99.csv;dataset_full.csv,1,1
+992610,Healthy,control,no_reported_condition,1,63,60–69,female,right,2026-09,2026-09-09 15:16:52,dataset_99.csv;dataset_full.csv,1,1
+992611,Healthy,control,no_reported_condition,1,65,60–69,female,right,2026-09,2026-09-09 15:28:40,dataset_99.csv;dataset_full.csv,1,1
+992612,Healthy,control,no_reported_condition,1,74,70–79,female,right,2026-09,2026-09-09 15:41:10,dataset_99.csv;dataset_full.csv,1,1
+1702202501,Other control,control,unknown_or_conflicting,0,36,30–39,female,left,2025-02,2025-02-17 14:17:25,dataset_full.csv;dataset_tuke.csv,1,1
+1802202503,Other control,control,reported_condition,1,22,20–29,female,right,2025-02,2025-02-18 11:07:12,dataset_full.csv;dataset_tuke.csv,1,1
+1902202504,Other control,control,reported_condition,1,21,20–29,male,right,2025-02,2025-02-19 10:30:42,dataset_full.csv;dataset_tuke.csv,1,1
+1902202506,Other control,control,reported_condition,1,22,20–29,male,right,2025-02,2025-02-19 10:48:39,dataset_full.csv;dataset_tuke.csv,1,1
+20250228003,Other control,control,reported_condition,1,21,20–29,female,right,2025-02,2025-02-28 12:38:31,dataset_full.csv;dataset_tuke.csv,1,1
+20250228004,Other control,control,duplicate_questionnaire_id,2,25,20–29,female,right,2025-02,2025-02-28 12:41:36,dataset_full.csv;dataset_tuke.csv,1,1
+20250228005,Other control,control,unknown_or_conflicting,0,30,30–39,female,right,2025-02,2025-02-28 12:50:35,dataset_full.csv;dataset_tuke.csv,1,1
+2102202505,Other control,control,reported_condition,1,56,50–59,male,right,2025-02,2025-02-21 10:10:57,dataset_full.csv;dataset_tuke.csv,1,1
+2102202511,Other control,control,reported_condition,1,66,60–69,female,right,2025-02,2025-02-21 11:03:39,dataset_full.csv;dataset_tuke.csv,1,1
+2102202517,Other control,control,reported_condition,1,60,60–69,female,right,2025-02,2025-02-21 12:07:33,dataset_full.csv;dataset_tuke.csv,1,1
+992603,Other control,control,reported_condition,1,75,70–79,female,right,2026-09,2026-09-09 13:35:09,dataset_99.csv;dataset_full.csv,1,1
+992605,Other control,control,reported_condition,1,65,60–69,female,right,2026-09,2026-09-09 14:12:44,dataset_99.csv;dataset_full.csv,1,1
+992608,Other control,control,reported_condition,1,83,80–89,female,right,2026-09,2026-09-09 14:50:01,dataset_99.csv;dataset_full.csv,1,1
+992609,Other control,control,reported_condition,1,71,70–79,female,left,2026-09,2026-09-09 15:05:49,dataset_99.csv;dataset_full.csv,1,1
+0HXU-5CYJ,Sick,patient,patient_cohort,0,67,60–69,male,,2025-08,2025-08-12 09:56:01,dataset_full.csv;dataset_patients.csv,2,2
+0IKB-27Y1,Sick,patient,patient_cohort,0,75,70–79,female,,2025-04,2025-04-02 10:04:34,dataset_full.csv;dataset_patients.csv,1,1
+2REJ-DLCV,Sick,patient,patient_cohort,0,56,50–59,female,,2025-05,2025-05-09 09:49:00,dataset_full.csv;dataset_patients.csv,2,2
+3BOP-Z8PU,Sick,patient,patient_cohort,0,85,80–89,female,,2025-05,2025-05-22 08:43:21,dataset_full.csv;dataset_patients.csv,2,2
+3OUS-NI9J,Sick,patient,patient_cohort,0,82,80–89,female,,2025-04,2025-04-10 13:01:39,dataset_full.csv;dataset_patients.csv,2,2
+4FGL-NBCC,Sick,patient,patient_cohort,0,79,70–79,female,,2025-04,2025-04-11 11:50:33,dataset_full.csv;dataset_patients.csv,2,2
+6JRZ-KPE6,Sick,patient,patient_cohort,0,51,50–59,male,,2025-07,2025-07-04 09:55:16,dataset_full.csv;dataset_patients.csv,2,2
+8VAU-MPTB,Sick,patient,patient_cohort,0,67,60–69,male,,2025-03,2025-03-28 07:32:22,dataset_full.csv;dataset_patients.csv,1,1
+9VMD-WMRM,Sick,patient,patient_cohort,0,84,80–89,male,,2025-07,2025-07-16 10:12:52,dataset_full.csv;dataset_patients.csv,1,1
+A8MY-DD2W,Sick,patient,patient_cohort,0,64,60–69,male,,2025-04,2025-04-04 11:05:07,dataset_full.csv;dataset_patients.csv,2,2
+AIP1-ZJEP,Sick,patient,patient_cohort,0,62,60–69,male,,2025-06,2025-06-09 12:23:43,dataset_full.csv;dataset_patients.csv,2,2
+ALFZ-9NGL,Sick,patient,patient_cohort,0,66,60–69,male,,2025-07,2025-07-16 09:59:06,dataset_full.csv;dataset_patients.csv,2,2
+ALVB-UZKR,Sick,patient,patient_cohort,0,35,30–39,male,,2025-05,2025-05-09 12:58:27,dataset_full.csv;dataset_patients.csv,2,2
+B5LW-5W1Q,Sick,patient,patient_cohort,0,60,60–69,male,,2025-08,2025-08-12 10:05:59,dataset_full.csv;dataset_patients.csv,1,1
+BVRZ-IF8J,Sick,patient,patient_cohort,0,49,40–49,male,,2025-05,2025-05-22 09:27:11,dataset_full.csv;dataset_patients.csv,2,2
+EJIT-XSEZ,Sick,patient,patient_cohort,0,76,70–79,male,,2025-07,2025-07-04 09:25:38,dataset_full.csv;dataset_patients.csv,2,2
+EPLH-ZTE8,Sick,patient,patient_cohort,0,47,40–49,male,,2025-08,2025-08-12 10:18:17,dataset_full.csv;dataset_patients.csv,2,2
+FC3B-FR3M,Sick,patient,patient_cohort,0,71,70–79,male,,2025-07,2025-07-04 09:37:58,dataset_full.csv;dataset_patients.csv,2,2
+FHIK-X0HJ,Sick,patient,patient_cohort,0,22,20–29,male,,2025-04,2025-04-15 11:01:44,dataset_full.csv;dataset_patients.csv,1,1
+G1VW-NO6C,Sick,patient,patient_cohort,0,77,70–79,female,,2025-07,2025-07-23 10:01:54,dataset_full.csv;dataset_patients.csv,2,2
+ILHC-BZCP,Sick,patient,patient_cohort,0,73,70–79,female,,2025-04,2025-04-24 11:31:44,dataset_full.csv;dataset_patients.csv,2,2
+JJAV-NYZD,Sick,patient,patient_cohort,0,56,50–59,male,,2025-04,2025-04-28 11:33:35,dataset_full.csv;dataset_patients.csv,2,2
+JMPV-JTBP,Sick,patient,patient_cohort,0,56,50–59,male,,2025-04,2025-04-28 10:36:01,dataset_full.csv;dataset_patients.csv,2,2
+LLCF-IB2I,Sick,patient,patient_cohort,0,63,60–69,male,,2025-05,2025-05-16 09:32:25,dataset_full.csv;dataset_patients.csv,2,2
+MAYR-BEU4,Sick,patient,patient_cohort,0,62,60–69,male,,2025-04,2025-04-10 13:23:33,dataset_full.csv;dataset_patients.csv,2,2
+N78F-WUBU,Sick,patient,patient_cohort,0,22,20–29,female,,2025-04,2025-04-02 08:07:03,dataset_full.csv;dataset_patients.csv,1,1
+NUYV-81KG,Sick,patient,patient_cohort,0,88,80–89,female,,2025-05,2025-05-22 08:31:57,dataset_full.csv;dataset_patients.csv,2,2
+OJBL-BUN8,Sick,patient,patient_cohort,0,76,70–79,female,,2025-04,2025-04-22 12:58:51,dataset_full.csv;dataset_patients.csv,1,1
+OKZD-QXFU,Sick,patient,patient_cohort,0,70,70–79,female,,2025-05,2025-05-09 10:18:34,dataset_full.csv;dataset_patients.csv,2,2
+OQHZ-N4AV,Sick,patient,patient_cohort,0,60,60–69,male,,2025-04,2025-04-04 13:04:22,dataset_full.csv;dataset_patients.csv,2,2
+QQYP-XMRG,Sick,patient,patient_cohort,0,74,70–79,female,,2025-05,2025-05-29 13:52:21,dataset_full.csv;dataset_patients.csv,2,2
+REWW-2HZE,Sick,patient,patient_cohort,0,56,50–59,male,,2025-07,2025-07-31 08:42:16,dataset_full.csv;dataset_patients.csv,1,1
+RPKE-H4MT,Sick,patient,patient_cohort,0,61,60–69,male,,2025-08,2025-08-12 10:38:36,dataset_full.csv;dataset_patients.csv,2,2
+S5PQ-K0C7,Sick,patient,patient_cohort,0,69,60–69,male,,2025-06,2025-06-05 11:33:18,dataset_full.csv;dataset_patients.csv,2,2
+SVEL-EDUK,Sick,patient,patient_cohort,0,79,70–79,female,,2025-04,2025-04-04 13:30:50,dataset_full.csv;dataset_patients.csv,1,1
+T1IE-6TRR,Sick,patient,patient_cohort,0,89,80–89,female,,2025-04,2025-04-08 13:03:35,dataset_full.csv;dataset_patients.csv,2,2
+T3VN-RDQV,Sick,patient,patient_cohort,0,34,30–39,male,,2025-07,2025-07-08 09:49:32,dataset_full.csv;dataset_patients.csv,2,2
+T9VB-KBHX,Sick,patient,patient_cohort,0,21,20–29,female,,2025-04,2025-04-02 07:58:44,dataset_full.csv;dataset_patients.csv,1,1
+UFEQ-X1ZK,Sick,patient,patient_cohort,0,76,70–79,female,,2025-03,2025-03-28 12:59:42,dataset_full.csv;dataset_patients.csv,1,1
+UHE7-LPCN,Sick,patient,patient_cohort,0,74,70–79,male,,2025-05,2025-05-26 13:40:03,dataset_full.csv;dataset_patients.csv,2,2
+UIMG-NOVN,Sick,patient,patient_cohort,0,73,70–79,male,,2025-06,2025-06-05 11:16:57,dataset_full.csv;dataset_patients.csv,1,1
+UQIS-DXIH,Sick,patient,patient_cohort,0,55,50–59,female,,2025-04,2025-04-17 10:26:06,dataset_full.csv;dataset_patients.csv,2,2
+V6TD-3R18,Sick,patient,patient_cohort,0,24,20–29,male,,2025-05,2025-05-02 13:14:34,dataset_full.csv;dataset_patients.csv,2,2
+VFKD-HGNK,Sick,patient,patient_cohort,0,67,60–69,female,,2025-03,2025-03-26 11:03:20,dataset_full.csv;dataset_patients.csv,2,2
+W6JM-R0SG,Sick,patient,patient_cohort,0,58,50–59,female,,2025-06,2025-06-23 13:35:50,dataset_full.csv;dataset_patients.csv,1,1
+XT2X-WLNW,Sick,patient,patient_cohort,0,67,60–69,male,,2025-03,2025-03-31 13:13:31,dataset_full.csv;dataset_patients.csv,2,2
+ZPVE-HPNW,Sick,patient,patient_cohort,0,58,50–59,male,,2025-05,2025-05-16 10:08:54,dataset_full.csv;dataset_patients.csv,2,2
+ZWTN-LDUR,Sick,patient,patient_cohort,0,74,70–79,female,,2025-07,2025-07-16 09:41:53,dataset_full.csv;dataset_patients.csv,2,2

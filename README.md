@@ -1,5 +1,7 @@
 # RehaPiano EXACT_FORCE: ukazovatele tremoru pre každý prst
 
+**Zjednotený pipeline pre všetky hry (EXACT_FORCE + RHYTHM, štatistika, klasifikátor): [PIPELINE.md](PIPELINE.md).**
+
 Pipeline: načítanie → doplnenie chýbajúcich hodnôt → zníženie vzorkovacej frekvencie → orezanie → kritériá platnosti → ukazovatele pre každý prst → agregácia → CSV.
 Ďalej nasleduje štatistická analýza (`scripts/run_analysis.py`) a vizualizácia (`notebooks/week3/analyza_prstov.ipynb`).
 
