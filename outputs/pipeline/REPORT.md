@@ -198,6 +198,6 @@ Logistic regression with all factors and age (AUC 0.91). Each factor is (a) used
 
 ## 8. Reproducibility
 
-Generated 2026-11-01 14:13 by `python scripts/run_pipeline.py` (code version 7ab40ce + uncommitted code changes). Recording files: {"copy/identical_copy": 54, "excluded/no_metadata": 312, "excluded/step_not_analysed": 1942, "used": 346}; extraction errors: 0. Software: python 3.9.6, numpy 2.0.2, pandas 2.3.3, scipy 1.13.1, scikit-learn 1.6.1.
+Generated 2026-11-01 14:17 by `python scripts/run_pipeline.py` (code version 7a18d0d). Recording files: {"copy/identical_copy": 54, "excluded/no_metadata": 312, "excluded/step_not_analysed": 1942, "used": 346}; extraction errors: 0. Software: python 3.9.6, numpy 2.0.2, pandas 2.3.3, scipy 1.13.1, scikit-learn 1.6.1.
 
 Tables behind every number: `outputs/pipeline/analysis/*.csv`; per-person features: `outputs/pipeline/person_features.csv`. Method details: `PIPELINE.md`.
