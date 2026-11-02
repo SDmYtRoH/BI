@@ -37,7 +37,7 @@ NOTEBOOKS = {
     "exact_force": ["notebooks/exact_force/analyza_prstov.ipynb",
                     "notebooks/exact_force/statisticka_analyza_exact_force.ipynb"],
     "rhythm": ["notebooks/rhythm/rovnovaha_ruk.ipynb", "notebooks/rhythm/statisticka_analyza_rytmus.ipynb"],
-    "combined": ["notebooks/combined/klasifikator_oba_testy.ipynb"],
+    "combined": ["notebooks/combined/klasifikator_oba_testy.ipynb", "notebooks/combined/hypotezy_a_normy.ipynb"],
 }
 
 
