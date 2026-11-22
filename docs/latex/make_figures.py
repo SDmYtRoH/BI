@@ -162,7 +162,7 @@ def figure_classifier():
     sets = [(next(s for s in all_sets if "len" not in s), "všetci ľudia"),
             (next(s for s in all_sets if "len" in s), "len ľudia nad 50 rokov")]
     features = [("EXACT_FORCE", "Exact Force", EF_COLOR), ("rytmus", "Rhythm", RH_COLOR),
-                ("EXACT_FORCE + rytmus", "oba testy", "#2E8B57")]
+                ("EXACT_FORCE + rytmus", "obe cvičenia", "#2E8B57")]
     fig, ax = plt.subplots(figsize=(11 * CM, 6.3 * CM))
     width = 0.26
     for i, (key, name) in enumerate(sets):
@@ -202,7 +202,7 @@ def figure_ablation():
     ax.set_yticks(y, names)
     ax.set_xlim(0.38, 0.88)
     ax.axvline(0.5, color="#555555", linestyle=":", linewidth=1)
-    ax.set_xlabel("AUC modelu, ktorý pozná iba tento faktor (0,5 = hádanie)")
+    ax.set_xlabel("AUC modelu, ktorý používa iba tento faktor (0,5 = hádanie)")
     ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v:.2f}".replace(".", ",")))
     ax.grid(axis="x", color="#DDDDDD", linewidth=0.6)
     ax.grid(axis="y", visible=False)
