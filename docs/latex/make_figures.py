@@ -162,7 +162,7 @@ def figure_classifier():
     sets = [(next(s for s in all_sets if "len" not in s), "všetci ľudia"),
             (next(s for s in all_sets if "len" in s), "len ľudia nad 50 rokov")]
     features = [("EXACT_FORCE", "Exact Force", EF_COLOR), ("rytmus", "Rhythm", RH_COLOR),
-                ("EXACT_FORCE + rytmus", "oba testy", "#2E8B57")]
+                ("EXACT_FORCE + rytmus", "obe cvičenia", "#2E8B57")]
     fig, ax = plt.subplots(figsize=(11 * CM, 6.3 * CM))
     width = 0.26
     for i, (key, name) in enumerate(sets):

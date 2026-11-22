@@ -1,4 +1,4 @@
-% Analýza dát zo zariadenia RehaPiano – testy Exact Force a Rhythm
+% Analýza dát zo zariadenia RehaPiano – cvičenia Exact Force a Rhythm
 % Kompilácia: pdflatex dokumentacia.tex (2x) alebo tectonic dokumentacia.tex.
 % Obrázky obr_*.pdf vytvorí skript make_figures.py z tabuliek v outputs/.
 \documentclass[12pt,a4paper]{article}
@@ -6,7 +6,7 @@
 
 \begin{document}
 
-\titulnastrana{Analýza dát zo zariadenia RehaPiano:\\ testy \ef{} a Rhythm}{Projektová dokumentácia}
+\titulnastrana{Analýza dát zo zariadenia RehaPiano:\\ cvičenia \ef{} a Rhythm}{Projektová dokumentácia}
 
 % ---------------------------------------------------------------------------------------------------
 \pagenumbering{roman}
@@ -14,15 +14,16 @@
 \section*{Abstrakt}
 
 Práca sa zaoberá analýzou dát z rehabilitačného zariadenia RehaPiano, ktoré meria silu stlačenia každého
-z desiatich prstov. Analyzovali sme dva testy: test \ef{}, pri ktorom človek drží rovnomernú silu, a test Rhythm,
-pri ktorom čo najrýchlejšie stláča a uvoľňuje obe ruky. Súbor tvorí 135 zdravých ľudí a 48 pacientov. Pre každý test
+z desiatich prstov. Analyzovali sme dve cvičenia: cvičenie \ef{}, pri ktorom človek drží rovnomernú silu, a cvičenie Rhythm,
+pri ktorom čo najrýchlejšie stláča a uvoľňuje obe ruky. Dáta obsahujú merania 135 zdravých osôb a 48 pacientov.
+Pri každom meraní osoba vykonala obe cvičenia, každé v štyroch pokusoch. Pre každé cvičenie
 sme vypočítali desať parametrov osoby, stanovili hypotézy o rozdieloch medzi zdravými a pacientmi a overili ich
 neparametrickými testami s Holmovou korekciou, a to aj medzi rovnako starými ľuďmi. U zdravých sme skúmali vplyv veku
 a stanovili normálne rozsahy hodnôt. Zdravých a pacientov sme klasifikovali logistickou regresiou a ablačnou analýzou
 sme určili prínos jednotlivých faktorov. Pacienti majú aj pri rovnakom veku väčšie kolísanie držanej sily, silnejší
-tras a menšiu silu prstov. V teste Rhythm stláčajú pomalšie, menej súčasne a s menej vyrovnanými rukami.
-Test Exact Force rozlišuje skupiny s AUC 0,78, test Rhythm s AUC 0,81 a oba testy spolu s AUC 0,85, kým samotný
-vek len s AUC 0,64. Testy zachytávajú odlišné prejavy ochorenia a navzájom sa dopĺňajú. Hlavným obmedzením je, že
+tras a menšiu silu prstov. V cvičení Rhythm stláčajú pomalšie, menej súčasne a s menej vyrovnanými rukami.
+Cvičenie Exact Force rozlišuje skupiny s AUC 0,78, cvičenie Rhythm s AUC 0,81 a obe cvičenia spolu s AUC 0,85, kým samotný
+vek len s AUC 0,64. Cvičenia zachytávajú odlišné prejavy ochorenia a navzájom sa dopĺňajú. Hlavným obmedzením je, že
 mladší a starší zdraví ľudia boli zmeraní na rôznych miestach.
 
 \textbf{Kľúčové slová:} RehaPiano, tras, štatistická analýza, normálne hodnoty, logistická regresia, ablačná analýza
@@ -58,7 +59,7 @@ jednoduchých hier.
 
 Táto práca nadväzuje na predchádzajúce týždenné úlohy projektu, v ktorých sme spracovali surové záznamy zariadenia,
 oddelili tras od vedomých korekcií sily a popísali skupiny podľa veku. Tu sa sústreďujeme na štatistické overenie
-rozdielov medzi zdravými ľuďmi a pacientmi, na normálne hodnoty, na klasifikáciu a na porovnanie dvoch testov.
+rozdielov medzi zdravými ľuďmi a pacientmi, na normálne hodnoty, na klasifikáciu a na porovnanie dvoch cvičení.
 Teoretický rozbor problematiky nie je súčasťou dokumentácie.
 
 Dokumentácia je rozdelená takto. Kapitola~\ref{sec:ciel} formuluje úlohu, kapitola~\ref{sec:data} popisuje dáta
@@ -77,22 +78,22 @@ detekciu trasu. Úloha pozostáva zo štyroch častí:
   \item analyzovať zmeny parametrov s vekom u zdravých ľudí a stanoviť normálne hodnoty a rozsahy podľa dekád,
   \item navrhnúť klasifikátor na oddelenie zdravých a pacientov a ablačnou analýzou určiť vplyv jednotlivých
         faktorov na výsledok klasifikácie,
-  \item porovnať závery z testu \ef{} so závermi z testu Rhythm.
+  \item porovnať závery z cvičenia \ef{} so závermi z cvičenia Rhythm.
 \end{enumerate}
 
 % ===================================================================================================
 \section{Popis dát}
 \label{sec:data}
 
-\subsection{Zariadenie a testy}
+\subsection{Zariadenie a cvičenia}
 
 RehaPiano obsahuje desať snímačov sily, päť pre každú ruku. Zariadenie zaznamenáva signál s frekvenciou približne
-1000 vzoriek za sekundu. Každý záznam patrí k jednému meraniu osoby a k jednému kroku hry, ktorý určuje, o aký test
+1000 vzoriek za sekundu. Každý záznam patrí k jednému meraniu osoby a k jednému kroku hry, ktorý určuje, o aké cvičenie
 ide. Z dostupných hier sme analyzovali dve:
 \begin{itemize}
-  \item \textbf{Test \ef{}.} Osoba drží všetkými prstami rovnomernú silu na predpísanej úrovni. Test má štyri pokusy
+  \item \textbf{Cvičenie \ef{}.} Osoba drží všetkými prstami rovnomernú silu na predpísanej úrovni. Cvičenie má štyri pokusy
         po 16 sekúnd. Sleduje sa tras a stabilita sily.
-  \item \textbf{Test Rhythm.} Osoba čo najrýchlejšie rytmicky stláča a uvoľňuje obe ruky naraz. Test má štyri
+  \item \textbf{Cvičenie Rhythm.} Osoba čo najrýchlejšie rytmicky stláča a uvoľňuje obe ruky naraz. Cvičenie má štyri
         pokusy po 31 sekúnd. Sleduje sa rýchlosť, koordinácia a vyrovnanosť rúk.
 \end{itemize}
 
@@ -102,11 +103,11 @@ Zdraví účastníci sú osoby, ktoré v dotazníku neuviedli žiadne ochorenie 
 167 zdravých túto podmienku spĺňa 135 a iba z nich počítame normálne hodnoty. Kontrolná analýza so všetkými
 167 zdravými viedla k takmer rovnakým záverom. Mladší zdraví pochádzajú z meraní na TUKE v roku 2025, starší
 väčšinou z meracieho centra (september a november 2026). Skupinu pacientov tvorí 48 osôb. Nové merania pacientov
-z roku 2026 zatiaľ nemajú údaje o veku a pohlaví, preto nie sú zahrnuté. Tí istí ľudia absolvovali oba testy
+z roku 2026 zatiaľ nemajú údaje o veku a pohlaví, preto nie sú zahrnuté. Tí istí ľudia absolvovali obe cvičenia
 a 35 pacientov bolo zmeraných dvakrát, typicky s odstupom jedného týždňa. Základné údaje o skupinách uvádza
 tabuľka~\ref{tab:skupiny}.
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Veľkosť a vek skupín.}
 \label{tab:skupiny}
@@ -127,9 +128,9 @@ merania, pretože mladší a starší zdraví boli zmeraní na rôznych miestach
 
 \subsection{Výber a kvalita dát}
 
-Zo všetkých nahrávok sme ponechali tie, ktoré patria k jednému z dvoch testov a dajú sa jednoznačne priradiť k údajom
-o osobe. Vylúčili sme poškodené súbory, duplicitné záznamy a záznamy bez metadát. Zdraví a pacienti hrali každý test
-v mierne odlišnej verzii hry, čo zohľadňujeme v diskusii. V oboch testoch je prvý pokus nácvik, pri ktorom si
+Zo všetkých nahrávok sme ponechali tie, ktoré patria k jednému z dvoch cvičení a dajú sa jednoznačne priradiť k údajom
+o osobe. Vylúčili sme poškodené súbory, duplicitné záznamy a záznamy bez metadát. Zdraví a pacienti hrali každé cvičenie
+v mierne odlišnej verzii hry, čo zohľadňujeme v diskusii. V oboch cvičeniach je prvý pokus nácvik, pri ktorom si
 človek zvyká na hru, preto analyzujeme len pokusy 2 až 4.
 
 % ===================================================================================================
@@ -141,18 +142,18 @@ v mierne odlišnej verzii hry, čo zohľadňujeme v diskusii. V oboch testoch je
 Signál sme najprv zjednotili: duplicitné časové značky sme spriemerovali, krátke výpadky lineárne doplnili
 a signál prevzorkovali na 100~Hz. Kanál s opačným znamienkom sme opravili.
 
-\textbf{Test \ef{}.} Používame úsek od 3. do 15. sekundy pokusu, pretože v prvých sekundách človek silu ešte len
+\textbf{Cvičenie \ef{}.} Používame úsek od 3. do 15. sekundy pokusu, pretože v prvých sekundách človek silu ešte len
 nastavuje. Signál každého prsta rozkladáme spektrogramom s Hannovým oknom dĺžky 5~s na dve zložky. Pomalé korekcie
 sily v pásme 0 -- 4~Hz vznikajú, keď človek vedome dorovnáva silu na cieľovú úroveň. Tras v pásme 4 -- 15~Hz je rýchle
 nevedomé chvenie. Prsty, ktoré netlačia, do výpočtu trasu nezahŕňame, pretože ich signál tvorí iba šum snímača.
 Hodnotu ruky určuje medián aktívnych prstov a hodnotu osoby priemer oboch rúk. Pokusy s odľahlými hodnotami
 vylučujeme.
 
-\textbf{Test Rhythm.} Silu ruky počítame ako priemer jej piatich snímačov a používame úsek od 2. do 30. sekundy.
+\textbf{Cvičenie Rhythm.} Silu ruky počítame ako priemer jej piatich snímačov a používame úsek od 2. do 30. sekundy.
 Jednotlivé stlačenia hľadáme ako výrazné vrcholy súčtu síl oboch rúk, ktoré sú od seba vzdialené aspoň 0,25~s.
 Časy stlačení, ktoré ukladá hra, so signálom sily nesúhlasia, preto ich nepoužívame.
 
-Pre každý test sme takto získali desať parametrov osoby, ktoré sú zoskupené do ôsmich faktorov. Ich zoznam
+Pre každé cvičenie sme takto získali desať parametrov osoby, ktoré sú zoskupené do ôsmich faktorov. Ich zoznam
 a význam uvádzajú tabuľky~\ref{tab:ef} a~\ref{tab:rytmus} v kapitole~\ref{sec:experimenty}.
 
 \subsection{Testovanie hypotéz}
@@ -164,8 +165,8 @@ najprísnejší:
   \item porovnanie všetkých zdravých so všetkými pacientmi Mann-Whitneyho testom~\cite{mann1947},
   \item porovnanie rovnako starých ľudí, teda zvlášť v každej dekáde, spojené van Elterenovým testom~\cite{vanelteren1960},
   \item lineárny model s vekom ako ďalšou premennou, s robustnými chybami odhadu~\cite{mackinnon1985},
-  \item rovnaký model doplnený o premennú, ktorá by mohla rozdiel vysvetliť inak ako ochorením. V teste \ef{} je to
-        sila prstov, v teste Rhythm tempo.
+  \item rovnaký model doplnený o premennú, ktorá by mohla rozdiel vysvetliť inak ako ochorením. V cvičení \ef{} je to
+        sila prstov, v cvičení Rhythm tempo.
 \end{enumerate}
 Keďže testujeme viac parametrov naraz, p-hodnoty upravujeme Holmovou korekciou~\cite{holm1979}. Hypotézu považujeme
 za potvrdenú, ak je rozdiel významný ($p < 0{,}05$ po korekcii) v očakávanom smere aj medzi rovnako starými ľuďmi.
@@ -182,16 +183,16 @@ posúvajú podľa kvantilovej regresie~\cite{koenker1978}.
 \subsection{Klasifikácia a ablačná analýza}
 
 Hlavným klasifikátorom je logistická regresia so štandardizovanými parametrami, pretože je jednoduchá a dobre
-vysvetliteľná. Na porovnanie sme použili náhodný les s 300 stromami~\cite{breiman2001}. Úspešnosť sme merali
+vysvetliteľná. Na porovnanie sme použili random forest s 300 stromami~\cite{breiman2001}. Úspešnosť sme merali
 opakovanou päťnásobnou krížovou validáciou (20 opakovaní), takže model sme vždy hodnotili na ľuďoch, ktorých pri
 učení nevidel. Ako referenciu sme použili model, ktorý pozná iba vek, a model sme overili aj len na ľuďoch nad 50 rokov.
 Pri ablačnej analýze sme každý faktor z modelu vynechali a sledovali pokles AUC. Zároveň sme hodnotili model, ktorý
 pozná iba tento jeden faktor.
 
-\subsection{Porovnanie testov}
+\subsection{Porovnanie cvičení}
 
-Testy sme porovnali podľa veľkosti rozdielov medzi skupinami, podľa korelácie parametrov medzi testami, podľa toho,
-ktorých pacientov rozpozná klasifikátor každého testu, a podľa opakovateľnosti. Opakovateľnosť sme určili u 35
+Cvičenia sme porovnali podľa veľkosti rozdielov medzi skupinami, podľa korelácie parametrov medzi cvičeniami, podľa toho,
+ktorých pacientov rozpozná klasifikátor každého cvičenia, a podľa opakovateľnosti. Opakovateľnosť sme určili u 35
 pacientov zmeraných dvakrát pomocou vnútrotriedneho korelačného koeficientu ICC~\cite{koo2016}.
 
 \subsection{Použité nástroje}
@@ -204,14 +205,14 @@ príručky v prílohách.
 \section{Experimenty}
 \label{sec:experimenty}
 
-\subsection{Hypotézy pre test \ef{}}
+\subsection{Hypotézy pre cvičenie \ef{}}
 
-Tabuľka~\ref{tab:ef} uvádza hypotézy pre test \ef{} a ich výsledok. Obrázok~\ref{fig:ef} zobrazuje štyri parametre
+Tabuľka~\ref{tab:ef} uvádza hypotézy pre cvičenie \ef{} a ich výsledok. Obrázok~\ref{fig:ef} zobrazuje štyri parametre
 s najvýraznejšími rozdielmi.
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering\small
-\caption{Hypotézy pre test \ef{} a ich výsledok.}
+\caption{Hypotézy pre cvičenie \ef{} a ich výsledok.}
 \label{tab:ef}
 \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.7cm} L >{\raggedright\arraybackslash}p{3.9cm}@{}}
 \toprule
@@ -231,10 +232,10 @@ frekvencia trasu & pomalší tras & nepotvrdená \\
 \end{tabularx}
 \end{table}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{obr_ef_parametre.pdf}
-\caption[Test \ef{}: parametre zdravých a pacientov]{Test \ef{}: parametre s najväčším rozdielom medzi zdravými a pacientmi. Každý bod je jedna osoba, čierna
+\caption[Cvičenie \ef{}: parametre zdravých a pacientov]{Cvičenie \ef{}: parametre s najväčším rozdielom medzi zdravými a pacientmi. Každý bod je jedna osoba, čierna
 čiara je medián skupiny. Prvé dva grafy majú logaritmickú os.}
 \label{fig:ef}
 \end{figure}
@@ -249,13 +250,25 @@ rastie ešte viac. Rozdiely medzi prstami, rytmickosť trasu a rovnováha rúk s
 zdravých so všetkými pacientmi, medzi rovnako starými ľuďmi už nie. Frekvencia trasu sa nelíši, tras pacientov
 teda nie je pomalší.
 
-\subsection{Hypotézy pre test Rhythm}
+\subsection{Hypotézy pre cvičenie Rhythm}
 
-Výsledky hypotéz pre test Rhythm sú v tabuľke~\ref{tab:rytmus} a vybrané parametre na obrázku~\ref{fig:rytmus}.
+Výsledky hypotéz pre cvičenie Rhythm sú v tabuľke~\ref{tab:rytmus} a vybrané parametre na obrázku~\ref{fig:rytmus}.
 
-\begin{table}[htbp]
+Najspoľahlivejším rozdielom je rovnováha rúk. Zostáva významná vo všetkých štyroch krokoch, teda ju nevysvetľuje vek
+ani pomalšie tempo. U pacientov tlačí jedna ruka výrazne slabšie ako druhá. Pacienti tiež stláčajú pomalšie, približne
+1,6-krát za sekundu oproti 2,5-krát u zdravých, a to aj pri rovnakom veku. Ich ruky stláčajú menej súčasne. Tento
+rozdiel je zreteľný pri porovnaní po dekádach, v lineárnom modeli je však len na hranici významnosti, pretože ho
+ovplyvňuje niekoľko pacientov s veľmi veľkým oneskorením.
+
+Dva parametre vyšli opačne, ako sme očakávali: pacienti tlačia silnejšou rukou silnejšie a ruku medzi stlačeniami
+úplnejšie uvoľnia. Medzi rovnako starými ľuďmi a pri rovnakom tempe sa však v týchto parametroch nelíšia. Obe
+zistenia teda vysvetľuje vek a pomalšie tempo, pretože pri pomalom stláčaní človek stihne ruku úplne uvoľniť aj
+silnejšie stlačiť. Nestálosť sily sa líši iba pri rovnakom tempe: pri rovnakej rýchlosti stláčania kolíše pacientom
+veľkosť stlačení viac.
+
+\begin{table}[H]
 \centering\small
-\caption{Hypotézy pre test Rhythm a ich výsledok.}
+\caption{Hypotézy pre cvičenie Rhythm a ich výsledok.}
 \label{tab:rytmus}
 \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.7cm} L >{\raggedright\arraybackslash}p{3.9cm}@{}}
 \toprule
@@ -275,30 +288,18 @@ nestálosť sily & väčšie kolísanie sily stlačení & nepotvrdená, vyššia
 \end{tabularx}
 \end{table}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{obr_rytmus_parametre.pdf}
-\caption[Test Rhythm: parametre zdravých a pacientov]{Test Rhythm: parametre s najväčším rozdielom medzi zdravými a pacientmi. Každý bod je jedna osoba, čierna
+\caption[Cvičenie Rhythm: parametre zdravých a pacientov]{Cvičenie Rhythm: parametre s najväčším rozdielom medzi zdravými a pacientmi. Každý bod je jedna osoba, čierna
 čiara je medián skupiny. Oneskorenie medzi rukami má logaritmickú os.}
 \label{fig:rytmus}
 \end{figure}
 
-Najspoľahlivejším rozdielom je rovnováha rúk. Zostáva významná vo všetkých štyroch krokoch, teda ju nevysvetľuje vek
-ani pomalšie tempo. U pacientov tlačí jedna ruka výrazne slabšie ako druhá. Pacienti tiež stláčajú pomalšie, približne
-1,6-krát za sekundu oproti 2,5-krát u zdravých, a to aj pri rovnakom veku. Ich ruky stláčajú menej súčasne. Tento
-rozdiel je zreteľný pri porovnaní po dekádach, v lineárnom modeli je však len na hranici významnosti, pretože ho
-ovplyvňuje niekoľko pacientov s veľmi veľkým oneskorením.
-
-Dva parametre vyšli opačne, ako sme očakávali: pacienti tlačia silnejšou rukou silnejšie a ruku medzi stlačeniami
-úplnejšie uvoľnia. Medzi rovnako starými ľuďmi a pri rovnakom tempe sa však v týchto parametroch nelíšia. Obe
-zistenia teda vysvetľuje vek a pomalšie tempo, pretože pri pomalom stláčaní človek stihne ruku úplne uvoľniť aj
-silnejšie stlačiť. Nestálosť sily sa líši iba pri rovnakom tempe: pri rovnakej rýchlosti stláčania kolíše pacientom
-veľkosť stlačení viac.
-
 \subsection{Vek a normálne hodnoty}
 
-U zdravých ľudí sa s vekom významne menia štyri parametre v každom teste. V teste \ef{} s vekom klesá podiel trasu
-a frekvencia trasu, kým rytmickosť trasu a sila prstov stúpajú. V teste Rhythm starší zdraví stláčajú pomalšie, ale
+U zdravých ľudí sa s vekom významne menia štyri parametre v každom cvičení. V cvičení \ef{} s vekom klesá podiel trasu
+a frekvencia trasu, kým rytmickosť trasu a sila prstov stúpajú. V cvičení Rhythm starší zdraví stláčajú pomalšie, ale
 pravidelnejšie, s rovnomernejšou silou a ruku úplnejšie uvoľnia. Všetky tieto trendy sú slabé
 ($|\rho| \leq 0{,}46$) a časť z nich môže pochádzať z rozdielnych miest merania mladších a starších zdravých.
 Dôležité je, že rovnováha rúk ($\rho = -0{,}09$) ani amplitúda trasu s vekom nesúvisia. Ich zmena u pacientov je
@@ -306,20 +307,20 @@ teda prejavom ochorenia, nie starnutia.
 
 Normálne rozsahy kľúčových parametrov uvádza tabuľka~\ref{tab:normy} a obrázok~\ref{fig:normy} ich porovnáva
 s hodnotami pacientov. Pre parametre s vplyvom veku sa hranice normy posúvajú s vekom, ostatné majú jednu normu
-pre všetky dekády. Najviac pacientov mimo normy je v teste Rhythm, kde má rovnováhu rúk pod normou 19 zo 48
+pre všetky dekády. Najviac pacientov mimo normy je v cvičení Rhythm, kde má rovnováhu rúk pod normou 19 zo 48
 pacientov a oneskorenie medzi rukami nad normou 14. Pomalé korekcie sily majú u niektorých starších zdravých veľké
 hodnoty, preto je horná hranica normy široká a nad ňou je len 4 zo 48 pacientov, hoci ide o parameter s najväčším
 rozdielom medzi skupinami. Treba pamätať, že mimo normy je z definície aj 5~\% zdravých, takže jedna hodnota mimo
 normy ešte neznamená ochorenie. Spoľahlivé sú normy pre dekády 20 -- 29, 60 -- 69 a 70 -- 79 rokov, pre ostatné
 dekády sú len orientačné.
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering\small
 \caption[Normálne hodnoty kľúčových parametrov]{Normálne hodnoty kľúčových parametrov (medián a rozsah 95~\% zdravých) a počet pacientov mimo normy.}
 \label{tab:normy}
 \begin{tabularx}{\textwidth}{@{}l L l >{\raggedright\arraybackslash}p{3.3cm}@{}}
 \toprule
-test & parameter & norma & pacienti mimo normy \\
+cvičenie & parameter & norma & pacienti mimo normy \\
 \midrule
 \ef{} & pomalé korekcie sily [$\times 10^{-5}$] & 5,5 (2,5 -- 39,4) & 4 nad normou \\
  & amplitúda trasu [$\times 10^{-5}$] & 0,82 (0,37 -- 2,44) & 5 nad, 1 pod normou \\
@@ -334,7 +335,7 @@ Rhythm & tempo, vek 20 -- 29 rokov [stlačenia/s] & 2,63 (1,29 -- 3,39) & 10 pod
 \end{tabularx}
 \end{table}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{obr_normy.pdf}
 \caption[Normálne rozsahy podľa veku a hodnoty pacientov]{Normálny rozsah zdravých podľa veku (modré pásmo obsahuje 95~\% zdravých) a hodnoty jednotlivých osôb.
@@ -344,19 +345,19 @@ Pri sile prstov a tempe sa hranice normy posúvajú s vekom.}
 
 \subsection{Klasifikácia zdravých a pacientov}
 
-Logistická regresia rozlišuje pacientov od zdravých s AUC 0,78 na základe testu \ef{} a s AUC 0,81 na základe testu
-Rhythm (obr.~\ref{fig:klasifikator}). Po spojení oboch testov stúpne AUC na 0,85. Model z oboch testov správne
+Logistická regresia rozlišuje pacientov od zdravých s AUC 0,78 na základe cvičenia \ef{} a s AUC 0,81 na základe cvičenia
+Rhythm (obr.~\ref{fig:klasifikator}). Po spojení oboch cvičení stúpne AUC na 0,85. Model z oboch cvičení správne
 rozpozná približne troch zo štyroch pacientov a štyroch z piatich zdravých. Permutačný test potvrdil, že výsledok
 nie je náhodný.
 
 Model, ktorý pozná iba vek, dosiahne len AUC 0,64, pretože skupiny sú vďaka novým meraniam vekovo podobné. Úspešnosť
-klasifikátora teda nevyplýva z veku. Medzi ľuďmi nad 50 rokov dosahuje test \ef{} AUC 0,84, test Rhythm 0,80 a oba
-testy spolu 0,86. Náhodný les dosiahol porovnateľné alebo mierne horšie výsledky.
+klasifikátora teda nevyplýva z veku. Medzi ľuďmi nad 50 rokov dosahuje cvičenie \ef{} AUC 0,84, cvičenie Rhythm 0,80 a obe
+cvičenia spolu 0,86. Random forest dosiahol porovnateľné alebo mierne horšie výsledky.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{obr_klasifikator.pdf}
-\caption[Úspešnosť klasifikátora pre jednotlivé testy]{Úspešnosť logistickej regresie (AUC) pre jednotlivé testy a ich spojenie, pre všetkých ľudí a len pre ľudí
+\caption[Úspešnosť klasifikátora pre jednotlivé cvičenia]{Úspešnosť logistickej regresie (AUC) pre jednotlivé cvičenia a ich spojenie, pre všetkých ľudí a len pre ľudí
 nad 50 rokov. Úsečky ukazujú rozptyl medzi opakovaniami krížovej validácie, prerušovaná čiara model iba z veku.}
 \label{fig:klasifikator}
 \end{figure}
@@ -364,62 +365,62 @@ nad 50 rokov. Úsečky ukazujú rozptyl medzi opakovaniami krížovej validácie
 \subsection{Ablačná analýza}
 
 Obrázok~\ref{fig:ablacia} ukazuje, akú úspešnosť dosiahne model, ktorý pozná iba jeden faktor. Najsilnejším
-samostatným faktorom je kolísanie sily v teste \ef{} (AUC 0,81). Nasledujú tempo, sila stlačenia a rovnováha rúk
-z testu Rhythm a amplitúda trasu z testu \ef{} s AUC približne 0,74. Samotný vek dosahuje len 0,64. Frekvencia trasu,
+samostatným faktorom je kolísanie sily v cvičení \ef{} (AUC 0,81). Nasledujú tempo, sila stlačenia a rovnováha rúk
+z cvičenia Rhythm a amplitúda trasu z cvičenia \ef{} s AUC približne 0,74. Samotný vek dosahuje len 0,64. Frekvencia trasu,
 pravidelnosť rytmu a stálosť sily samy nenesú takmer žiadnu informáciu.
 
 Po vynechaní jedného faktora z úplného modelu sa AUC zníži najviac o 0,013, pretože faktory sa navzájom zastupujú.
-V samostatnom modeli testu Rhythm sú najdôležitejšie tempo a rovnováha rúk, v modeli testu \ef{} sila prstov
+V samostatnom modeli cvičenia Rhythm sú najdôležitejšie tempo a rovnováha rúk, v modeli cvičenia \ef{} sila prstov
 a kolísanie sily.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{obr_ablacia.pdf}
-\caption[Ablačná analýza: AUC jednotlivých faktorov]{Ablačná analýza: AUC modelu, ktorý pozná iba jeden faktor. Fialová farba označuje test \ef{}, oranžová
-test Rhythm a sivá vek. Úsečky ukazujú rozptyl medzi opakovaniami krížovej validácie.}
+\caption[Ablačná analýza: AUC jednotlivých faktorov]{Ablačná analýza: AUC modelu, ktorý pozná iba jeden faktor. Fialová farba označuje cvičenie \ef{}, oranžová
+cvičenie Rhythm a sivá vek. Úsečky ukazujú rozptyl medzi opakovaniami krížovej validácie.}
 \label{fig:ablacia}
 \end{figure}
 
-\subsection{Porovnanie testov \ef{} a Rhythm}
+\subsection{Porovnanie cvičení \ef{} a Rhythm}
 
-Oba testy rozlišujú pacientov podobne dobre, test Rhythm o niečo lepšie, ale podľa iných prejavov. Test \ef{}
+Obe cvičenia rozlišujú pacientov podobne dobre, cvičenie Rhythm o niečo lepšie, ale podľa iných prejavov. Cvičenie \ef{}
 reaguje na nestabilnú silu, tras a menšiu silu prstov,
-test Rhythm na spomalenie, nevyrovnanosť a nesúčasnosť rúk. Parametre jedného testu takmer nesúvisia s parametrami
-druhého: u zdravých sú korelácie medzi testami prakticky nulové a u pacientov slabé. Testy teda nemerajú to isté.
+cvičenie Rhythm na spomalenie, nevyrovnanosť a nesúčasnosť rúk. Parametre jedného cvičenia takmer nesúvisia s parametrami
+druhého: u zdravých sú korelácie medzi cvičeniami prakticky nulové a u pacientov slabé. Cvičenia teda nemerajú to isté.
 
-Slabšiu ruku odhalí lepšie test Rhythm. Medzi rovnako starými ľuďmi sa rovnováha rúk v teste \ef{} nelíši,
-v teste Rhythm áno. Všetkých sedem pacientov, ktorých slabšiu ruku zachytil test \ef{}, má
-rovnováhu rúk pod normou aj v teste Rhythm, ten však nájde ďalších dvanásť. Pri pokojnom držaní stačí
+Slabšiu ruku odhalí lepšie cvičenie Rhythm. Medzi rovnako starými ľuďmi sa rovnováha rúk v cvičení \ef{} nelíši,
+v cvičení Rhythm áno. Všetkých sedem pacientov, ktorých slabšiu ruku zachytilo cvičenie \ef{}, má
+rovnováhu rúk pod normou aj v cvičení Rhythm, toto cvičenie však nájde ďalších dvanásť. Pri pokojnom držaní stačí
 slabšej ruke malá sila, kým rýchle opakované stláčanie ju zaťaží viac.
 
-Testy sa navzájom dopĺňajú (tabuľka~\ref{tab:zhoda}). Aspoň jeden z klasifikátorov rozpozná 41 zo 48 pacientov,
-zatiaľ čo každý samostatne iba 33. Za túto citlivosť sa platí tým, že aspoň jeden test označí za pacienta aj 50 zo
+Cvičenia sa navzájom dopĺňajú (tabuľka~\ref{tab:zhoda}). Aspoň jeden z klasifikátorov rozpozná 41 zo 48 pacientov,
+zatiaľ čo každý samostatne iba 33. Za túto citlivosť sa platí tým, že aspoň jedno cvičenie označí za pacienta aj 50 zo
 135 zdravých.
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering\small
-\caption{Koľkých ľudí označí za pacienta klasifikátor každého testu.}
+\caption{Koľkých ľudí označí za pacienta klasifikátor každého cvičenia.}
 \label{tab:zhoda}
 \begin{tabular}{@{}lcc@{}}
 \toprule
 označený za pacienta & pacienti (48) & zdraví (135) \\
 \midrule
-oboma testami & 25 & 5 \\
-len testom \ef{} & 8 & 25 \\
-len testom Rhythm & 8 & 20 \\
-ani jedným testom & 7 & 85 \\
+oboma cvičeniami & 25 & 5 \\
+len cvičením \ef{} & 8 & 25 \\
+len cvičením Rhythm & 8 & 20 \\
+ani jedným cvičením & 7 & 85 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Test Rhythm je opakovateľnejší (obr.~\ref{fig:opakovatelnost}). Pri druhom meraní tých istých pacientov dávajú
-rovnováha rúk, sila stlačenia a tempo takmer rovnaké výsledky. V teste \ef{} sa medzi meraniami výraznejšie mení
+Cvičenie Rhythm je opakovateľnejšie (obr.~\ref{fig:opakovatelnost}). Pri druhom meraní tých istých pacientov dávajú
+rovnováha rúk, sila stlačenia a tempo takmer rovnaké výsledky. V cvičení \ef{} sa medzi meraniami výraznejšie mení
 sila prstov, rovnováha trasu rúk a rozdiely medzi prstami, stabilné sú najmä rytmickosť trasu, podiel trasu
-a kolísanie sily. Únava v teste Rhythm sa nezopakuje
+a kolísanie sily. Únava v cvičení Rhythm sa nezopakuje
 vôbec, čo vysvetľuje, prečo neodlišuje skupiny. Po Holmovej korekcii sa pri druhom meraní žiadny parameter významne
 nezmenil.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{obr_opakovatelnost.pdf}
 \caption[Opakovateľnosť parametrov pri dvoch meraniach]{Opakovateľnosť parametrov u 35 pacientov zmeraných dvakrát. Hodnota ICC nad 0,75 znamená dobrú
@@ -431,9 +432,9 @@ opakovateľnosť, pod 0,5 slabú~\cite{koo2016}.}
 \section{Diskusia}
 \label{sec:diskusia}
 
-Hlavným výsledkom je, že pacienti sa od zdravých líšia aj pri rovnakom veku. V teste \ef{} majú nestabilnejšiu silu,
-silnejší tras a menšiu silu prstov, v teste Rhythm pomalšie tempo, menej vyrovnané ruky a menej súčasné
-stláčanie. Každý test zachytí čiastočne iných pacientov, preto sú spolu spoľahlivejšie ako ktorýkoľvek z nich
+Hlavným výsledkom je, že pacienti sa od zdravých líšia aj pri rovnakom veku. V cvičení \ef{} majú nestabilnejšiu silu,
+silnejší tras a menšiu silu prstov, v cvičení Rhythm pomalšie tempo, menej vyrovnané ruky a menej súčasné
+stláčanie. Každé cvičenie zachytí čiastočne iných pacientov, preto sú spolu spoľahlivejšie ako ktorékoľvek z nich
 samostatne.
 
 Vek už nie je hlavným rušivým faktorom. Po doplnení starších zdravých je zdravých nad 50 rokov 74, skupiny sú
@@ -443,16 +444,16 @@ vo všetkých krokoch, naopak rozdiely medzi prstami medzi rovnako starými ľu�
 zostáva miesto merania. Mladší zdraví boli zmeraní na TUKE, starší väčšinou v meracom centre, takže zmeny parametrov
 s vekom u zdravých môžu čiastočne odrážať rozdiel medzi miestami merania.
 
-Zdraví a pacienti hrali v oboch testoch trochu inú verziu hry. Časť rozdielov, napríklad v tempe, môže pochádzať
+Zdraví a pacienti hrali v oboch cvičeniach trochu inú verziu hry. Časť rozdielov, napríklad v tempe, môže pochádzať
 z nastavenia hry, a nie z ochorenia. Porovnanie po dekádach odstráni vplyv veku, ale nie vplyv verzie hry.
 
-Výsledky v opačnom smere, ako sme očakávali, majú logické vysvetlenie. V teste Rhythm silnejšie stlačenie
-a úplnejšie uvoľnenie vyplývajú z vyššieho veku a pomalšieho tempa pacientov. V teste \ef{} je podiel trasu nižší, lebo pomalé kolísanie
+Výsledky v opačnom smere, ako sme očakávali, majú logické vysvetlenie. V cvičení Rhythm silnejšie stlačenie
+a úplnejšie uvoľnenie vyplývajú z vyššieho veku a pomalšieho tempa pacientov. V cvičení \ef{} je podiel trasu nižší, lebo pomalé kolísanie
 sily rastie viac ako samotný tras.
 
 Normy sú spoľahlivé pre dekády 20 -- 29, 60 -- 69 a 70 -- 79 rokov. V dekádach 30 -- 59 a nad 80 rokov je
 zdravých stále málo. Na sledovanie pacienta v čase sú najvhodnejšie parametre, ktoré sa pri opakovanom meraní
-nemenia, teda rovnováha rúk a tempo z testu Rhythm. Opakovateľnosť sme mohli overiť len u pacientov, medzi ktorých
+nemenia, teda rovnováha rúk a tempo z cvičenia Rhythm. Opakovateľnosť sme mohli overiť len u pacientov, medzi ktorých
 meraniami mohla prebiehať liečba.
 
 Klasifikátor nie je diagnostický nástroj, pretože zatiaľ nebol overený na nezávislej skupine ľudí. Pre ďalšiu prácu
@@ -466,19 +467,19 @@ z roku 2026, používať rovnakú verziu hry pre všetkých, zmerať zdravých d
 \addcontentsline{toc}{section}{Záver}
 \markboth{Záver}{Záver}
 
-Práca analyzovala dva testy zariadenia RehaPiano u 135 zdravých ľudí a 48 pacientov. Stanovili sme a otestovali
+Práca analyzovala dve cvičenia zariadenia RehaPiano u 135 zdravých ľudí a 48 pacientov. Stanovili sme a otestovali
 hypotézy o rozdieloch medzi skupinami, preskúmali vplyv veku, určili normálne rozsahy, navrhli klasifikátor
-a porovnali oba testy.
+a porovnali obe cvičenia.
 
-Pacienti sa od zdravých líšia v oboch testoch aj pri rovnakom veku. Test \ef{} zachytáva nestabilnú silu, tras
-a menšiu silu prstov, test Rhythm spomalenie a nevyrovnanosť rúk. U zdravých sa s vekom mierne menia štyri parametre
-v každom teste, ich normy sa preto posúvajú s vekom. Rovnováha rúk a amplitúda trasu majú normu spoločnú pre všetky
-dekády. Klasifikátor dosahuje AUC 0,78 pre test \ef{}, 0,81 pre test Rhythm a 0,85 pre ich spojenie, kým samotný
+Pacienti sa od zdravých líšia v oboch cvičeniach aj pri rovnakom veku. Cvičenie \ef{} zachytáva nestabilnú silu, tras
+a menšiu silu prstov, cvičenie Rhythm spomalenie a nevyrovnanosť rúk. U zdravých sa s vekom mierne menia štyri parametre
+v každom cvičení, ich normy sa preto posúvajú s vekom. Rovnováha rúk a amplitúda trasu majú normu spoločnú pre všetky
+dekády. Klasifikátor dosahuje AUC 0,78 pre cvičenie \ef{}, 0,81 pre cvičenie Rhythm a 0,85 pre ich spojenie, kým samotný
 vek iba 0,64. Ablačná analýza ukázala ako najdôležitejšie
-faktory kolísanie sily, tempo a rovnováhu rúk. Test Rhythm je opakovateľnejší a jeho parametre sú vhodnejšie na
+faktory kolísanie sily, tempo a rovnováhu rúk. Cvičenie Rhythm je opakovateľnejšie a jeho parametre sú vhodnejšie na
 sledovanie pacienta v čase.
 
-Oba testy sú pre hodnotenie motoriky rúk potrebné, pretože sa navzájom dopĺňajú. Spoľahlivosť záverov obmedzuje
+Obe cvičenia sú pre hodnotenie motoriky rúk potrebné, pretože sa navzájom dopĺňajú. Spoľahlivosť záverov obmedzuje
 rozdielne miesto merania mladších a starších zdravých a malý počet zdravých v stredných dekádach.
 
 % ===================================================================================================
@@ -535,9 +536,9 @@ Príloha B & Systémová príručka: štruktúra programu, tok dát, moduly, par
 
 \subsection{Účel programu}
 
-Program spracuje surové záznamy zo zariadenia RehaPiano pre test \ef{} a test Rhythm. Vypočíta parametre každej
-osoby, otestuje rozdiely medzi zdravými a pacientmi, stanoví normálne hodnoty, natrénuje klasifikátor a porovná oba
-testy. Výsledky uloží ako tabuľky CSV a grafy v notebookoch. Príručka je určená tomu, kto chce analýzu zopakovať,
+Program spracuje surové záznamy zo zariadenia RehaPiano pre cvičenie \ef{} a cvičenie Rhythm. Vypočíta parametre každej
+osoby, otestuje rozdiely medzi zdravými a pacientmi, stanoví normálne hodnoty, natrénuje klasifikátor a porovná obe
+cvičenia. Výsledky uloží ako tabuľky CSV a grafy v notebookoch. Príručka je určená tomu, kto chce analýzu zopakovať,
 doplniť nové dáta alebo si prezrieť výsledky.
 
 \subsection{Inštalácia}
@@ -574,7 +575,7 @@ hlavnej analýzy a skript ich vypíše ako varovanie.
 
 Celá analýza sa spúšťa z koreňového priečinka repozitára jedným príkazom. Prepínače umožňujú spustiť len jej časť:
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering\small
 \caption{Spôsoby spustenia skriptu \texttt{run\_all.py}.}
 \begin{tabularx}{\textwidth}{@{}>{\ttfamily\raggedright\arraybackslash}p{6.6cm} L@{}}
@@ -584,7 +585,7 @@ Celá analýza sa spúšťa z koreňového priečinka repozitára jedným príka
 python scripts/run\_all.py & celá analýza od surových dát po tabuľky (približne 15 -- 20 minút) \\
 python scripts/run\_all.py -{}-notebooks & navyše znova spustí notebooky a prekreslí grafy \\
 python scripts/run\_all.py -{}-quick & rýchla kontrola s menším počtom opakovaní krížovej validácie \\
-python scripts/run\_all.py -{}-only rhythm & iba jeden test (\texttt{exact\_force}, \texttt{rhythm} alebo \texttt{combined}) \\
+python scripts/run\_all.py -{}-only rhythm & iba jedno cvičenie (\texttt{exact\_force}, \texttt{rhythm} alebo \texttt{combined}) \\
 python scripts/run\_all.py -{}-skip-build & iba štatistika, surové dáta sa znova nečítajú \\
 python -m unittest discover tests & spustí automatické testy programu \\
 \bottomrule
@@ -598,19 +599,19 @@ Po aktualizácii dát stačí nové súbory a riadky metadát pridať do prieči
 
 Hotové výsledky sú v repozitári, takže si ich možno prezrieť aj bez surových dát.
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering\small
 \caption{Umiestnenie výsledkov.}
 \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{4.6cm} L@{}}
 \toprule
 obsah & umiestnenie \\
 \midrule
-test \ef{} & \path{notebooks/exact_force/statisticka_analyza_exact_force.ipynb} \\
-test Rhythm & \path{notebooks/rhythm/statisticka_analyza_rytmus.ipynb} \\
+cvičenie \ef{} & \path{notebooks/exact_force/statisticka_analyza_exact_force.ipynb} \\
+cvičenie Rhythm & \path{notebooks/rhythm/statisticka_analyza_rytmus.ipynb} \\
 rovnováha rúk & \path{notebooks/rhythm/rovnovaha_ruk.ipynb} \\
-klasifikátor z oboch testov & \path{notebooks/combined/klasifikator_oba_testy.ipynb} \\
+klasifikátor z oboch cvičení & \path{notebooks/combined/klasifikator_oba_testy.ipynb} \\
 hypotézy a normy po dekádach & \path{notebooks/combined/hypotezy_a_normy.ipynb} \\
-porovnanie testov & \path{notebooks/combined/porovnanie_exact_force_rytmus.ipynb} \\
+porovnanie cvičení & \path{notebooks/combined/porovnanie_exact_force_rytmus.ipynb} \\
 tabuľky výsledkov (CSV) & \path{outputs/exact_force/}, \path{outputs/rhythm/}, \path{outputs/combined/},
                           \path{outputs/comparison/} \\
 dokumentácia a príručky & \path{docs/latex/} \\
@@ -618,7 +619,7 @@ dokumentácia a príručky & \path{docs/latex/} \\
 \end{tabularx}
 \end{table}
 
-Najdôležitejšie tabuľky v priečinkoch \path{outputs/<test>/analysis/} sú:
+Najdôležitejšie tabuľky v priečinkoch \path{outputs/<cvičenie>/analysis/} sú:
 \begin{itemize}
   \item \texttt{people.csv} -- parametre každej osoby, stĺpec \texttt{screened} označuje osoby v hlavnej analýze,
   \item \texttt{hypotheses.csv} -- výsledky testov hypotéz vo všetkých štyroch krokoch,
@@ -629,7 +630,7 @@ Najdôležitejšie tabuľky v priečinkoch \path{outputs/<test>/analysis/} sú:
 
 \subsection{Ako čítať výsledky}
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering\small
 \caption{Význam pojmov použitých vo výsledkoch.}
 \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.6cm} L@{}}
@@ -684,12 +685,12 @@ Celý priečinok \path{docs/latex/} sa dá nahrať aj do služby Overleaf.
 
 Riešenie je balík jazyka Python \texttt{rehapiano} v priečinku \path{src/} a sada skriptov v priečinku
 \path{scripts/}, ktoré balík volajú v pevnom poradí. Spoločná časť balíka zabezpečuje čítanie záznamov,
-predspracovanie signálu a štatistiku. Každý test má vlastný podbalík, ktorý z predspracovaného signálu vypočíta
-parametre osoby. Štatistická analýza je pre oba testy rovnaká, aby sa ich výsledky dali porovnať.
+predspracovanie signálu a štatistiku. Každé cvičenie má vlastný podbalík, ktorý z predspracovaného signálu vypočíta
+parametre osoby. Štatistická analýza je pre obe cvičenia rovnaká, aby sa ich výsledky dali porovnať.
 
 \subsection{Štruktúra repozitára}
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering\small
 \caption{Hlavné priečinky repozitára.}
 \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{4.8cm} L@{}}
@@ -697,10 +698,10 @@ parametre osoby. Štatistická analýza je pre oba testy rovnaká, aby sa ich v�
 priečinok & obsah \\
 \midrule
 \path{src/rehapiano/common/} & spoločné nastavenia, čítanie dát, predspracovanie, štatistika \\
-\path{src/rehapiano/exact_force/} & spracovanie testu \ef{} a jeho parametre \\
-\path{src/rehapiano/rhythm/} & spracovanie testu Rhythm a jeho parametre \\
-\path{src/rehapiano/combined.py} & spojenie parametrov oboch testov \\
-\path{src/rehapiano/comparison.py} & porovnanie testov \\
+\path{src/rehapiano/exact_force/} & spracovanie cvičenia \ef{} a jeho parametre \\
+\path{src/rehapiano/rhythm/} & spracovanie cvičenia Rhythm a jeho parametre \\
+\path{src/rehapiano/combined.py} & spojenie parametrov oboch cvičení \\
+\path{src/rehapiano/comparison.py} & porovnanie cvičení \\
 \path{scripts/} & spúšťacie skripty jednotlivých krokov a \texttt{run\_all.py} \\
 \path{notebooks/} & notebooky s grafmi a interpretáciou \\
 \path{outputs/} & výsledné tabuľky CSV \\
@@ -716,7 +717,7 @@ priečinok & obsah \\
 Skript \texttt{scripts/run\_all.py} spúšťa jednotlivé kroky v poradí podľa tabuľky~\ref{tab:kroky}. Kroky označené
 ako zostavenie čítajú surové dáta, ostatné pracujú s tabuľkami z predchádzajúcich krokov.
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering\small
 \caption{Kroky spracovania.}
 \label{tab:kroky}
@@ -730,8 +731,8 @@ run\_exact\_force\_analysis.py & \path{outputs/exact_force/analysis/} (hypotézy
 build\_rhythm.py & zostavenie: surové dáta $\rightarrow$ \path{outputs/rhythm/*.csv} (stlačenia, parametre pokusov) \\
 run\_rhythm\_hand\_balance.py & \path{outputs/rhythm/hand_balance/} (rovnováha rúk) \\
 run\_rhythm\_analysis.py & \path{outputs/rhythm/analysis/} (hypotézy, normy, klasifikátor, ablácia) \\
-run\_combined\_analysis.py & \path{outputs/combined/} (klasifikátor z oboch testov) \\
-run\_comparison.py & \path{outputs/comparison/} (porovnanie testov, opakovateľnosť) \\
+run\_combined\_analysis.py & \path{outputs/combined/} (klasifikátor z oboch cvičení) \\
+run\_comparison.py & \path{outputs/comparison/} (porovnanie cvičení, opakovateľnosť) \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -748,14 +749,14 @@ run\_comparison.py & \path{outputs/comparison/} (porovnanie testov, opakovateľn
   \item \texttt{io/metadata.py} -- čítanie metadát a priradenie záznamu k meraniu podľa dvojice identifikátorov
         merania a kroku hry; vytvára inventár záznamov s dôvodmi vylúčenia.
   \item \texttt{preprocessing/} -- oprava znamienka kanála, spracovanie medzier, prevzorkovanie na 100~Hz
-        a orezanie pokusu na úsek určený testom.
+        a orezanie pokusu na úsek určený cvičením.
   \item \texttt{stats/tests.py} -- Mann-Whitneyho, Wilcoxonov a van Elterenov test, Holmova korekcia, ICC.
   \item \texttt{stats/models.py} -- lineárny model s robustnými chybami odhadu (HC3).
-  \item \texttt{stats/group\_analysis.py} -- spoločný postup pre oba testy: hypotézy, vplyv veku, normy,
+  \item \texttt{stats/group\_analysis.py} -- spoločný postup pre obe cvičenia: hypotézy, vplyv veku, normy,
         klasifikátor a ablácia.
 \end{itemize}
 
-\subsubsection{Test \ef{}}
+\subsubsection{Cvičenie \ef{}}
 
 \begin{itemize}
   \item \texttt{config.py} -- identifikátory krokov hry, orezanie 3 -- 15~s, frekvenčné pásma a prahy kvality.
@@ -765,7 +766,7 @@ run\_comparison.py & \path{outputs/comparison/} (porovnanie testov, opakovateľn
   \item \texttt{parameters.py} -- desať parametrov osoby, osem faktorov a očakávaný smer rozdielu.
 \end{itemize}
 
-\subsubsection{Test Rhythm}
+\subsubsection{Cvičenie Rhythm}
 
 \begin{itemize}
   \item \texttt{config.py} -- identifikátory krokov hry, orezanie 2 -- 30~s, nastavenie detekcie stlačení
@@ -777,7 +778,7 @@ run\_comparison.py & \path{outputs/comparison/} (porovnanie testov, opakovateľn
 
 \subsection{Parametre spracovania}
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering\small
 \caption{Hlavné nastavenia spracovania signálu.}
 \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{5.8cm} L@{}}
@@ -794,7 +795,7 @@ medzery v signáli & výpadky do 50~ms sa lineárne doplnia, dlhšie rozdelia po
 Rhythm: analyzovaný úsek & 2 -- 30~s pokusu, prvý pokus je skúšobný \\
 Rhythm: stlačenie & vrchol vzdialený aspoň 0,25~s od predchádzajúceho, výška aspoň 25~\% rozsahu sily \\
 Rhythm: platný pokus & aspoň 5 stlačení \\
-klasifikátor & logistická regresia a náhodný les (300 stromov), 5-násobná krížová validácia, 20 opakovaní \\
+klasifikátor & logistická regresia a random forest (300 stromov), 5-násobná krížová validácia, 20 opakovaní \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -809,12 +810,12 @@ Tabuľky osôb (\texttt{people.csv}) majú jeden riadok na osobu a slúžia ako 
 \subsection{Testovanie}
 
 Automatické testy v priečinku \path{tests/} overujú čítanie a predspracovanie záznamov, detekciu stlačení
-v teste Rhythm, štatistické funkcie a porovnanie testov na umelých dátach so známym výsledkom. Spúšťajú sa
+v cvičení Rhythm, štatistické funkcie a porovnanie cvičení na umelých dátach so známym výsledkom. Spúšťajú sa
 príkazom \texttt{python -m unittest discover tests}.
 
-\subsection{Rozšírenie o nový test}
+\subsection{Rozšírenie o nové cvičenie}
 
-Nový test zariadenia sa pridá vytvorením podbalíka podľa vzoru \texttt{exact\_force} alebo \texttt{rhythm}.
+Nové cvičenie zariadenia sa pridá vytvorením podbalíka podľa vzoru \texttt{exact\_force} alebo \texttt{rhythm}.
 Podbalík musí definovať identifikátory krokov hry a orezanie pokusu v súbore \texttt{config.py}, výpočet parametrov
 osoby v súbore \texttt{parameters.py} spolu s ich faktormi a očakávaným smerom rozdielu, a spúšťacie skripty
 zostavenia a analýzy. Štatistickú analýzu zabezpečí spoločný modul \texttt{group\_analysis.py} bez úprav.
