@@ -56,6 +56,21 @@ def read_metadata(path: PathLike) -> pd.DataFrame:
     return frame
 
 
+def read_all_metadata(full_csv: PathLike, update_csvs: Iterable[PathLike] = ()) -> pd.DataFrame:
+    """``full_csv`` plus later exports; a row of an update replaces every earlier row with the same key.
+
+    Updates are applied in the given order, so a later file wins over an earlier one.
+    """
+
+    metadata = read_metadata(full_csv)
+    for path in update_csvs:
+        update = read_metadata(path)
+        update_keys = pd.MultiIndex.from_frame(update[MATCH_KEY])
+        replaced = pd.MultiIndex.from_frame(metadata[MATCH_KEY]).isin(update_keys)
+        metadata = pd.concat([metadata.loc[~replaced], update], ignore_index=True)
+    return metadata
+
+
 def filter_target_steps(
     metadata: pd.DataFrame,
     step_ids: Iterable[str],

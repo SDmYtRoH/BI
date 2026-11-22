@@ -17,6 +17,13 @@ MEASUREMENTS_DIR = DATA_DIR / "raw" / "RehaPiano"
 METADATA_DIR = DATA_DIR / "metadata"
 FULL_METADATA_CSV = METADATA_DIR / "dataset_full.csv"
 PATIENTS_METADATA_CSV = METADATA_DIR / "dataset_patients.csv"
+# Later metadata exports (same columns + questionnaire answers). Their rows replace the rows of
+# dataset_full.csv with the same (measurement_id, step_id): dataset_09_09_2026_en.csv corrects
+# dataset_full.csv, where the people of 9.9.2026 from the 4th one on were shifted by one person.
+METADATA_UPDATE_CSVS = (
+    METADATA_DIR / "dataset_09_09_2026_en.csv",  # healthy, measuring centre 9.9.2026 (correction)
+    METADATA_DIR / "dataset_13_11_2026_en.csv",  # healthy, measuring centre 9.-13.11.2026
+)
 # Questionnaire screening of the healthy group (week 2, M. Holovcyk): eligible_comparison =
 # healthy without a reported condition affecting the hands, or a patient.
 PARTICIPANT_LABELS_CSV = DATA_DIR / "participant_labels.csv"
@@ -53,6 +60,9 @@ MAX_MISSING_FRACTION_PER_CHANNEL = 0.01
 MAX_MISSING_AT_EDGE_S = 0.01
 PLAUSIBLE_PACKET_RATE_HZ = (50.0, 2000.0)
 ANALYSED_SEGMENT = 1  # only the first continuous segment is analysed
+# The first attempt of every game is a practice attempt (the person gets used to the task), so it is
+# left out of all statistics; attempts 2-4 are analysed. A recording with a single attempt keeps it.
+PRACTICE_ATTEMPTS = (1,)
 
 # --------------------------------------------------------------------------- age
 AGE_GROUP_WIDTH_YEARS = 10

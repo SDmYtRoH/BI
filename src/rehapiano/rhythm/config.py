@@ -6,7 +6,7 @@ Shared settings (paths, device, preprocessing, statistics) are in ``rehapiano.co
 
 from __future__ import annotations
 
-from rehapiano.common.config import OUTPUT_DIR
+from rehapiano.common.config import OUTPUT_DIR, PRACTICE_ATTEMPTS  # noqa: F401 - re-exported
 
 # --------------------------------------------------------------------------- outputs
 RHYTHM_OUTPUT_DIR = OUTPUT_DIR / "rhythm"  # attempt-level tables
@@ -21,8 +21,7 @@ RHYTHM_PATIENT_STEP_ID = "65a5a4b1-907c-4717-b47b-cd8f31eb3e4b"
 RHYTHM_STEP_IDS = (RHYTHM_CONTROL_STEP_ID, RHYTHM_PATIENT_STEP_ID)
 RHYTHM_CROP_START_S = 2.0  # the first presses start after ~1 s
 RHYTHM_CROP_END_S = 30.0
-# The first attempt is a practice attempt: people press slower and harder in it.
-PRACTICE_ATTEMPTS = (1,)
+# PRACTICE_ATTEMPTS (common.config): the first attempt is a practice attempt, people press slower and harder in it.
 
 # --------------------------------------------------------------------------- press detection
 # press_offset / release_offset in additional_data are not aligned with the force signal
