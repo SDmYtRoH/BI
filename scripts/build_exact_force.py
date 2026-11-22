@@ -34,6 +34,7 @@ from rehapiano.common.io.metadata import (  # noqa: E402
     build_manifest,
     filter_target_steps,
     label_patients,
+    read_all_metadata,
     read_metadata,
     resolve_project_path,
 )
@@ -52,6 +53,8 @@ def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--full-csv", type=Path, default=config.FULL_METADATA_CSV)
     parser.add_argument("--patients-csv", type=Path, default=config.PATIENTS_METADATA_CSV)
+    parser.add_argument("--update-csvs", type=Path, nargs="*", default=list(config.METADATA_UPDATE_CSVS),
+                        help="later metadata exports; their rows replace rows of --full-csv")
     parser.add_argument("--measurements-dir", type=Path, default=config.MEASUREMENTS_DIR)
     parser.add_argument("--output-dir", type=Path, default=ef_config.EF_OUTPUT_DIR)
     parser.add_argument("--step-ids", nargs="+", default=list(ef_config.ANALYSED_STEP_IDS))
@@ -107,6 +110,7 @@ def build_summary(
         attempt_hands = features_by_attempt.drop_duplicates(["measurement_id", "step_id", "attempt", "hand"])
         rows += [("attempts", "attempts", len(attempts)),
                  ("attempts", "attempt x hand units", len(attempt_hands)),
+                 ("attempts", "practice attempts left out (attempt 1)", int(attempts["practice_attempt"].sum())),
                  ("attempts", "attempt x hand flagged as outlier", int(attempt_hands["attempt_outlier"].sum())),
                  ("fingers", "attempt x finger rows", len(features_by_attempt)),
                  ("fingers", "valid", int(valid.sum())),
@@ -115,8 +119,8 @@ def build_summary(
         rows += [("fingers", f"invalid: {reason}", int(count)) for reason, count in reasons.items()]
         rows += [("fingers", "valid but finger_inactive",
                   int(features_by_attempt.loc[valid, "finger_inactive"].astype(bool).sum())),
-                 ("fingers", "used in averages (valid, not outlier attempt)",
-                  int((valid & ~features_by_attempt["attempt_outlier"]).sum()))]
+                 ("fingers", "used in averages (valid, not practice / outlier attempt)",
+                  int((valid & ~features_by_attempt["practice_attempt"] & ~features_by_attempt["attempt_outlier"]).sum()))]
         measurement_hands = features_by_measurement.drop_duplicates(["measurement_id", "step_id", "hand"])
         rows += [("measurements", "measurement x hand units", len(measurement_hands)),
                  ("measurements", "measurement x hand flagged as outlier",
@@ -135,7 +139,8 @@ def main() -> None:
     output_dir: Path = arguments.output_dir
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    metadata = label_patients(read_metadata(arguments.full_csv), read_metadata(arguments.patients_csv))
+    metadata = label_patients(read_all_metadata(arguments.full_csv, arguments.update_csvs),
+                              read_metadata(arguments.patients_csv))
     manifest, unmatched = build_manifest(metadata, arguments.measurements_dir, arguments.step_ids,
                                          ef_config.STEP_TYPE)
     manifest = add_demographics(manifest)

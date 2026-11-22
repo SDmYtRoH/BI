@@ -1,6 +1,7 @@
 """Aggregation of finger features: attempt -> measurement -> person.
 
-* attempt level: outlier attempts are flagged (compared with the other
+* attempt level: the practice attempt (``config.PRACTICE_ATTEMPTS``, attempt 1) is flagged
+  and left out; outlier attempts are flagged (compared with the other used
   attempts of the same measurement and hand);
 * measurement level: mean of valid, non-outlier attempts; outlier measurements
   are flagged (compared with the other measurements of the same person, step
@@ -17,7 +18,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from rehapiano.common.config import HANDS
+from rehapiano.common.config import HANDS, PRACTICE_ATTEMPTS
 from rehapiano.exact_force.config import FINGER_INACTIVE_MAX_FORCE, INACTIVE_HAND_MAX_ACTIVITY_RATIO
 from rehapiano.exact_force.features.finger import FINGER_FEATURE_COLUMNS
 from rehapiano.exact_force.quality import VALID, flag_outliers
@@ -33,10 +34,22 @@ def _hand_level(table: pd.DataFrame, keys: list[str]) -> pd.DataFrame:
     return table.groupby([*keys, "hand"], dropna=False)[OUTLIER_FEATURES].mean().reset_index()
 
 
-def flag_attempt_outliers(features_by_attempt: pd.DataFrame) -> pd.DataFrame:
-    """Add ``attempt_outlier`` and ``attempt_outlier_reason``."""
+def flag_practice_attempts(features_by_attempt: pd.DataFrame) -> pd.DataFrame:
+    """Add ``practice_attempt``: attempt 1 of a measurement that has more than one attempt."""
 
-    valid = features_by_attempt.loc[features_by_attempt["status"] == VALID]
+    n_attempts = features_by_attempt.groupby(MEASUREMENT_KEYS, dropna=False)["attempt"].transform("nunique")
+    return features_by_attempt.assign(
+        practice_attempt=features_by_attempt["attempt"].isin(PRACTICE_ATTEMPTS) & (n_attempts > 1))
+
+
+def flag_attempt_outliers(features_by_attempt: pd.DataFrame) -> pd.DataFrame:
+    """Add ``practice_attempt``, ``attempt_outlier`` and ``attempt_outlier_reason``.
+
+    Practice attempts are not used as an outlier reference and are never flagged as outliers.
+    """
+
+    features_by_attempt = flag_practice_attempts(features_by_attempt)
+    valid = features_by_attempt.loc[(features_by_attempt["status"] == VALID) & ~features_by_attempt["practice_attempt"]]
     hands = _hand_level(valid, [*MEASUREMENT_KEYS, "attempt"])
     flags = flag_outliers(hands, [*MEASUREMENT_KEYS, "hand"], OUTLIER_FEATURES)
     hands = hands.assign(attempt_outlier=flags["is_outlier"], attempt_outlier_reason=flags["outlier_reason"])
@@ -56,11 +69,15 @@ def _mean_features(used: pd.DataFrame, keys: list[str]) -> pd.DataFrame:
 
 
 def aggregate_by_measurement(features_by_attempt: pd.DataFrame) -> pd.DataFrame:
-    """One row per ``measurement x hand x finger``; adds measurement outlier flags."""
+    """One row per ``measurement x hand x finger``; adds measurement outlier flags.
+
+    Used attempts: valid, not the practice attempt, not an outlier.
+    """
 
     keys = [*MEASUREMENT_KEYS, *FINGER_KEYS]
     used = features_by_attempt.loc[
-        (features_by_attempt["status"] == VALID) & ~features_by_attempt["attempt_outlier"]
+        (features_by_attempt["status"] == VALID) & ~features_by_attempt["practice_attempt"]
+        & ~features_by_attempt["attempt_outlier"]
     ]
     grouped = features_by_attempt.groupby(keys, dropna=False)
     table = grouped[[*CONTEXT_COLUMNS, "timestamp"]].first()

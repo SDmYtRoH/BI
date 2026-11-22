@@ -177,6 +177,21 @@ class FingerFeatureTests(unittest.TestCase):
         self.assertTrue((rows["invalid_reason"] == NO_SEGMENT).all())
 
 
+class MetadataUpdateTests(unittest.TestCase):
+    def test_update_rows_replace_rows_with_the_same_key(self) -> None:
+        from rehapiano.common.io.metadata import METADATA_COLUMNS, read_all_metadata
+
+        def row(patient, measurement, step):
+            return dict(zip(METADATA_COLUMNS, [patient, "t", "70", "1", "1", "female", "right", measurement, step,
+                                               "EXACT_FORCE"]))
+        with tempfile.TemporaryDirectory() as folder:
+            full, update = Path(folder) / "full.csv", Path(folder) / "update.csv"
+            pd.DataFrame([row("A", "m1", "s"), row("WRONG", "m2", "s")]).to_csv(full, sep=";", index=False)
+            pd.DataFrame([row("B", "m2", "s"), row("C", "m3", "s")]).to_csv(update, sep=";", index=False)
+            metadata = read_all_metadata(full, [update]).set_index("measurement_id")["patient_id"]
+        self.assertEqual(metadata.sort_index().to_dict(), {"m1": "A", "m2": "B", "m3": "C"})
+
+
 class QualityTests(unittest.TestCase):
     def test_outlier_by_factor(self) -> None:
         table = pd.DataFrame({"g": ["a"] * 4 + ["b"] * 2, "x": [1.0, 1.1, 0.9, 5.0, 1.0, 10.0]})
@@ -192,6 +207,15 @@ class QualityTests(unittest.TestCase):
                                  finger=finger, status="valid", mean_force=force, tremor_mean_amplitude=0.001))
         flagged = flag_attempt_outliers(pd.DataFrame(rows))
         self.assertEqual(flagged.groupby("attempt")["attempt_outlier"].all().tolist(), [False, False, False, True])
+
+    def test_first_attempt_is_practice_unless_single(self) -> None:
+        rows = [dict(patient_id="P", measurement_id=measurement, step_id=STEP, attempt=attempt, hand="left",
+                     finger=1, status="valid", mean_force=0.05, tremor_mean_amplitude=0.001)
+                for measurement, n_attempts in (("M4", 4), ("M1", 1)) for attempt in range(1, n_attempts + 1)]
+        flagged = flag_attempt_outliers(pd.DataFrame(rows))
+        practice = flagged.set_index(["measurement_id", "attempt"])["practice_attempt"]
+        self.assertTrue(practice[("M4", 1)])
+        self.assertFalse(practice[("M4", 2)] or practice[("M1", 1)])
 
 
 class WideTableTests(unittest.TestCase):

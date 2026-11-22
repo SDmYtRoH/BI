@@ -14,7 +14,7 @@ import pandas as pd
 from scipy import stats
 
 from rehapiano.common.config import AGE_CATEGORY_EDGES, AGE_CATEGORY_LABELS, WEAK_HAND_REFERENCE_QUANTILE
-from rehapiano.rhythm.config import RHYTHM_MIN_GROUP_SIZE
+from rehapiano.rhythm.config import PRACTICE_ATTEMPTS, RHYTHM_MIN_GROUP_SIZE
 from rehapiano.common.stats.models import ols  # noqa: F401 - also used as hb.ols in the notebook
 from rehapiano.common.stats.tests import holm_adjust, mann_whitney
 
@@ -29,10 +29,15 @@ def _balance(left: pd.Series, right: pd.Series) -> tuple[pd.Series, pd.Series]:
     return ratio, weaker
 
 
-def rhythm_person_table(by_attempt: pd.DataFrame) -> pd.DataFrame:
-    """One row per person: hand values (median over attempts, mean over measurements) and balances."""
+def rhythm_person_table(by_attempt: pd.DataFrame, skip_first_attempt: bool = True) -> pd.DataFrame:
+    """One row per person: hand values (median over attempts, mean over measurements) and balances.
+
+    The practice attempt (``PRACTICE_ATTEMPTS``) is left out by default, as in ``rhythm.parameters``.
+    """
 
     valid = by_attempt.loc[by_attempt["status"] == "valid"]
+    if skip_first_attempt:
+        valid = valid.loc[~valid["attempt"].isin(PRACTICE_ATTEMPTS)]
     values = ["press_amplitude", "mean_force", "force_range", "press_rate_hz"]
     measurement = valid.groupby(["patient_id", "measurement_id", "hand"])[values].median().reset_index()
     person = measurement.groupby(["patient_id", "hand"])[values].mean()
