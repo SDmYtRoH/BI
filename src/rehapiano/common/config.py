@@ -22,6 +22,7 @@ PATIENTS_METADATA_CSV = METADATA_DIR / "dataset_patients.csv"
 PARTICIPANT_LABELS_CSV = DATA_DIR / "participant_labels.csv"
 OUTPUT_DIR = PROJECT_ROOT / "outputs"
 COMBINED_OUTPUT_DIR = OUTPUT_DIR / "combined"
+COMPARISON_OUTPUT_DIR = OUTPUT_DIR / "comparison"  # EXACT_FORCE vs RHYTHM: conclusions, agreement, repeatability
 
 MATCH_KEY = ["measurement_id", "step_id"]
 

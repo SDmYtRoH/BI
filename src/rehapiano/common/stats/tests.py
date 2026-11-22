@@ -42,6 +42,49 @@ def mann_whitney(a: Sequence[float], b: Sequence[float]) -> Dict[str, float]:
     return result
 
 
+def van_elteren(values: Sequence[float], patient: Sequence[int], strata: Sequence) -> Dict[str, float]:
+    """Mann-Whitney test inside every stratum (e.g. age decade), combined over strata (van Elteren).
+
+    Only strata with both groups contribute, so patients are compared with healthy people of the same
+    stratum. ``z`` > 0 = patients (``patient`` == 1) have higher values.
+    """
+
+    frame = pd.DataFrame({"value": values, "patient": patient, "stratum": strata}).dropna(subset=["value"])
+    numerator = variance = 0.0
+    used = 0
+    for _, stratum in frame.groupby("stratum", observed=True):
+        m, n = int(stratum["patient"].sum()), int((stratum["patient"] == 0).sum())
+        if m == 0 or n == 0:
+            continue
+        total = m + n
+        ranks = stats.rankdata(stratum["value"])
+        _, ties = np.unique(stratum["value"], return_counts=True)
+        weight = 1 / (total + 1)
+        numerator += weight * (ranks[stratum["patient"].to_numpy() == 1].sum() - m * (total + 1) / 2)
+        variance += weight ** 2 * m * n / 12 * ((total + 1) - (ties ** 3 - ties).sum() / (total * (total - 1)))
+        used += total
+    if variance <= 0:
+        return {"n": used, "z": np.nan, "p": np.nan}
+    z = numerator / np.sqrt(variance)
+    return {"n": used, "z": float(z), "p": float(2 * stats.norm.sf(abs(z)))}
+
+
+def icc_agreement(a: Sequence[float], b: Sequence[float]) -> float:
+    """ICC(2,1): absolute agreement of two measurements of the same people (1 = identical, 0 = no agreement)."""
+
+    x = np.column_stack([np.asarray(a, float), np.asarray(b, float)])
+    x = x[np.isfinite(x).all(axis=1)]
+    n, k = x.shape
+    if n < 3:
+        return np.nan
+    grand = x.mean()
+    ms_rows = k * ((x.mean(axis=1) - grand) ** 2).sum() / (n - 1)
+    ms_columns = n * ((x.mean(axis=0) - grand) ** 2).sum() / (k - 1)
+    residual = x - x.mean(axis=1, keepdims=True) - x.mean(axis=0, keepdims=True) + grand
+    ms_error = (residual ** 2).sum() / ((n - 1) * (k - 1))
+    return float((ms_rows - ms_error) / (ms_rows + (k - 1) * ms_error + k * (ms_columns - ms_error) / n))
+
+
 def wilcoxon_paired(a: Sequence[float], b: Sequence[float]) -> Dict[str, float]:
     """Paired samples; effect size = matched-pairs rank-biserial correlation (b > a is positive)."""
 

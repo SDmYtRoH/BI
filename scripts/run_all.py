@@ -31,13 +31,15 @@ STEPS = [
     ("rhythm", False, "run_rhythm_hand_balance.py"),
     ("rhythm", False, "run_rhythm_analysis.py"),
     ("combined", False, "run_combined_analysis.py"),
+    ("combined", False, "run_comparison.py"),
 ]
 CV_SCRIPTS = {"run_exact_force_analysis.py", "run_rhythm_analysis.py", "run_combined_analysis.py"}
 NOTEBOOKS = {
     "exact_force": ["notebooks/exact_force/analyza_prstov.ipynb",
                     "notebooks/exact_force/statisticka_analyza_exact_force.ipynb"],
     "rhythm": ["notebooks/rhythm/rovnovaha_ruk.ipynb", "notebooks/rhythm/statisticka_analyza_rytmus.ipynb"],
-    "combined": ["notebooks/combined/klasifikator_oba_testy.ipynb", "notebooks/combined/hypotezy_a_normy.ipynb"],
+    "combined": ["notebooks/combined/klasifikator_oba_testy.ipynb", "notebooks/combined/hypotezy_a_normy.ipynb",
+                 "notebooks/combined/porovnanie_exact_force_rytmus.ipynb"],
 }
 
 
