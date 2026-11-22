@@ -1,11 +1,16 @@
 % RehaPiano – testy EXACT_FORCE a rytmus: hypotézy, normy, klasifikátor, porovnanie
-% Kompilácia: pdflatex dokumentacia.tex (2x), alebo nahrať celý priečinok docs/latex do Overleafu.
+% Kompilácia: pdflatex dokumentacia.tex (2x), tectonic dokumentacia.tex, alebo nahrať celý priečinok docs/latex do Overleafu.
 \documentclass[11pt,a4paper]{article}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+\usepackage{iftex}
+\ifXeTeX
+  \usepackage{fontspec} % XeTeX / tectonic: Unicode fonts (Latin Modern)
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi
 \usepackage[slovak]{babel}
-\usepackage{lmodern}
 \usepackage[a4paper,margin=2.2cm]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
@@ -48,19 +53,22 @@ zmeny s~vekom a~normy, klasifikátor, ablácia), porovnanie ich záverov a~disku
 \toprule
  & zdraví & pacienti \\
 \midrule
-počet osôb & \textbf{76} & \textbf{48} \\
-vek -- medián (rozsah) & 23 (18 -- 85) & 66,5 (21 -- 89) \\
-osoby nad 50 rokov & 17 & 40 \\
+počet osôb & \textbf{135} & \textbf{48} \\
+vek -- medián (rozsah) & 61 (18 -- 85) & 66,5 (21 -- 89) \\
+osoby nad 50 rokov & 74 & 40 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{itemize}
-  \item \textbf{Zdraví} = osoby, ktoré v~dotazníku neuviedli žiadne ochorenie (z~90 zdravých). Normálne hodnoty
-        musia byť z~naozaj zdravých ľudí. Kontrola so všetkými 90 zdravými dáva rovnaké závery.
+  \item \textbf{Zdraví} = osoby, ktoré v~dotazníku neuviedli žiadne ochorenie (135 zo 167 zdravých). Normálne hodnoty
+        musia byť z~naozaj zdravých ľudí. Kontrola so všetkými 167 zdravými dáva takmer rovnaké závery.
+  \item \textbf{Odkiaľ sú zdraví:} mladí z~meraní TUKE (2025), starší väčšinou z~meracieho centra (9.~9.~2026
+        a~9.~--~13.~11.~2026; 59 zdravých bez ťažkostí z~novembra). Pacienti sú zatiaľ len tí s~metadátami
+        (nové merania pacientov z~roku 2026 ešte nemajú vek a~pohlavie, preto nie sú zahrnuté).
   \item Tí istí ľudia urobili oba testy. \textbf{35 pacientov} bolo meraných dvakrát (medián 7 dní medzi meraniami).
-  \item \textbf{Pozor:} pacienti sú o~približne 40 rokov starší ako zdraví. Preto každý rozdiel kontrolujeme aj pri
-        rovnakom veku.
+  \item \textbf{Pozor:} pacienti sú starší (medián 66,5 vs. 61 rokov) a~mladší zdraví sú z~iného miesta merania ako
+        starší. Preto každý rozdiel kontrolujeme aj pri rovnakom veku.
   \item RehaPiano má 10 snímačov sily (5 prstov $\times$ 2 ruky); signál sa prevzorkuje na 100~Hz (krok 10~ms).
 \end{itemize}
 
@@ -71,6 +79,8 @@ osoby nad 50 rokov & 17 & 40 \\
   \item \textbf{Rytmický test (RHYTHM)} -- osoba čo najrýchlejšie rytmicky stláča a~uvoľňuje obomi rukami naraz,
         4 pokusy po 31~s. Meria \textbf{rýchlosť, koordináciu a~rovnováhu rúk}.
 \end{itemize}
+V~oboch testoch je \textbf{1. pokus nácvik} (človek si zvyká na hru a~prístroj) a~nepoužíva sa; analyzujú sa
+pokusy 2 -- 4.
 
 % ===================================================================================================
 \section{Metodika (rovnaká pre oba testy)}
@@ -99,8 +109,8 @@ Hypotéza je \textbf{potvrdená}, ak je rozdiel významný ($p < 0{,}05$ po kore
 
 \textbf{2. Vek a~normy.} Iba zdraví: \textbf{H0} -- parameter nesúvisí s~vekom (Spearmanova korelácia, Holmova
 korekcia). Norma = medián a~rozsah 2,5. -- 97,5. percentil zdravých (rozsah, v~ktorom je 95\,\% zdravých).
-Zdravých v~dekádach (10 -- 19 \dots{} 80 -- 89) je 8 / 43 / 4 / 4 / 5 / 8 / 3 / 1; spoľahlivý rozsah potrebuje
-aspoň približne 20 osôb, čo má len dekáda 20 -- 29. Preto normu počítame zo všetkých zdravých naraz:
+Zdravých v~dekádach (10 -- 19 \dots{} 80 -- 89) je 8 / 43 / 4 / 5 / 7 / 33 / 34 / 1; spoľahlivý rozsah potrebuje
+aspoň približne 20 osôb, čo majú dekády 20 -- 29, 60 -- 69 a~70 -- 79. Preto normu počítame zo všetkých zdravých naraz:
 \begin{itemize}
   \item parameter \textbf{bez vplyvu veku} $\Rightarrow$ rovnaká norma pre všetky dekády;
   \item parameter \textbf{s~vplyvom veku} $\Rightarrow$ kvantilová regresia na vek (hranice normy sa menia s~vekom).
@@ -123,7 +133,8 @@ a~s~\textbf{faktorom samotným} (koľko dokáže sám).
 Analyzuje sa úsek 3 -- 15~s pokusu (prvé sekundy sú nábeh sily). Pre každý prst sa vypočíta spektrogram (Hannovo
 okno 5~s) a~z~neho dve pásma: \textbf{0 -- 4~Hz} = pomalé korekcie sily (človek dorovnáva silu) a~\textbf{4 -- 15~Hz}
 = tras. Prsty, ktoré netlačia, sa do trasu nepočítajú (ich signál je len šum snímača). Hodnota ruky = medián
-aktívnych prstov, hodnota osoby = priemer oboch rúk; pokusy $\rightarrow$ meranie $\rightarrow$ priemer meraní osoby.
+aktívnych prstov, hodnota osoby = priemer oboch rúk; pokusy 2 -- 4 $\rightarrow$ meranie $\rightarrow$ priemer meraní osoby
+(1. pokus je nácvik).
 
 \subsection{Hypotézy a výsledky}
 
@@ -138,13 +149,13 @@ faktor & parameter (čo meria) & H1 & výsledok \\
 amplitúda trasu & amplitúda 4 -- 15~Hz (obe ruky) & vyšší & \yes \\
  & amplitúda 4 -- 15~Hz horšej ruky & vyšší & \yes \\
 pomalé korekcie sily & amplitúda 0 -- 4~Hz -- ako kolíše držaná sila & vyšší & \yes \\
-podiel trasu & amplitúda 4 -- 15~Hz / 0 -- 4~Hz & vyšší & opačný smer, pri rov. veku n.s. \\
+podiel trasu & amplitúda 4 -- 15~Hz / 0 -- 4~Hz & vyšší & opačný smer, v~dekádach n.s. \\
 frekvencia trasu & frekvencia vrcholu spektra 4 -- 15~Hz & nižší & \no \\
 rytmickosť trasu & vrchol / medián spektra 4 -- 15~Hz & vyšší & len bez kontroly veku \\
-sila & priemerná sila prstov & nižší & \no \\
+sila & priemerná sila prstov & nižší & \yes \\
 rovnováha rúk & sila: slabšia / silnejšia ruka & nižší & len bez kontroly veku \\
  & tras: pokojnejšia / horšia ruka & nižší & len bez kontroly veku \\
-rozdiely medzi prstami & variačný koeficient podielu trasu medzi prstami & vyšší & \yes \\
+rozdiely medzi prstami & variačný koeficient podielu trasu medzi prstami & vyšší & len bez kontroly veku \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -158,16 +169,16 @@ rozdiely medzi prstami & variačný koeficient podielu trasu medzi prstami & vy�
 \toprule
 parameter & zdraví & pacienti & 1. všetci & 2. rovn. vek & 3. model + vek & 4. + sila \\
 \midrule
-amplitúda trasu [$\times 10^{-5}$] & 0,93 & 1,57 & \ok{} $<0{,}001$ & \ok{} 0,008 & \ok{} 0,016 & \ok{} 0,018 \\
--- horšej ruky [$\times 10^{-5}$] & 1,03 & 1,93 & \ok{} $<0{,}001$ & \ok{} 0,001 & \ok{} 0,004 & \ok{} 0,004 \\
-pomalé korekcie sily [$\times 10^{-5}$] & 6,22 & 17,1 & \ok{} $<0{,}001$ & \ok{} $<0{,}001$ & 0,071 & 0,067 \\
-rozdiely medzi prstami & 0,224 & 0,317 & \ok{} 0,012 & \ok{} 0,007 & \ok{} 0,001 & \ok{} 0,001 \\
-podiel trasu & 0,161 & 0,107 & \ok{} $<0{,}001$ & 0,109 & 0,169 & 0,153 \\
-rytmickosť trasu & 2,77 & 3,46 & \ok{} $<0{,}001$ & 0,147 & 0,411 & 0,360 \\
-rovnováha síl rúk & 0,939 & 0,894 & \ok{} 0,041 & 0,962 & 0,411 & 0,424 \\
-rovnováha trasu rúk & 0,817 & 0,738 & \ok{} 0,016 & 0,962 & 0,411 & 0,360 \\
-frekvencia trasu [Hz] & 5,42 & 5,29 & 0,250 & 0,962 & 1,000 & 0,796 \\
-sila [$\times 10^{-3}$] & 19,6 & 19,1 & 0,283 & 0,962 & 1,000 & -- \\
+amplitúda trasu [$\times 10^{-5}$] & 0,82 & 1,37 & \ok{} $<0{,}001$ & \ok{} $<0{,}001$ & \ok{} 0,002 & \ok{} 0,031 \\
+-- horšej ruky [$\times 10^{-5}$] & 0,93 & 1,63 & \ok{} $<0{,}001$ & \ok{} $<0{,}001$ & \ok{} 0,006 & \ok{} 0,042 \\
+pomalé korekcie sily [$\times 10^{-5}$] & 5,49 & 14,1 & \ok{} $<0{,}001$ & \ok{} $<0{,}001$ & \ok{} 0,004 & \ok{} 0,002 \\
+sila [$\times 10^{-3}$] & 19,9 & 18,8 & \ok{} 0,010 & \ok{} 0,004 & \ok{} 0,002 & -- \\
+podiel trasu & 0,157 & 0,116 & \ok{} $<0{,}001$ & 0,062 & \ok{} 0,018 & \ok{} 0,031 \\
+rytmickosť trasu & 2,85 & 3,25 & \ok{} 0,002 & 0,107 & 1,000 & 0,931 \\
+rozdiely medzi prstami & 0,232 & 0,303 & \ok{} 0,039 & 0,222 & 0,056 & 0,083 \\
+rovnováha síl rúk & 0,941 & 0,915 & \ok{} 0,036 & 0,185 & 0,057 & 0,500 \\
+rovnováha trasu rúk & 0,825 & 0,775 & \ok{} 0,039 & 0,281 & 0,095 & 0,147 \\
+frekvencia trasu [Hz] & 5,27 & 5,33 & 0,971 & 0,315 & 1,000 & 0,931 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -175,13 +186,15 @@ sila [$\times 10^{-3}$] & 19,6 & 19,1 & 0,283 & 0,962 & 1,000 & -- \\
 \textbf{Interpretácia:}
 \begin{itemize}
   \item Najväčší rozdiel je v~tom, ako pacientom \textbf{kolíše celá držaná sila} (pomalé korekcie 0 -- 4~Hz,
-        približne 2,7-krát viac ako u~zdravých; AUC 0,89). Rozdiel zostáva pri porovnaní v~dekádach, v~lineárnom
-        modeli s~vekom je na hranici významnosti -- časť rozdielu súvisí s~vekom.
-  \item Pri rovnakom veku aj rovnakej sile zostáva vyššia \textbf{amplitúda trasu} (aj horšej ruky) a~väčšie
-        \textbf{rozdiely medzi prstami} jednej ruky.
+        približne 2,6-krát viac ako u~zdravých; AUC 0,81). S~novými staršími zdravými rozdiel zostáva vo všetkých
+        štyroch krokoch -- nie je teda dôsledkom veku.
+  \item Pri rovnakom veku aj rovnakej sile zostáva vyššia \textbf{amplitúda trasu} (aj horšej ruky).
+  \item Pacienti tlačia pri rovnakom veku \textbf{menšou silou} (19 vs. 20 jednotiek $\times 10^{-3}$) -- rozdiel je
+        malý, ale stabilný.
   \item \textbf{Podiel trasu} je u~pacientov nižší, nie vyšší: pomalé kolísanie sily u~nich rastie viac ako tras.
-  \item \textbf{Sila, frekvencia trasu a~rovnováha rúk} sa pri rovnakom veku nelíšia -- pacienti vedia predpísanú
-        silu udržať a~ich tras nie je pomalší.
+  \item \textbf{Frekvencia trasu, rovnováha rúk a~rozdiely medzi prstami} sa pri rovnakom veku nelíšia -- tras
+        pacientov nie je pomalší. Rozdiely medzi prstami boli s~menším počtom starších zdravých významné, s~novými
+        dátami už nie.
 \end{itemize}
 
 \begin{figure}[H]
@@ -192,8 +205,10 @@ sila [$\times 10^{-3}$] & 19,6 & 19,1 & 0,283 & 0,962 & 1,000 & -- \\
 
 \subsection{Vek a normy}
 \begin{itemize}
-  \item S~vekom sa po Holmovej korekcii mení len \textbf{podiel trasu} ($\rho = -0{,}33$): u~starších zdravých je
-        nižší. Ostatné parametre od veku nezávisia (amplitúda trasu má slabý trend $\rho = -0{,}31$, $p = 0{,}052$).
+  \item S~vekom sa po Holmovej korekcii menia štyri parametre: \textbf{podiel trasu} ($\rho = -0{,}27$) a~\textbf{frekvencia
+        trasu} ($\rho = -0{,}27$) klesajú, \textbf{rytmickosť trasu} ($\rho = 0{,}36$) a~\textbf{sila} ($\rho = 0{,}26$)
+        stúpajú. Trendy sú slabé a~čiastočne môžu byť rozdielom miest merania (starší zdraví sú väčšinou z~meracieho
+        centra). Amplitúda trasu, pomalé korekcie a~rovnováha rúk od veku nezávisia.
   \item Normy (medián [2,5 -- 97,5\,\%]) a~počet pacientov mimo normy:
 \end{itemize}
 
@@ -204,25 +219,29 @@ sila [$\times 10^{-3}$] & 19,6 & 19,1 & 0,283 & 0,962 & 1,000 & -- \\
 \toprule
 parameter & norma & pacienti mimo normy \\
 \midrule
-pomalé korekcie sily [$\times 10^{-5}$] & 6,22 [2,94 -- 29,6] & \textbf{11 z~48} nad normou \\
-rozdiely medzi prstami & 0,224 [0,085 -- 0,424] & 8 nad normou \\
-rovnováha síl rúk & 0,939 [0,623 -- 0,997] & 7 pod normou \\
-amplitúda trasu [$\times 10^{-5}$] & 0,93 [0,45 -- 2,79] & 4 nad, 1 pod normou \\
-podiel trasu -- 20 -- 29 rokov & 0,166 [0,093 -- 0,289] & 11 mimo normy svojej dekády \\
-podiel trasu -- 60 -- 69 rokov & 0,141 [0,060 -- 0,179] & \\
+podiel trasu -- 20 -- 29 rokov & 0,169 [0,102 -- 0,301] & \textbf{10 z~48} mimo normy svojej dekády \\
+podiel trasu -- 70 -- 79 rokov & 0,138 [0,076 -- 0,232] & \\
+sila -- 20 -- 29 rokov [$\times 10^{-3}$] & 19,5 [15,4 -- 23,2] & \textbf{10 z~48} mimo normy (9 pod) \\
+sila -- 70 -- 79 rokov [$\times 10^{-3}$] & 20,7 [17,0 -- 25,9] & \\
+rovnováha síl rúk & 0,941 [0,612 -- 0,996] & 7 pod, 1 nad normou \\
+amplitúda trasu [$\times 10^{-5}$] & 0,82 [0,37 -- 2,44] & 5 nad, 1 pod normou \\
+rozdiely medzi prstami & 0,232 [0,095 -- 0,452] & 4 nad, 1 pod normou \\
+pomalé korekcie sily [$\times 10^{-5}$] & 5,49 [2,54 -- 39,4] & 4 nad normou \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Podiel trasu má normu podľa veku (kvantilová regresia); pre 70 -- 89 rokov je len orientačná (3 + 1 zdravý).
+Parametre s~vplyvom veku (podiel trasu, frekvencia, rytmickosť, sila) majú normu podľa veku (kvantilová regresia),
+ostatné jednu normu pre všetky dekády. Pomalé korekcie sily majú u~niektorých starších zdravých veľké hodnoty, preto
+je ich horná hranica široká a~nad ňou je len 4 z~48 pacientov, hoci je to parameter s~najväčším rozdielom skupín.
 
 \subsection{Klasifikátor a ablácia}
 \begin{itemize}
-  \item Logistická regresia z~parametrov \ef{}: \textbf{AUC 0,85} (citlivosť 0,77, špecificita 0,84);
-        s~vekom 0,89; len vek 0,84; len osoby nad 50 rokov 0,82. Náhodný les 0,88. Permutačný test $p = 0{,}005$.
-  \item Ablácia: rozhoduje \textbf{jeden faktor -- pomalé korekcie sily} (sám AUC 0,88, bez neho pokles 0,033).
-        Ostatné faktory samy dávajú 0,54 -- 0,77 a~bez nich AUC neklesne -- ich informáciu už nesú pomalé korekcie.
-        S~vekom v~modeli je vek faktor s~najväčším poklesom (0,043).
+  \item Logistická regresia z~parametrov \ef{}: \textbf{AUC 0,77} (citlivosť 0,66, špecificita 0,78);
+        s~vekom 0,82; len vek 0,64; len osoby nad 50 rokov 0,84. Náhodný les 0,77. Permutačný test $p = 0{,}005$.
+  \item Ablácia: najsilnejší faktor sám sú \textbf{pomalé korekcie sily} (AUC 0,81), potom amplitúda trasu (0,74).
+        Po vynechaní jedného faktora AUC klesne najviac o~0,012 (sila) -- faktory sa navzájom zastupujú.
+        S~vekom v~modeli je vek faktor s~najväčším poklesom (0,049).
 \end{itemize}
 
 \begin{figure}[H]
@@ -242,7 +261,7 @@ Podiel trasu má normu podľa veku (kvantilová regresia); pre 70 -- 89 rokov je
         pred vrcholom po minimum za ním. Pokus s~menej ako 5 stlačeniami sa nepoužije.
         Časy stlačení, ktoré ukladá hra, nesedia so signálom sily (korelácia od $-0{,}55$ do $+0{,}70$), preto sa
         nepoužívajú.
-  \item \textbf{1. pokus sa nepoužíva} -- je skúšobný (ľudia v~ňom stláčajú pomalšie a~silnejšie).
+  \item \textbf{1. pokus sa nepoužíva} -- je nácvik (ľudia v~ňom stláčajú pomalšie a~silnejšie).
   \item Hodnota osoby = medián pokusov 2 -- 4 jedného merania, potom priemer meraní osoby.
 \end{enumerate}
 
@@ -258,7 +277,7 @@ faktor & parameter (čo meria) & H1 & výsledok \\
 \midrule
 tempo & počet stlačení za sekundu & nižší & \yes \\
 pravidelnosť rytmu & rozptyl intervalov medzi stlačeniami / ich priemer & vyšší & \no \\
-sila stlačenia & veľkosť stlačenia silnejšej ruky & nižší & opačný smer (vyššia) \\
+sila stlačenia & veľkosť stlačenia silnejšej ruky & nižší & opačný smer, len bez kontroly veku \\
  & veľkosť stlačenia slabšej ruky & nižší & \no \\
 rovnováha rúk & slabšia ruka / silnejšia ruka (1 = rovnaké) & nižší & \yes{} (všetky kroky) \\
 stálosť sily & rozptyl veľkosti stlačení / ich priemer & vyšší & \no \\
@@ -279,13 +298,14 @@ uvoľnenie & sila po stlačení / sila vo vrchole & vyšší & opačný smer, le
 \toprule
 parameter & zdraví & pacienti & 1. všetci & 2. rovn. vek & 3. model + vek & 4. + tempo \\
 \midrule
-rovnováha rúk & 0,865 & 0,699 & \ok{} $<0{,}001$ & \ok{} 0,016 & \ok{} $<0{,}001$ & \ok{} 0,006 \\
-tempo [stlačení/s] & 2,55 & 1,63 & \ok{} $<0{,}001$ & \ok{} 0,008 & \ok{} 0,005 & -- \\
-oneskorenie rúk [ms] & 20 & 30 & \ok{} 0,001 & \ok{} 0,005 & 0,334 & 0,986 \\
-sila silnejšej ruky & 0,067 & 0,084 & \ok{} 0,001 & \ok{} 0,023 & \ok{} 0,001 & \ok{} 0,031 \\
-neúplné uvoľnenie & 0,197 & 0,086 & \ok{} $<0{,}001$ & 0,225 & 0,334 & 1,000 \\
+rovnováha rúk & 0,838 & 0,699 & \ok{} $<0{,}001$ & \ok{} 0,002 & \ok{} $<0{,}001$ & \ok{} $<0{,}001$ \\
+tempo [stlačení/s] & 2,46 & 1,63 & \ok{} $<0{,}001$ & \ok{} 0,005 & \ok{} $<0{,}001$ & -- \\
+oneskorenie rúk [ms] & 20 & 30 & \ok{} $<0{,}001$ & \ok{} 0,010 & 0,052 & 0,089 \\
+sila silnejšej ruky & 0,069 & 0,084 & \ok{} 0,016 & 0,307 & \ok{} 0,041 & 0,649 \\
+neúplné uvoľnenie & 0,165 & 0,086 & \ok{} 0,010 & 0,221 & 0,136 & 0,649 \\
+stálosť sily (CV) & 0,158 & 0,147 & 1,000 & 0,823 & 0,603 & \ok{} 0,027 \\
 pravidelnosť, sila slabšej ruky, & & & & & & \\
-\quad stálosť sily, únava (2) & & & n.s. & n.s. & n.s. & n.s. \\
+\quad únava (2) & & & n.s. & n.s. & n.s. & n.s. \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -294,13 +314,15 @@ pravidelnosť, sila slabšej ruky, & & & & & & \\
 \begin{itemize}
   \item \textbf{Rovnováha rúk} je najspoľahlivejší rozdiel -- zostáva vo všetkých štyroch krokoch. Pacientom jedna
         ruka tlačí výrazne slabšie a~nie je to vekom ani pomalším tempom.
-  \item \textbf{Tempo:} pacienti stláčajú pomalšie (približne 1,6 vs. 2,6 stlačenia za sekundu), aj pri rovnakom veku.
+  \item \textbf{Tempo:} pacienti stláčajú pomalšie (približne 1,6 vs. 2,5 stlačenia za sekundu), aj pri rovnakom veku.
   \item \textbf{Oneskorenie rúk} je významné pri porovnaní v~dekádach, nie však v~lineárnom modeli. Model pokazí
         niekoľko pacientov s~veľmi veľkým oneskorením (120 -- 510~ms); test v~dekádach pracuje s~poradím hodnôt
         a~je voči nim odolný.
   \item \textbf{Opačný smer:} pacienti tlačia silnejšou rukou \textbf{silnejšie} a~ruky \textbf{úplnejšie uvoľnia}.
         Je to dôsledok pomalšieho tempa -- kto stláča pomaly, stihne ruku úplne uvoľniť a~stlačiť silnejšie.
-        Uvoľnenie po pridaní tempa do modelu prestane byť významné.
+        Po pridaní tempa do modelu ani jedno nie je významné a~v~dekádach sa tiež nelíšia.
+  \item \textbf{Stálosť sily} sa líši len pri rovnakom tempe (krok 4): pri rovnakej rýchlosti stláčania kolíše
+        pacientom veľkosť stlačení viac.
 \end{itemize}
 
 \begin{figure}[H]
@@ -311,10 +333,13 @@ pravidelnosť, sila slabšej ruky, & & & & & & \\
 
 \subsection{Vek a normy}
 \begin{itemize}
-  \item S~vekom sa po Holmovej korekcii \textbf{nemení žiadny} parameter. Slabé trendy ($|\rho| \leq 0{,}30$, len bez
-        korekcie): oneskorenie rúk, uvoľnenie a~stálosť sily mierne klesajú s~vekom.
-  \item \textbf{Rovnováha rúk od veku vôbec nezávisí} ($\rho = 0{,}07$) -- jej pokles u~pacientov je prejavom
-        ochorenia, nie starnutia. Norma je spoločná pre všetky dekády:
+  \item S~vekom sa po Holmovej korekcii menia štyri parametre -- všetky klesajú: \textbf{tempo} ($\rho = -0{,}32$),
+        \textbf{nepravidelnosť rytmu} ($\rho = -0{,}44$), \textbf{nestálosť sily} ($\rho = -0{,}46$) a~\textbf{neúplné
+        uvoľnenie} ($\rho = -0{,}34$). Starší zdraví stláčajú pomalšie, ale pravidelnejšie. Časť trendu môže byť
+        rozdielom miest merania (mladí z~TUKE, starší väčšinou z~meracieho centra).
+  \item \textbf{Rovnováha rúk od veku nezávisí} ($\rho = -0{,}09$) -- jej pokles u~pacientov je prejavom
+        ochorenia, nie starnutia. Norma rovnováhy je spoločná pre všetky dekády, tempo a~uvoľnenie majú normu
+        podľa veku:
 \end{itemize}
 
 \begin{table}[H]
@@ -324,11 +349,12 @@ pravidelnosť, sila slabšej ruky, & & & & & & \\
 \toprule
 parameter & norma: medián [2,5 -- 97,5\,\%] & pacienti mimo normy \\
 \midrule
-rovnováha rúk & 0,865 [0,647 -- 0,972] & \textbf{19 z~48} pod normou \\
-tempo [stlačení/s] & 2,55 [1,17 -- 3,40] & 14 pod normou \\
-oneskorenie rúk [ms] & 20 [10 -- 55] & 12 nad normou \\
-neúplné uvoľnenie & 0,197 [0,023 -- 0,545] & 11 pod normou \\
-sila silnejšej ruky & 0,067 [0,036 -- 0,119] & 10 nad normou \\
+rovnováha rúk & 0,838 [0,615 -- 0,979] & \textbf{19 z~48} pod normou \\
+oneskorenie rúk [ms] & 20 [10 -- 50] & 14 nad normou \\
+tempo -- 20 -- 29 rokov [stlačení/s] & 2,63 [1,29 -- 3,39] & 10 pod normou svojho veku \\
+tempo -- 70 -- 79 rokov [stlačení/s] & 2,25 [0,75 -- 3,39] & \\
+sila silnejšej ruky & 0,069 [0,037 -- 0,125] & 10 nad normou \\
+neúplné uvoľnenie -- 20 -- 29 / 70 -- 79 rokov & 0,249 / 0,097 & 4 pod normou svojho veku \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -337,12 +363,12 @@ Mimo normy je z~definície aj 5\,\% zdravých, preto hodnota mimo normy ešte ne
 
 \subsection{Klasifikátor a ablácia}
 \begin{itemize}
-  \item Logistická regresia z~parametrov rytmu: \textbf{AUC 0,85} (citlivosť 0,76, špecificita 0,83); s~vekom 0,90;
-        len vek 0,84; len osoby nad 50 rokov 0,80. Náhodný les 0,82. Permutačný test $p = 0{,}005$.
-  \item Ablácia: najviac prispievajú \textbf{tempo} (sám AUC 0,79, bez neho pokles 0,019), \textbf{rovnováha rúk}
-        (0,77; pokles 0,016) a~\textbf{sila stlačenia} (0,79). Pravidelnosť, stálosť sily a~únava samy dávajú len
-        0,57 -- 0,60. Poklesy sú malé, lebo parametre sa navzájom zastupujú; rovnováha rúk nesie informáciu, ktorú
-        ostatné parametre nemajú. S~vekom v~modeli je vek faktor s~najväčším poklesom (0,050).
+  \item Logistická regresia z~parametrov rytmu: \textbf{AUC 0,81} (citlivosť 0,70, špecificita 0,79); s~vekom 0,82;
+        len vek 0,64; len osoby nad 50 rokov 0,80. Náhodný les 0,76. Permutačný test $p = 0{,}005$.
+  \item Ablácia: najviac prispievajú \textbf{tempo} (sám AUC 0,75, bez neho pokles 0,025), \textbf{rovnováha rúk}
+        (0,74; pokles 0,014) a~\textbf{sila stlačenia} (0,74). Pravidelnosť, stálosť sily a~únava samy dávajú len
+        0,42 -- 0,57. Poklesy sú malé, lebo parametre sa navzájom zastupujú; rovnováha rúk nesie informáciu, ktorú
+        ostatné parametre nemajú. S~vekom v~modeli je vek faktor s~najväčším poklesom (0,016).
 \end{itemize}
 
 \begin{figure}[H]
@@ -366,14 +392,15 @@ Kód \path{src/rehapiano/comparison.py}, notebook \path{notebooks/combined/porov
  & \ef{} & rytmus \\
 \midrule
 čo meria & tras a~stabilitu držanej sily & rýchlosť, koordináciu, rovnováhu rúk \\
-potvrdené hypotézy (rovnaký vek) & pomalé korekcie sily, amplitúda trasu (aj horšej ruky), rozdiely medzi prstami
+potvrdené hypotézy (rovnaký vek) & pomalé korekcie sily, amplitúda trasu (aj horšej ruky), sila prstov
   & tempo, rovnováha rúk, súčasnosť rúk \\
-opačný smer, ako sme čakali & podiel trasu & sila silnejšej ruky, uvoľnenie \\
-najsilnejší parameter (AUC) & pomalé korekcie sily (0,89) & tempo (0,80) \\
-mení sa s~vekom u~zdravých & podiel trasu & žiadny \\
+opačný smer, ako sme čakali & podiel trasu & sila silnejšej ruky, uvoľnenie (len bez kontroly veku) \\
+najsilnejší parameter (AUC) & pomalé korekcie sily (0,81) & tempo (0,76) \\
+mení sa s~vekom u~zdravých & podiel trasu, frekvencia a~rytmickosť trasu, sila & tempo, pravidelnosť, stálosť sily,
+  uvoľnenie \\
 rovnováha rúk: pacienti pod normou & 7 z~48 & 19 z~48 \\
-klasifikátor (AUC) & 0,85 & 0,85 \\
-opakovateľnosť (medián ICC) & 0,52 & 0,65 \\
+klasifikátor (AUC) & 0,77 & 0,81 \\
+opakovateľnosť (medián ICC) & 0,56 & 0,65 \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -386,34 +413,36 @@ opakovateľnosť (medián ICC) & 0,52 & 0,65 \\
 \toprule
 príznaky & \ef{} & rytmus & oba testy \\
 \midrule
-parametre testu & 0,85 & 0,85 & 0,88 \\
-parametre + vek & 0,89 & 0,90 & 0,90 \\
-len vek & 0,84 & 0,84 & 0,84 \\
-len osoby nad 50 rokov & 0,82 & 0,80 & 0,87 \\
+parametre testu & 0,77 & 0,81 & 0,85 \\
+parametre + vek & 0,82 & 0,82 & 0,86 \\
+len vek & 0,64 & 0,64 & 0,64 \\
+len osoby nad 50 rokov & 0,84 & 0,80 & 0,86 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \textbf{Zistenia:}
 \begin{enumerate}
-  \item \textbf{Oba testy oddelia pacientov rovnako dobre, ale podľa iných prejavov.} Test \ef{} podľa
-        nestabilnej sily a~trasu, rytmický test podľa spomalenia, nerovnováhy a~nesúčasnosti rúk.
+  \item \textbf{Oba testy oddelia pacientov podobne dobre (rytmus o~niečo lepšie), ale podľa iných prejavov.}
+        Test \ef{} podľa nestabilnej sily, trasu a~menšej sily, rytmický test podľa spomalenia, nerovnováhy
+        a~nesúčasnosti rúk.
   \item \textbf{Slabšiu ruku ukáže lepšie rytmický test.} V~\ef{} sa rovnováha rúk pri rovnakom veku nelíši
-        ($p = 0{,}96$), v~rytme áno ($p = 0{,}016$). Všetkých 7 pacientov pod normou v~\ef{} je pod normou
+        ($p = 0{,}19$), v~rytme áno ($p = 0{,}002$). Všetkých 7 pacientov pod normou v~\ef{} je pod normou
         aj v~rytme, rytmus nájde ďalších 12. Pri pokojnom držaní sily stačí slabšej ruke malá sila; rýchle opakované
         stláčanie ju viac zaťaží.
   \item \textbf{Testy nemerajú to isté.} Korelácie parametrov medzi testami sú u~zdravých takmer nulové
-        (medián $|\rho| = 0{,}08$), u~pacientov slabé (medián $|\rho| = 0{,}19$, najviac 0,52). Kto je postihnutý
+        (medián $|\rho| = 0{,}06$), u~pacientov slabé (medián $|\rho| = 0{,}17$, najviac 0,49). Kto je postihnutý
         viac, býva horší v~oboch testoch, ale každý test zachytí iné vlastnosti pohybu.
-  \item \textbf{Testy sa dopĺňajú.} Z~48 pacientov rozpoznajú oba klasifikátory 29, len \ef{} 9, len rytmus 7,
-        žiadny 3. Aspoň jeden test zachytí 45 z~48 pacientov (každý sám 38 a~36). Priemer pravdepodobností oboch
-        testov dáva AUC 0,92, spoločný model zo všetkých 20 parametrov 0,88; medzi rovnako starými (nad 50 rokov)
-        oba testy spolu 0,87, kým každý sám 0,80 -- 0,82.
+  \item \textbf{Testy sa dopĺňajú.} Z~48 pacientov rozpoznajú oba klasifikátory 25, len \ef{} 8, len rytmus 8,
+        žiadny 7. Aspoň jeden test zachytí 41 z~48 pacientov (každý sám 33). Pravdepodobnosti oboch klasifikátorov
+        u~pacientov súvisia len stredne ($\rho = 0{,}41$). Priemer pravdepodobností oboch testov dáva AUC 0,86,
+        spoločný model zo všetkých 20 parametrov 0,85; medzi rovnako starými (nad 50 rokov) oba testy spolu 0,86,
+        kým každý sám 0,80 -- 0,84.
   \item \textbf{Rytmický test je opakovateľnejší.} U~35 pacientov meraných dvakrát
         (\textbf{ICC} = zhoda 1. a~2. merania; 1 = rovnaké hodnoty, nad 0,75 dobrá, pod 0,5 slabá):
   \begin{itemize}
     \item rytmus: rovnováha rúk 0,87, tempo 0,76, sila stlačenia 0,77 -- 0,80;
-    \item \ef{}: rytmickosť trasu 0,86, podiel trasu 0,73, ale sila prstov 0,25 a~amplitúda trasu 0,46;
+    \item \ef{}: rytmickosť trasu 0,85, podiel trasu 0,77, ale sila prstov 0,25 a~amplitúda trasu 0,54;
     \item únava v~rytme sa nezopakuje vôbec (ICC približne 0) -- preto ani neoddeľuje skupiny;
     \item oneskorenie rúk má ICC 0,17 kvôli jednému pacientovi (950~ms a~potom 70~ms), poradie pacientov sa však
           zachová ($\rho = 0{,}83$);
@@ -441,27 +470,30 @@ parametrov u~35 pacientov (stĺpec = ICC, bod = $\rho$).}
 
 \begin{itemize}
   \item \textbf{Hlavný výsledok:} pacienti sa od zdravých líšia aj pri rovnakom veku -- v~\ef{}
-        \textbf{nestabilnou silou}, \textbf{trasom} a~rozdielmi medzi prstami, v~rytme \textbf{pomalším tempom},
+        \textbf{nestabilnou silou}, \textbf{trasom} a~menšou silou prstov, v~rytme \textbf{pomalším tempom},
         \textbf{nerovnováhou} a~\textbf{nesúčasnosťou rúk}. Oba testy sú dôležité: každý zachytí iných pacientov
         a~spolu sú lepšie ako ktorýkoľvek sám.
-  \item \textbf{Vek je najväčší rušivý faktor.} Pacienti sú o~približne 40 rokov starší a~len vek oddelí skupiny
-        s~AUC 0,84. Preto uvádzame aj porovnanie v~dekádach, modely s~vekom a~klasifikátor len na osobách nad
-        50 rokov. Tieto výsledky stoja na len 17 zdravých nad 50 rokov -- sú menej presné.
+  \item \textbf{Vek už nie je hlavný rušivý faktor.} S~74 zdravými nad 50 rokov (pred meraním v~centre ich bolo 17)
+        sú skupiny vekovo podobné (medián 61 vs. 66,5 rokov) a~len vek oddelí skupiny s~AUC 0,64. Výsledky pri rovnakom
+        veku sú preto oveľa presnejšie ako predtým. Zostáva však \textbf{miesto merania}: mladí zdraví sú z~TUKE,
+        starší väčšinou z~meracieho centra, takže zmeny s~vekom u~zdravých môžu byť čiastočne rozdielom miest.
   \item \textbf{Verzia úlohy:} zdraví a~pacienti hrali v~oboch testoch inú verziu hry (iné \texttt{step\_id}).
         Časť rozdielu, napr. v~tempe, môže byť spôsobená verziou hry. Porovnanie v~dekádach odstráni vek,
         nie verziu hry.
   \item \textbf{Opačné smery majú vysvetlenie:} v~rytme silnejšie stlačenie a~úplnejšie uvoľnenie vyplývajú
         z~pomalšieho tempa; v~\ef{} je podiel trasu nižší, lebo pomalé kolísanie sily rastie viac ako tras.
-  \item \textbf{Normy} pre staršie dekády stoja na predpoklade, že parameter sa s~vekom nemení (v~\ef{} okrem podielu
-        trasu) -- v~dátach sa to potvrdilo, ale starších zdravých je málo. Mimo normy je z~definície aj 5\,\% zdravých.
+  \item \textbf{Normy:} pre parametre s~vplyvom veku (v~\ef{} štyri, v~rytme štyri) sa hranice menia s~vekom, pre
+        ostatné je jedna norma. Spoľahlivé (aspoň 20 zdravých) sú dekády 20 -- 29, 60 -- 69 a~70 -- 79; v~dekádach
+        30 -- 59 a~nad 80 rokov je zdravých stále málo. Mimo normy je z~definície aj 5\,\% zdravých.
   \item \textbf{Sledovanie pacienta v~čase:} najvhodnejšie sú opakovateľné parametre -- rovnováha rúk a~tempo
         v~rytme. Amplitúda trasu a~sila v~\ef{} sa medzi dňami menia viac. Opakovateľnosť máme len pre pacientov;
         medzi meraniami mohla prebiehať liečba.
   \item \textbf{Klasifikátor nie je diagnostický nástroj} -- nie je overený na nezávislých dátach.
 \end{itemize}
 
-\textbf{Odporúčania:} namerať zdravých nad 50 rokov (aspoň 20 v~dekáde), používať jednu verziu hry pre všetkých,
-zmerať zdravých dvakrát a~overiť klasifikátor na nových osobách.
+\textbf{Odporúčania:} namerať zdravých vo veku 30 -- 59 a~nad 80 rokov (aspoň 20 v~dekáde), časť mladých zdravých
+zmerať aj v~meracom centre (aby sa dal oddeliť vplyv veku od miesta merania), doplniť metadáta nových pacientov
+z~roku 2026, používať jednu verziu hry pre všetkých, zmerať zdravých dvakrát a~overiť klasifikátor na nových osobách.
 
 % ===================================================================================================
 \section{Kde čo nájsť}
