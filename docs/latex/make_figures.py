@@ -202,7 +202,7 @@ def figure_ablation():
     ax.set_yticks(y, names)
     ax.set_xlim(0.38, 0.88)
     ax.axvline(0.5, color="#555555", linestyle=":", linewidth=1)
-    ax.set_xlabel("AUC modelu, ktorý pozná iba tento faktor (0,5 = hádanie)")
+    ax.set_xlabel("AUC modelu, ktorý používa iba tento faktor (0,5 = hádanie)")
     ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v:.2f}".replace(".", ",")))
     ax.grid(axis="x", color="#DDDDDD", linewidth=0.6)
     ax.grid(axis="y", visible=False)
