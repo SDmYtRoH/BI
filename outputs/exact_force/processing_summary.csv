@@ -1,24 +1,24 @@
 level,item,value
-files,results_* files found,1912
-files,matched to EXACT_FORCE metadata,263
+files,results_* files found,2220
+files,matched to EXACT_FORCE metadata,419
 files,metadata rows without a file,0
-files,excluded: not_target_step,1504
-files,excluded: no_match,118
+files,excluded: not_target_step,1658
+files,excluded: no_match,116
 files,excluded: duplicate_file,27
-attempts,attempts,782
-attempts,attempt x hand units,1564
-attempts,attempt x hand flagged as outlier,29
-fingers,attempt x finger rows,7820
-fingers,valid,7820
+attempts,attempts,1172
+attempts,attempt x hand units,2344
+attempts,practice attempts left out (attempt 1),251
+attempts,attempt x hand flagged as outlier,12
+fingers,attempt x finger rows,11720
+fingers,valid,11720
 fingers,invalid,0
-fingers,valid but finger_inactive,577
-fingers,"used in averages (valid, not outlier attempt)",7675
-measurements,measurement x hand units,526
+fingers,valid but finger_inactive,749
+fingers,"used in averages (valid, not practice / outlier attempt)",9150
+measurements,measurement x hand units,838
 measurements,measurement x hand flagged as outlier,0
-people,control: people,90
-people,control: measurements,180
-people,control: inactive_hand=none (person x step),179
-people,control: inactive_hand=unknown (person x step),1
+people,control: people,167
+people,control: measurements,336
+people,control: inactive_hand=none (person x step),334
 people,patient: people,48
 people,patient: measurements,83
 people,patient: inactive_hand=none (person x step),48

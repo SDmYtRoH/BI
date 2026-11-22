@@ -1,13 +1,13 @@
 metric,threshold,group,n_people,n_below,percent_below,patient_ids
-force_ratio,0.1,control,90,0,0.0,
+force_ratio,0.1,control,167,0,0.0,
 force_ratio,0.1,patient,48,0,0.0,
-force_ratio,0.25,control,90,1,1.1111111111111112,20250228004
+force_ratio,0.25,control,167,1,0.5988023952095809,20250228004
 force_ratio,0.25,patient,48,1,2.083333333333333,0IKB-27Y1
-force_ratio,0.5,control,90,2,2.2222222222222223,"20250228004, 1302202521"
-force_ratio,0.5,patient,48,6,12.5,"0IKB-27Y1, 3OUS-NI9J, EJIT-XSEZ, ILHC-BZCP, W6JM-R0SG, XT2X-WLNW"
-fluctuation_ratio,0.1,control,90,0,0.0,
+force_ratio,0.5,control,167,2,1.1976047904191618,"20250228004, 101105"
+force_ratio,0.5,patient,48,5,10.416666666666668,"0IKB-27Y1, 3OUS-NI9J, EJIT-XSEZ, ILHC-BZCP, W6JM-R0SG"
+fluctuation_ratio,0.1,control,167,1,0.5988023952095809,992612
 fluctuation_ratio,0.1,patient,48,0,0.0,
-fluctuation_ratio,0.25,control,90,0,0.0,
-fluctuation_ratio,0.25,patient,48,2,4.166666666666666,"0IKB-27Y1, 2REJ-DLCV"
-fluctuation_ratio,0.5,control,90,0,0.0,
-fluctuation_ratio,0.5,patient,48,6,12.5,"0IKB-27Y1, 3OUS-NI9J, ILHC-BZCP, 2REJ-DLCV, OQHZ-N4AV, JJAV-NYZD"
+fluctuation_ratio,0.25,control,167,1,0.5988023952095809,992612
+fluctuation_ratio,0.25,patient,48,1,2.083333333333333,0IKB-27Y1
+fluctuation_ratio,0.5,control,167,5,2.9940119760479043,"101105, 091116, 20261113014, 992612, 20261113010"
+fluctuation_ratio,0.5,patient,48,8,16.666666666666664,"0IKB-27Y1, 3OUS-NI9J, ILHC-BZCP, 3BOP-Z8PU, OQHZ-N4AV, 2REJ-DLCV, JJAV-NYZD, OKZD-QXFU"
